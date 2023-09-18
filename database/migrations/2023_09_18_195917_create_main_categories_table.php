@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserPasswordRest extends Migration
+class CreateMainCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateUserPasswordRest extends Migration
      */
     public function up()
     {
-        Schema::create('user_password_rest', function (Blueprint $table) {
+        Schema::create('main_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
-            $table->longText('token');
+            $table->string('title_ar');
+            $table->string('title_en');
+            $table->string('image')->nullable();
+            $table->longText('desc_ar');
+            $table->longText('desc_en');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateUserPasswordRest extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_password_rest');
+        Schema::dropIfExists('main_categories');
     }
 }
