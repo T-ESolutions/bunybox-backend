@@ -15,6 +15,20 @@ class Setting extends Model
         "image",
     ];
 
+    public static function setMany($data)
+    {
+        foreach ($data as $key => $value) {
+            Self::set($key, $value);
+        }
+    }
+
+    public static function set($key, $value)
+    {
+        if (is_array($value)) {
+            $value = json_encode($value);
+        }
+        Self::updateOrCreate(['key' => $key], ['value' => $value]);
+    }
 
     public function getImageAttribute($image)
     {
