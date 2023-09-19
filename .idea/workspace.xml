@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PhpIncludePathManager">
+  <component name="ChangeListManager">
+    <list default="true" id="3d45824f-b8e7-4135-b917-e56fcafd8802" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Monasba.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable path="composer" />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
@@ -122,9 +149,107 @@
       <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
     </include_path>
   </component>
-  <component name="PhpUnit">
-    <phpunit_settings>
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
-    </phpunit_settings>
+  <component name="ProjectId" id="2UyZOcW0NG1XDzmMCHck2DMUvWc" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\ME\Rashed\app\Http\Requests\Admin" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\ME\Rashed\resources\views\Admin\operations" />
+      <recent name="E:\ME\Rashed\resources\views\Admin" />
+      <recent name="E:\ME\Rashed\app\Http\Controllers\Admin" />
+      <recent name="E:\ME\Rashed\app\Http\Requests" />
+      <recent name="E:\ME\Rashed\public" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3d45824f-b8e7-4135-b917-e56fcafd8802" name="Default Changelist" comment="" />
+      <created>1693913749077</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1693913749077</updated>
+      <workItem from="1693913751977" duration="11733000" />
+      <workItem from="1694077659681" duration="2123000" />
+      <workItem from="1694427702962" duration="2079000" />
+      <workItem from="1694507001181" duration="188000" />
+      <workItem from="1694699767783" duration="612000" />
+      <workItem from="1694882258300" duration="201000" />
+      <workItem from="1694882624387" duration="1787000" />
+      <workItem from="1694888834953" duration="638000" />
+      <workItem from="1694889832674" duration="931000" />
+      <workItem from="1694943383334" duration="660000" />
+      <workItem from="1695063605710" duration="2334000" />
+      <workItem from="1695067460717" duration="1911000" />
+      <workItem from="1695117557435" duration="645000" />
+      <workItem from="1695141030547" duration="6287000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="626" y="246" key="#Notifications" timestamp="1695064327455">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="626" y="246" key="#Notifications/0.0.1536.824/1920.0.1366.728@0.0.1536.824" timestamp="1695064327455" />
+    <state x="478" y="195" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1694882761025">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="478" y="195" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1694882761025" />
+    <state x="1920" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1695145274734">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="1920" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1366.728@1920.0.1366.728" timestamp="1695145274734" />
+    <state x="2267" y="60" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1695147067119">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="2267" y="60" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824/1920.0.1366.728@1920.0.1366.728" timestamp="1695147067119" />
+    <state x="2345" y="261" key="ComposerInitDialogKey" timestamp="1695068967576">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="2345" y="261" key="ComposerInitDialogKey/0.0.1536.824/1920.0.1366.728@1920.0.1366.728" timestamp="1695068967576" />
+    <state x="2330" y="60" key="FileChooserDialogImpl" timestamp="1695142583262">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="2330" y="60" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1366.728@1920.0.1366.728" timestamp="1695142583262" />
+    <state x="2370" y="32" key="NewPhpClassDialog" timestamp="1695146889191">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="2370" y="32" key="NewPhpClassDialog/0.0.1536.824/1920.0.1366.728@1920.0.1366.728" timestamp="1695146889191" />
+    <state x="2286" y="64" width="690" height="664" key="find.popup" timestamp="1695143964744">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="2286" y="64" width="690" height="664" key="find.popup/0.0.1536.824/1920.0.1366.728@1920.0.1366.728" timestamp="1695143964744" />
+    <state x="411" y="80" width="714" height="664" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1693932351852" />
   </component>
 </project>
