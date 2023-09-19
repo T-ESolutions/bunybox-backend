@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -12,7 +13,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +21,22 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','about_ar','about_en','country_id','city_id','state_id','username','image','phone','fcm_token','country_code'
+        'name',
+        'image',
+        'email',
+        'country_code',
+        'phone',
+        'email_verified_at',
+        'password',
+        'gender',
+        'weight',
+        'height',
+        'age',
+        'shoes_size',
+        'size',
+        'is_active',
+        'fcm_token',
+        'login_code',
     ];
 
     /**
@@ -72,44 +88,12 @@ class User extends Authenticatable implements JWTSubject
             $this->attributes['image'] = $img_name;
         }
     }
-    public function getCoverAttribute($image)
+
+
+    public function addresses()
     {
-        if (!empty($image)) {
-            return asset('uploads/clients_images') . '/' . $image;
-        }
-        return asset('defaults/user_default.png');
+        return $this->hasMany(Address::class, 'user_id');
     }
 
-    public function setCoverAttribute($image)
-    {
-        if (is_file($image)) {
-            $img_name = 'user_' . time() . random_int(0000, 9999) . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('/uploads/clients_images/'), $img_name);
-            $this->attributes['cover'] = $img_name;
-        }
-    }
-    public function Country(){
-        return $this->belongsTo(Country::class,'country_id');
-    }
-    public function City(){
-        return $this->belongsTo(City::class,'city_id');
-    }
-    public function State(){
-        return $this->belongsTo(State::class,'state_id');
-    }
-
-    public function Products(){
-        return $this->HasMany(Product::class,'user_id');
-    }
-
-    public function Rates(){
-        return $this->HasMany(Rate::class,'profile_id');
-    }
-    public function followers(){
-        return $this->HasMany(Follower::class,'profile_id');
-    }
-    public function following(){
-        return $this->HasMany(Follower::class,'user_id');
-    }
 
 }

@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class GiftHistory extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "user_id",
+        "type",
+        "gift_content",
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

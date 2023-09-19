@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class GiftMainCategory extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "gift_id",
+        "main_category_id"
+    ];
+
+    public function mainCategory()
+    {
+        return $this->belongsTo(MainCategory::class, 'main_category_id');
+    }
+
+    public function gift()
+    {
+        return $this->belongsTo(Gift::class, 'gift_id');
+    }
 }

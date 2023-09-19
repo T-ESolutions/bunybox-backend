@@ -10,10 +10,18 @@ class Admin extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'admins';
+    protected $fillable = [
+        "name",
+        "email",
+        "phone",
+        "email_verified_at",
+        "password",
+        "image",
+    ];
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
-
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
     public function setPasswordAttribute($password)
     {
