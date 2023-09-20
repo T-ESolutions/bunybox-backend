@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,11 @@ use App\Http\Controllers\Api\AuthController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+Route::group(['prefix' => "app"], function () {
+Route::get('pages/{type}', [SettingsController::class, 'pages']);
+    Route::get('/settings', [SettingsController::class, 'settings']);
+    Route::get('/settings/{key}', [SettingsController::class, 'custom_settings']);
 });
 
 Route::prefix('client')->group(function () {
@@ -35,6 +42,8 @@ Route::prefix('client')->group(function () {
             Route::post('reset-password', [AuthController::class, 'submitResetPasswordForm']);
 
         });
+
+
     });
 
 
@@ -45,6 +54,8 @@ Route::prefix('client')->group(function () {
             Route::get('/profile', [AuthController::class, 'profile']);
             Route::post('/profile/update', [AuthController::class, 'profileUpdate']);
         });
+        Route::get('/home', [HomeController::class, 'home'])->name('home');
+        Route::post('/save-sizes-data', [HomeController::class, 'saveSizesData'])->name('saveSizesData');
 
 
     });

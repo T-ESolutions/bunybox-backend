@@ -15,7 +15,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable, SoftDeletes;
 
-    const SIZE = ['S', 'L', 'XL', 'Free Size'];
+    const SIZE = ['S', 'L', 'XL', 'FS'];
     /**
      * The attributes that are mass assignable.
      *

@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->integer('height');
             $table->integer('age');
             $table->integer('shoes_size');
-            $table->enum('size', ['S', 'L', 'XL', 'Free Size']);
+            $table->enum('size', ['S', 'L', 'XL', 'FS']);
             $table->tinyInteger('is_active')->default(1);
             $table->string('fcm_token')->nullable();
             $table->string('login_code')->nullable();

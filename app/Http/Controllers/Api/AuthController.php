@@ -40,15 +40,15 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         $user = User::where('country_code', $data['country_code'])->where('phone', $data['phone'])->first();
-
-        if (!$userToken = JWTAuth::fromUser($user)) {
+        $token = auth('user')->login($user);
+        if (!$token) {
             return msg(false, trans('lang.invalid_account'), failed());
         }
 
-//        if ($user->email_verified_at == null) {
-//            $user->logout();
-//            return msg(false, trans('lang.verify_phone_first'), not_accepted());
-//        }
+        if (auth('user')->user()->email_verified_at == null) {
+            auth('user')->logout();
+            return msg(false, trans('lang.verify_phone_first'), not_accepted());
+        }
 //        if ($user->status == 'inactive') {
 //            auth('user')->logout();
 //            return msg(false, trans('lang.you_not_active_contact_admin'), not_accepted());
@@ -76,14 +76,14 @@ class AuthController extends Controller
         $exist_user = User::where('country_code', $data['country_code'])->where('phone', $data['phone'])->
         where('login_code', $data['token'])->first();
         if ($exist_user) {
-            $token = Auth::guard('user')->login($exist_user);
+            $token = auth('user')->login($exist_user);
             if (!$token) {
                 return msg(false, trans('lang.invalid_account'), failed());
             }
-//            if (Auth::guard('user')->user()->email_verified_at == null) {
-//                auth('user')->logout();
-//                return msg(false, trans('lang.verify_phone_first'), failed());
-//            }
+            if ($exist_user->email_verified_at == null) {
+                auth('user')->logout();
+                return msg(false, trans('lang.verify_phone_first'), not_accepted());
+            }
 
             $result['token'] = $token;
             $result['user_data'] = Auth::guard('user')->user();
@@ -127,7 +127,18 @@ class AuthController extends Controller
                 if ($client) {
                     $client->email_verified_at = Carbon::now();
                     $client->save();
-                    return msg(true, trans('lang.phone_verified_s'), success());
+
+                    $token = Auth::guard('user')->login($client);
+                    if (!$token) {
+                        return msg(false, trans('lang.invalid_account'), failed());
+                    }
+                    $result['token'] = $token;
+                    $result['user_data'] = Auth::guard('user')->user();
+//        update fcm_token if sent it
+                    if (isset($data['fcm_token'])) {
+                        Auth::guard('user')->user()->update(['fcm_token' => $data['fcm_token']]);
+                    }
+                    return msgdata(true, trans('lang.phone_verified_s'), $result,success());
                 } else {
                     return msg(false, trans('lang.client_not_found'), failed());
                 }

@@ -32,5 +32,7 @@ class SettingsSeeder extends Seeder
         ];
 
         Setting::setMany($data);
+
+        Setting::create(['key'=>'slider_image','value'=>'image','image'=>'slider_image.png']);
     }
 }

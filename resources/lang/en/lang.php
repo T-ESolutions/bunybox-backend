@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'page_not_found' => 'page not found',
     'login_first' => 'you should login first',
     'country_code' => 'country code ',
     'please choose at least one item' => 'please choose at least one item',
