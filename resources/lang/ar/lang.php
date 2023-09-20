@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'code_sent' => 'تم ارسال كود التحقق',
     'login_first' => 'يرجى تسجيل الدخول اولا',
     'please choose at least one item' => 'الرجاء اختيار عنصر واحد على الاقل',
     'is_popular' => 'ظهور في الصفحة الرئيسية',

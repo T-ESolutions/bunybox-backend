@@ -15,6 +15,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable, SoftDeletes;
 
+    const SIZE = ['S', 'L', 'XL', 'Free Size'];
     /**
      * The attributes that are mass assignable.
      *
@@ -93,6 +94,13 @@ class User extends Authenticatable implements JWTSubject
     public function addresses()
     {
         return $this->hasMany(Address::class, 'user_id');
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        if (!empty($password)) {
+            $this->attributes['password'] = bcrypt($password);
+        }
     }
 
 
