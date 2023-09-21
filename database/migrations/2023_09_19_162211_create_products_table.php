@@ -28,10 +28,8 @@ class CreateProductsTable extends Migration
             $table->string('size')->nullable();
             $table->integer('min_age')->nullable();
             $table->integer('max_age')->nullable();
-
             $table->integer('min_weight')->nullable();
             $table->integer('max_weight')->nullable();
-
             $table->integer('min_height')->nullable();
             $table->integer('max_height')->nullable();
 

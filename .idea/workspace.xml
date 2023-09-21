@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d45824f-b8e7-4135-b917-e56fcafd8802" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/BoxDetailsRequest.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/Http/Resources/Api/User/BoxResource.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/Http/Resources/Api/User/CategoryResource.php" afterDir="false" />
@@ -27,13 +28,25 @@
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/User/SaveSizesDataRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/SaveSizesDataRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/Bunny_backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Bunny_backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2023_09_19_162211_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2023_09_19_162211_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpstan.neon" beforeDir="false" afterPath="$PROJECT_DIR$/phpstan.neon" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo/logo@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo/logo@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/products/Slider.png" beforeDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable path="composer" />
@@ -165,7 +178,11 @@
       <path value="$PROJECT_DIR$/vendor/simplesoftwareio/simple-qrcode" />
       <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
+<<<<<<< Updated upstream
       <path value="$PROJECT_DIR$/vendor/lcobucci/clock" />
+=======
+      <path value="$PROJECT_DIR$/vendor/phpstan/phpstan" />
+>>>>>>> Stashed changes
     </include_path>
   </component>
   <component name="ProjectId" id="2UyZOcW0NG1XDzmMCHck2DMUvWc" />
@@ -227,7 +244,13 @@
       <workItem from="1695067460717" duration="1911000" />
       <workItem from="1695117557435" duration="645000" />
       <workItem from="1695141030547" duration="6287000" />
+<<<<<<< Updated upstream
       <workItem from="1695222276206" duration="13928000" />
+=======
+      <workItem from="1695147332423" duration="607000" />
+      <workItem from="1695153192964" duration="3010000" />
+      <workItem from="1695191632720" duration="254000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -257,9 +280,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="626" y="246" key="#Notifications/0.0.1536.824/1920.0.1366.728@0.0.1536.824" timestamp="1695064327455" />
-    <state x="478" y="195" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1694882761025">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2345" y="172" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1695156393441">
+      <screen x="1920" y="0" width="1366" height="728" />
     </state>
+    <state x="2345" y="172" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/1920.0.1366.728@1920.0.1366.728" timestamp="1695156393441" />
     <state x="478" y="195" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1694882761025" />
     <state x="1920" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1695145274734">
       <screen x="1920" y="0" width="1366" height="728" />
@@ -269,7 +293,14 @@
       <screen x="1920" y="0" width="1680" height="990" />
     </state>
     <state x="2267" y="60" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824/1920.0.1366.728@1920.0.1366.728" timestamp="1695147067119" />
+<<<<<<< Updated upstream
     <state x="2347" y="82" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1680.990/0.0.1536.816@1920.0.1680.990" timestamp="1695252452566" />
+=======
+    <state x="2148" y="0" key="CommitChangelistDialog2" timestamp="1695147373910">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="2148" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1366.728@1920.0.1366.728" timestamp="1695147373910" />
+>>>>>>> Stashed changes
     <state x="2345" y="261" key="ComposerInitDialogKey" timestamp="1695068967576">
       <screen x="1920" y="0" width="1366" height="728" />
     </state>

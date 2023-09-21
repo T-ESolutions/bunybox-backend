@@ -1,8 +1,8 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+  - vendor/phpstan/phpstan/conf/bleedingEdge.neon
 parameters:
     paths:
-        - app/Http/Controllers/Admin/OperationsController.php
+        - app
     level: 9
     ignoreErrors:
     excludePaths:
