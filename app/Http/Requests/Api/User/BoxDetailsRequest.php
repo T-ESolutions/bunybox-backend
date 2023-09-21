@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class SaveSizesDataRequest extends FormRequest
+class BoxDetailsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,12 +28,7 @@ class SaveSizesDataRequest extends FormRequest
     public function rules()
     {
         return [
-            'main_category_id' => 'required|exists:main_categories,id',
-            'weight' => 'required|numeric',
-            'height' => 'required|numeric',
-            'age' => 'required|numeric',
-            'shoes_size' => 'required|numeric',
-            'size' => ['required', Rule::in(User::SIZE)],
+            'id' => 'required|exists:boxes,id',
         ];
     }
 

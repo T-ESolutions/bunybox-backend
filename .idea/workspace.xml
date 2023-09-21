@@ -20,21 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d45824f-b8e7-4135-b917-e56fcafd8802" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/SettingsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/SaveSizesDataRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Resources/Api/User/MainCategoryResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Resources/Api/User/PagesResources.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/setting/slider_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/BoxDetailsRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Resources/Api/User/BoxResource.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Resources/Api/User/CategoryResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/User/UserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/UserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Setting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/SettingsSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/SettingsSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ar/lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/lang.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/User/SaveSizesDataRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/SaveSizesDataRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,13 +182,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Requests/Api/User" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Resources/Api/User" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\Tes\bunybox-backend\app\Http\Requests\Api\User" />
       <recent name="D:\projects\Tes\bunybox-backend\app\Http\Resources\Api\User" />
+      <recent name="D:\projects\Tes\bunybox-backend\app\Http\Requests\Api\User" />
       <recent name="D:\projects\Tes\bunybox-backend\app\Http\Controllers\Api" />
       <recent name="D:\projects\Tes\bunybox-backend\app\Http" />
       <recent name="D:\projects\Tes\bunybox-backend\app\Http\Requests\Api" />
@@ -236,7 +227,7 @@
       <workItem from="1695067460717" duration="1911000" />
       <workItem from="1695117557435" duration="645000" />
       <workItem from="1695141030547" duration="6287000" />
-      <workItem from="1695222276206" duration="12286000" />
+      <workItem from="1695222276206" duration="13928000" />
     </task>
     <servers />
   </component>
