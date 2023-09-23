@@ -102,10 +102,12 @@ class Box extends Model
                         });
                     })
                     ->where(function ($q_shoes) use ($filter_data) {
-                        $q_shoes->where('shoes_size', $filter_data['shoes_size'])->orWhere('shoes_size', null);
+                        $q_shoes->where('shoes_size', $filter_data['shoes_size'])
+                            ->orWhere('shoes_size', null);
                     })
                     ->where(function ($q_size) use ($filter_data) {
-                        $q_size->where('size', $filter_data['size'])->orWhere('size', null);
+                        $q_size->where('size', $filter_data['size'])
+                            ->orWhere('size', null);
                     });
             })->inRandomOrder()->get();
     }
