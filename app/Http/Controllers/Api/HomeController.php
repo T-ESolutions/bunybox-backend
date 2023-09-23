@@ -12,6 +12,7 @@ use App\Http\Resources\Api\User\MainCategoryResource;
 use App\Models\Box;
 use App\Models\BoxCategory;
 use App\Models\MainCategory;
+use App\Models\Product;
 use App\Models\Setting;
 use App\Models\User;
 
@@ -46,7 +47,12 @@ class HomeController extends Controller
     {
         $data = $request->validated();
         $boxes = Box::where('is_offer', 0)->where('main_category_id', $data['main_category_id'])->orderBy('id', 'asc')->get();
-        $result['boxes'] = BoxResource::collection($boxes);
+
+//        foreach ($boxes as $row){
+//            $products = Product::whereIn('category_id',$row->box_categories_ids)->get();
+////            dd($products);
+//        }
+        $result['boxes'] = BoxResource::customCollection($boxes,$data);
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 

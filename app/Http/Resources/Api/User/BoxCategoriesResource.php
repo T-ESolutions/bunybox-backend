@@ -4,13 +4,8 @@ namespace App\Http\Resources\Api\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BoxResource extends JsonResource
+class BoxCategoriesResource extends JsonResource
 {
-
-    private static $data;
-
-
-
     /**
      * Transform the resource into an array.
      *
@@ -26,21 +21,10 @@ class BoxResource extends JsonResource
             'image' => $this->image,
             'title' => $this->title,
             'description' => $this->desc,
-            'price' => $this->price,
-            'sold_out' => 0,
-            'categories' => BoxCategoriesResource::collection($this->categoriesByData($this->main_category_id,self::$data)),
+            'type' => 'show',
+            'product' => ProductResource::collection($this->products)
+
+
         ];
     }
-
-
-
-    public static function customCollection($resource, $request_data)
-    {
-
-        //you can add as many params as you want.
-        self::$data = $request_data;
-        return parent::collection($resource);
-    }
-
-
 }
