@@ -83,7 +83,8 @@ function limousine_first_radius()
     return 3; // 3km
 }
 
-function checkGuard () {
+function checkGuard()
+{
     if (auth()->guard('host')->check()) {
         return auth()->guard('host')->user();
     } else if (auth()->guard('admin')->check()) {
@@ -199,7 +200,7 @@ function sendToProvider($tokens, $title, $msg, $notification_type, $order_id, $o
     send($tokens, $title, $msg, $notification_type, $order_id, $order_type);
 }
 
-function send($tokens, $title , $msg, $product_id)
+function send($tokens, $title, $msg, $product_id)
 {
     $api_key = getServerKey();
     $fields = array
@@ -503,5 +504,72 @@ if (!function_exists('store')) {
         return auth()->guard('stores');
     }
 }
+
+if (!function_exists('divideMinMax')) {
+    function divideMinMax($min, $max)
+    {
+        // Calculate the subrange width
+        $subrangeWidth = ($max - $min) / 4;
+
+        $subranges = [];
+        for ($i = 0; $i < 4; $i++) {
+            $start = $min + ($subrangeWidth * $i);
+            $end = $start + $subrangeWidth;
+            $subranges[] = ['min' => $start, 'max' => $end];
+        }
+        return $subranges;
+    }
+}
+
+function findProductCombinations($boxes, $minPrice, $maxPrice)
+{
+    $validCombinations = [];
+    $numBoxes = count($boxes);
+    $currentCombination = [];
+
+
+    generateProductCombinations($boxes, $minPrice, $maxPrice, $numBoxes, $currentCombination, $validCombinations, 0);
+
+    return $validCombinations;
+}
+
+function generateProductCombinations($boxes, $minPrice, $maxPrice, $numBoxes, &$currentCombination, &$validCombinations, $currentBoxIndex)
+{
+    if ($currentBoxIndex == $numBoxes) {
+        if (count($currentCombination) == 4) {
+            $sum = array_sum($currentCombination);
+            if ($sum >= $minPrice && $sum <= $maxPrice) {
+                $validCombinations[] = $currentCombination;
+            }
+        }
+        return;
+    }
+
+    foreach ($boxes[$currentBoxIndex] as $product) {
+        $currentCombination[] = $product;
+        generateProductCombinations($boxes, $minPrice, $maxPrice, $numBoxes, $currentCombination, $validCombinations, $currentBoxIndex + 1);
+        array_pop($currentCombination);
+    }
+}
+
+//
+//// Example usage
+//$boxes = [
+//    [1, 2, 3], // Products in box 1
+//    [4, 5, 6], // Products in box 2
+//    [7, 8, 9], // Products in box 3
+//    // Add more boxes here...
+//];
+//
+//$minPrice = 10;
+//$maxPrice = 20;
+//
+//$validCombinations = findProductCombinations($boxes, $minPrice, $maxPrice);
+//
+//echo "Valid combinations:<br>";
+//foreach ($validCombinations as $combination) {
+//    echo implode(', ', $combination) . "<br>";
+//}
+
 
 
