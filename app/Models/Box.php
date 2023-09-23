@@ -81,24 +81,33 @@ class Box extends Model
                     $q2->where('main_categories.id', $main_category_id);
                 })
                 ->where(function ($q_age) use ($filter_data) {
-                    $q_age->where('min_age', '<=', $filter_data['age'])->where('max_age', '>=', $filter_data['age']);
+                    $q_age->where(function ($q_age2) use ($filter_data) {
+                        $q_age2->where('min_age', '<=', $filter_data['age'])->where('max_age', '>=', $filter_data['age']);
+                    })->orWhere(function ($q_age3) {
+                        $q_age3->whereNull('min_age')->whereNull('max_age');
+                    });
                 })
                 ->where(function ($q_weight) use ($filter_data) {
-                    $q_weight->where('min_weight', '<=', $filter_data['weight'])->where('max_weight', '>=', $filter_data['weight']);
+                    $q_weight->where(function ($q_weight2) use ($filter_data) {
+                        $q_weight2->where('min_weight', '<=', $filter_data['weight'])->where('max_weight', '>=', $filter_data['weight']);
+                    })->orWhere(function ($q_weight3) {
+                        $q_weight3->whereNull('min_weight')->whereNull('max_weight');
+                    });
                 })
                 ->where(function ($q_height) use ($filter_data) {
-                    $q_height->where('min_height', '<=', $filter_data['height'])->where('max_height', '>=', $filter_data['height']);
+                    $q_height->where(function ($q_height2) use ($filter_data) {
+                        $q_height2->where('min_height', '<=', $filter_data['height'])->where('max_height', '>=', $filter_data['height']);
+                    })->orWhere(function ($q_height3) {
+                        $q_height3->whereNull('min_height')->whereNull('max_height');
+                    });
                 })
                 ->where(function ($q_shoes) use ($filter_data) {
-                    $q_shoes->where('shoes_size', $filter_data['shoes_size'])->orWhere('shoes_size', null );
+                    $q_shoes->where('shoes_size', $filter_data['shoes_size'])->orWhere('shoes_size', null);
                 })
                 ->where(function ($q_size) use ($filter_data) {
-                    $q_size->where('size', $filter_data['size'])->orWhere('size', null );
-                })
-                    ->orWhere('min_age', null )->orWhere('max_age', null )->orWhere('min_height', null )->orWhere('max_height', null )
-                    ->orWhere('min_weight', null )->orWhere('max_weight', null );
-                ;
-            })->get();
+                    $q_size->where('size', $filter_data['size'])->orWhere('size', null);
+                });
+            })->inRandomOrder()->get();
     }
 
 

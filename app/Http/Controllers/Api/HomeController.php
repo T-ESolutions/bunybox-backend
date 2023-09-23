@@ -15,7 +15,7 @@ use App\Models\MainCategory;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\User;
-
+use Illuminate\Support\Arr;
 
 class HomeController extends Controller
 {
@@ -48,20 +48,52 @@ class HomeController extends Controller
         $data = $request->validated();
         $boxes = Box::where('is_offer', 0)->where('main_category_id', $data['main_category_id'])->orderBy('id', 'asc')->get();
 
-//        foreach ($boxes as $row){
-//            $products = Product::whereIn('category_id',$row->box_categories_ids)->get();
-////            dd($products);
-//        }
-        $result['boxes'] = BoxResource::customCollection($boxes,$data);
+
+        $boxes = BoxResource::customCollection($boxes, $data);
+
+        foreach ($boxes as $box) {
+            $product_array[$box->id] = [];
+            $resourceData = $box->toArray($box);
+            $categories = $resourceData['resource_categories'];
+            foreach ($categories as $category) {
+                foreach ($category->products as $product) {
+                    array_push($product_array[$box->id], $product);
+                }
+            }
+
+            //compare box price ................
+            $price_range = ['min' => $box->min_price, 'max' => $box->max_price];
+            $result_arr = [];
+            foreach ($product_array as $product_item) {
+                $category_id = $product_item->category_id;
+                $price = $product_item->price;
+                if (!isset($result_arr[$category_id])) {
+                    $result_arr[$category_id] = array_fill(0, count($price_range), 0);
+                }
+                foreach ($price_range as $key => $item) {
+                    $item_min = $item['min'];
+                    $item_max = $item['max'];
+                    if($price >= $item_min && $price <= $item_max) {
+                        $result_arr[$category_id][$key] = $price;
+                    }
+                }
+            }
+            return $result_arr;
+
+
+        }
+//        return $product_array;
+        $result['boxes'] = BoxResource::customCollection($boxes, $data);
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 
-    public function boxDetails(BoxDetailsRequest $request)
+    public
+    function boxDetails(BoxDetailsRequest $request)
     {
         $data = $request->validated();
-        $box = Box::where('id',$data['id'])->orderBy('id', 'asc')->first();
+        $box = Box::where('id', $data['id'])->orderBy('id', 'asc')->first();
         $result['box'] = new BoxResource($box);
-        $result['categories'] =  CategoryResource::collection(BoxCategory::where('box_id',$data['id'])->get());
+        $result['categories'] = CategoryResource::collection(BoxCategory::where('box_id', $data['id'])->get());
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 
