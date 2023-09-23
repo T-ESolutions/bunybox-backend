@@ -28,8 +28,13 @@ class SettingsSeeder extends Seeder
             'app_gif' => "null",
             'android_version' => 1,
             'ios_version' => 1,
+            'facebook' => 'https://www.facebook.com/',
+            'youtube' => 'https://www.youtube.com/',
+            'instagram' => 'https://www.instagram.com/',
             'accessKey' => 'accessKey9A3q9p6V0eKVizqYt9Su9KAMfORbccWrvoJVUCGPKqHBvEgvtJq',
         ];
+
+
 
         Setting::setMany($data);
 

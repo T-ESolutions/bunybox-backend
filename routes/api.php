@@ -38,25 +38,26 @@ Route::prefix('client')->group(function () {
             Route::post('/sign-up/verify-phone', [AuthController::class, 'verifyPhone']);
             Route::post('/sign-up/resend-verify-phone', [AuthController::class, 'resendVerifyPhone']);
             Route::post('/register', [AuthController::class, 'register']);
-            Route::post('forget-password', [AuthController::class, 'submitForgetPasswordForm']);
-            Route::post('reset-password', [AuthController::class, 'submitResetPasswordForm']);
-
+//            Route::post('forget-password', [AuthController::class, 'submitForgetPasswordForm']);
+//            Route::post('reset-password', [AuthController::class, 'submitResetPasswordForm']);
         });
 
+        Route::get('/home', [HomeController::class, 'home'])->name('home');
+        Route::post('/save-sizes-data', [HomeController::class, 'saveSizesData'])->name('saveSizesData');
+        Route::get('/box/details', [HomeController::class, 'boxDetails'])->name('boxDetails');
 
     });
 
 
     Route::group(['middleware' => ['user']], function () {
         Route::prefix('auth')->group(function () {
-            Route::post('/change-password', [AuthController::class, 'changePassword'])->name('client.change.password');
+//            Route::post('/change-password', [AuthController::class, 'changePassword'])->name('client.change.password');
             Route::get('/logout', [AuthController::class, 'logout'])->name('client.logout');
             Route::get('/profile', [AuthController::class, 'profile']);
             Route::post('/profile/update', [AuthController::class, 'profileUpdate']);
+            Route::post('/profile/update_sizes', [AuthController::class, 'profileUpdateSizes']);
         });
-        Route::get('/home', [HomeController::class, 'home'])->name('home');
-        Route::post('/save-sizes-data', [HomeController::class, 'saveSizesData'])->name('saveSizesData');
-        Route::get('/box/details', [HomeController::class, 'boxDetails'])->name('boxDetails');
+
 
 
     });
