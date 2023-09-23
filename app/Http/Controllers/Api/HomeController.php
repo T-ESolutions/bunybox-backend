@@ -64,7 +64,7 @@ class HomeController extends Controller
             //compare box price ................
             $price_range = ['min' => $box->min_price, 'max' => $box->max_price];
             $result_arr = [];
-            foreach ($product_array as $product_item) {
+            foreach ($product_array[$box->id] as $product_item) {
                 $category_id = $product_item->category_id;
                 $price = $product_item->price;
                 if (!isset($result_arr[$category_id])) {
