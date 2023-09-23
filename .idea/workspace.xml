@@ -20,12 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d45824f-b8e7-4135-b917-e56fcafd8802" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/BoxDetailsRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Resources/Api/User/BoxResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Resources/Api/User/CategoryResource.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/ProfileUpdateSizesRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/User/SaveSizesDataRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/SaveSizesDataRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/User/ProfileUpdateRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/User/ProfileUpdateRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/Api/User/UserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/Api/User/UserResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/SettingsSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/SettingsSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,19 +182,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Resources/Api/User" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Requests/Api/User" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\ME\Rashed\app\Http\Requests\Admin" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\Tes\bunybox-backend\app\Http\Resources\Api\User" />
       <recent name="D:\projects\Tes\bunybox-backend\app\Http\Requests\Api\User" />
+      <recent name="D:\projects\Tes\bunybox-backend\app\Http\Resources\Api\User" />
       <recent name="D:\projects\Tes\bunybox-backend\app\Http\Controllers\Api" />
       <recent name="D:\projects\Tes\bunybox-backend\app\Http" />
       <recent name="D:\projects\Tes\bunybox-backend\app\Http\Requests\Api" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\ME\Rashed\app\Http\Requests\Admin" />
     </key>
   </component>
   <component name="RunManager">
@@ -227,7 +227,8 @@
       <workItem from="1695067460717" duration="1911000" />
       <workItem from="1695117557435" duration="645000" />
       <workItem from="1695141030547" duration="6287000" />
-      <workItem from="1695222276206" duration="13928000" />
+      <workItem from="1695222276206" duration="13955000" />
+      <workItem from="1695474103261" duration="1798000" />
     </task>
     <servers />
   </component>
@@ -244,6 +245,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

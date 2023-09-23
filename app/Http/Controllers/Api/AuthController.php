@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\User\ProfileUpdateSizesRequest;
 use App\Http\Requests\Api\User\VerifyLoginRequest;
 use App\Http\Requests\Api\User\ProfileUpdateRequest;
 use App\Http\Requests\Api\User\UserLoginRequest;
@@ -191,9 +192,19 @@ class AuthController extends Controller
     public function profileUpdate(ProfileUpdateRequest $request)
     {
         $data = $request->validated();
-        if (isset($data['image']) && is_file($data['image'])) {
-            $data['image'] = upload($data['image'], 'clients_images');
-        }
+//        if (isset($data['image']) && is_file($data['image'])) {
+//            $data['image'] = upload($data['image'], 'clients_images');
+//        }
+        User::where('id', \auth('user')->user()->id)->update($data);
+        return msg(true, trans('lang.data_updated_s'), success());
+    }
+
+    public function profileUpdateSizes(ProfileUpdateSizesRequest $request)
+    {
+        $data = $request->validated();
+//        if (isset($data['image']) && is_file($data['image'])) {
+//            $data['image'] = upload($data['image'], 'clients_images');
+//        }
         User::where('id', \auth('user')->user()->id)->update($data);
         return msg(true, trans('lang.data_updated_s'), success());
     }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Api\User;
 
+use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class ProfileUpdateRequest extends FormRequest
+class ProfileUpdateSizesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,11 +29,12 @@ class ProfileUpdateRequest extends FormRequest
     {
 
         return [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . auth('user')->user()->id,
-            'country_code' => 'required|string',
-            'phone' => 'required|string|unique:users,phone,' . auth('user')->user()->id,
-//            'image' => 'nullable|image|mimes:png,jpg,jpeg,svg,webp|max:20480',
+            'gender' => 'required|in:male,female',
+            'weight' => 'required|numeric',
+            'height' => 'required|numeric',
+            'age' => 'required|numeric',
+            'shoes_size' => 'required|numeric',
+            'size' => ['required',Rule::in(User::SIZE)],
         ];
     }
 
