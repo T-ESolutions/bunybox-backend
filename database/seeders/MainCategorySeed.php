@@ -20,7 +20,7 @@ class MainCategorySeed extends Seeder
                 'id' => 1,
                 'title_ar' => 'طفل',
                 'title_en' => 'Baby',
-                'image' => null,
+                'image' => '3.png',
                 'desc_ar' => 'لوريم إيبسوم هو نص عباري وهمي يُستخدم في صناعات المطابع والتنضيد. كتب هذا النص بواسطة الطبيب والفيلسوف المتخصص في علم النفس، "لوريم إيبسوم" عام ١٩٥٠. حيث يمثل "لوريم إيبسوم" نصًا وهميًا في الصناعات',
                 'desc_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -35,7 +35,7 @@ class MainCategorySeed extends Seeder
                 'id' => 2,
                 'title_ar' => 'ولد',
                 'title_en' => 'Boy',
-                'image' => null,
+                'image' => '4.png',
                 'desc_ar' => 'لوريم إيبسوم هو نص عباري وهمي يُستخدم في صناعات المطابع والتنضيد. كتب هذا النص بواسطة الطبيب والفيلسوف المتخصص في علم النفس، "لوريم إيبسوم" عام ١٩٥٠. حيث يمثل "لوريم إيبسوم" نصًا وهميًا في الصناعات',
                 'desc_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -50,7 +50,7 @@ class MainCategorySeed extends Seeder
                 'id' => 3,
                 'title_ar' => 'فتاة',
                 'title_en' => 'Girl',
-                'image' => null,
+                'image' => '5.png',
                 'desc_ar' => 'لوريم إيبسوم هو نص عباري وهمي يُستخدم في صناعات المطابع والتنضيد. كتب هذا النص بواسطة الطبيب والفيلسوف المتخصص في علم النفس، "لوريم إيبسوم" عام ١٩٥٠. حيث يمثل "لوريم إيبسوم" نصًا وهميًا في الصناعات',
                 'desc_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -64,7 +64,7 @@ class MainCategorySeed extends Seeder
                 'id' => 4,
                 'title_ar' => 'رجل',
                 'title_en' => 'Man',
-                'image' => null,
+                'image' => '6.png',
                 'desc_ar' => 'لوريم إيبسوم هو نص عباري وهمي يُستخدم في صناعات المطابع والتنضيد. كتب هذا النص بواسطة الطبيب والفيلسوف المتخصص في علم النفس، "لوريم إيبسوم" عام ١٩٥٠. حيث يمثل "لوريم إيبسوم" نصًا وهميًا في الصناعات',
                 'desc_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -79,7 +79,7 @@ class MainCategorySeed extends Seeder
                 'id' => 5,
                 'title_ar' => 'امرأة',
                 'title_en' => 'Woman',
-                'image' => null,
+                'image' => '3.png',
                 'desc_ar' => 'لوريم إيبسوم هو نص عباري وهمي يُستخدم في صناعات المطابع والتنضيد. كتب هذا النص بواسطة الطبيب والفيلسوف المتخصص في علم النفس، "لوريم إيبسوم" عام ١٩٥٠. حيث يمثل "لوريم إيبسوم" نصًا وهميًا في الصناعات',
                 'desc_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
