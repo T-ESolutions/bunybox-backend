@@ -538,13 +538,13 @@ function generateArray($products, $min, $max, $limit = 4)
         }
     }
 
-//    if (count($secArr) == 0) {
-//        if ($element <= 1) {
-//            generateArray($products, $min, $max, $limit - 1);
-//            $limit--;
-//            $element++;
-//        }
-//    }
+    if (count($secArr) == 0) {
+        if ($element <= 1 && $limit > 3) {
+            generateArray($products, $min, $max, $limit - 1);
+            $limit--;
+            $element++;
+        }
+    }
 
 
     $data = array_merge($newArr, $secArr);
