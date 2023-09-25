@@ -572,4 +572,23 @@ function generateProductCombinations($boxes, $minPrice, $maxPrice, $numBoxes, &$
 //}
 
 
+function generateNewArray($products, $minPrice, $maxPrice)
+{
+    $categoryProducts = [];
+
+    foreach ($products as $product) {
+        $category_id = $product['category_id'];
+        $sel_price = $product['sel_price'];
+
+        if (!isset($categoryProducts[$category_id])) {
+            $categoryProducts[$category_id] = [];
+        }
+
+        if ($sel_price >= $minPrice && $sel_price <= $maxPrice) {
+            $categoryProducts[$category_id][] = $product;
+        }
+    }
+
+    return $categoryProducts;
+}
 

@@ -59,13 +59,11 @@ class HomeController extends Controller
             $maxPrice = $box->max_price;
 
             foreach ($categories as $category) {
+                
                 foreach ($category->products as $product) {
                     array_push($product_array, $product);
                 }
-
             }
-           return $product_array;
-
 
         }
         $result['boxes'] = BoxResource::customCollection($boxes, $data);
