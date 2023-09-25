@@ -65,5 +65,10 @@ class Category extends Model
         return $this->hasMany(Product::class, 'category_id');
     }
 
+    public function randomProducts()
+    {
+        return $this->hasMany(Product::class, 'category_id')->inRandomOrder();
+    }
+
 
 }

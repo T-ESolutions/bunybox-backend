@@ -505,90 +505,70 @@ if (!function_exists('store')) {
     }
 }
 
-if (!function_exists('divideMinMax')) {
-    function divideMinMax($min, $max)
-    {
-        // Calculate the subrange width
-        $subrangeWidth = ($max - $min) / 4;
 
-        $subranges = [];
-        for ($i = 0; $i < 4; $i++) {
-            $start = $min + ($subrangeWidth * $i);
-            $end = $start + $subrangeWidth;
-            $subranges[] = ['min' => $start, 'max' => $end];
-        }
-        return $subranges;
-    }
-}
-
-function findProductCombinations($boxes, $minPrice, $maxPrice)
+function generateArray($products, $min, $max, $limit = 4)
 {
-    $validCombinations = [];
-    $numBoxes = count($boxes);
-    $currentCombination = [];
 
-
-    generateProductCombinations($boxes, $minPrice, $maxPrice, $numBoxes, $currentCombination, $validCombinations, 0);
-
-    return $validCombinations;
-}
-
-function generateProductCombinations($boxes, $minPrice, $maxPrice, $numBoxes, &$currentCombination, &$validCombinations, $currentBoxIndex)
-{
-    if ($currentBoxIndex == $numBoxes) {
-        if (count($currentCombination) == 4) {
-            $sum = array_sum($currentCombination);
-            if ($sum >= $minPrice && $sum <= $maxPrice) {
-                $validCombinations[] = $currentCombination;
+    $element = 0;
+    $total = 0;
+    $newArr = [];
+    $new_product_Arr = [];
+    $catsArr = [];
+    $secArr = [];
+    $secondCatsArr = [];
+    foreach ($products as $product) {
+        if ($total < $max && count($newArr) < $limit) {
+            if ($total + $product['sel_price'] <= $max && !in_array($product['category_id'], $catsArr)) {
+                array_push($newArr, $product);
+                array_push($catsArr, $product['category_id']);
+                $total += $product['sel_price'];
             }
         }
-        return;
     }
 
-    foreach ($boxes[$currentBoxIndex] as $product) {
-        $currentCombination[] = $product;
-        generateProductCombinations($boxes, $minPrice, $maxPrice, $numBoxes, $currentCombination, $validCombinations, $currentBoxIndex + 1);
-        array_pop($currentCombination);
+    $x = array_merge($products, $newArr);
+    $new_product_Arr = arrayUniqueByKey($x, "id");
+
+//    $remain = $max - $total;
+    foreach ($new_product_Arr as $pro) {
+        if ((($total + $pro['sel_price']) >= $min) &&
+            (($total + $pro['sel_price']) <= $max) &&
+            (!in_array($pro['category_id'], $secondCatsArr))) {
+            array_push($secArr, $pro);
+            array_push($secondCatsArr, $pro['category_id']);
+        }
     }
+
+    if (count($secArr) == 0) {
+        if ($element <= 1) {
+            generateArray($products, $min, $max, $limit - 1);
+            $limit--;
+            $element++;
+        }
+    }
+
+
+
+    $data = array_merge($newArr, $secArr);
+    return $data;
+
 }
 
-//
-//// Example usage
-//$boxes = [
-//    [1, 2, 3], // Products in box 1
-//    [4, 5, 6], // Products in box 2
-//    [7, 8, 9], // Products in box 3
-//    // Add more boxes here...
-//];
-//
-//$minPrice = 10;
-//$maxPrice = 20;
-//
-//$validCombinations = findProductCombinations($boxes, $minPrice, $maxPrice);
-//
-//echo "Valid combinations:<br>";
-//foreach ($validCombinations as $combination) {
-//    echo implode(', ', $combination) . "<br>";
-//}
 
-
-function generateNewArray($products, $minPrice, $maxPrice)
+function arrayUniqueByKey($array, $key)
 {
-    $categoryProducts = [];
+    $result = [];
+    $seenKeys = [];
 
-    foreach ($products as $product) {
-        $category_id = $product['category_id'];
-        $sel_price = $product['sel_price'];
-
-        if (!isset($categoryProducts[$category_id])) {
-            $categoryProducts[$category_id] = [];
-        }
-
-        if ($sel_price >= $minPrice && $sel_price <= $maxPrice) {
-            $categoryProducts[$category_id][] = $product;
+    foreach ($array as $item) {
+        $value = $item[$key];
+        if (!isset($seenKeys[$value])) {
+            $result[] = $item;
+            $seenKeys[$value] = true;
         }
     }
 
-    return $categoryProducts;
+    return $result;
 }
+
 

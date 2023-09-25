@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\BoxDetailsRequest;
 use App\Http\Requests\Api\User\SaveSizesDataRequest;
 use App\Http\Requests\Api\User\UserRequest;
+use App\Http\Resources\Api\User\BoxFinalResource;
 use App\Http\Resources\Api\User\BoxResource;
 use App\Http\Resources\Api\User\CategoryResource;
 use App\Http\Resources\Api\User\MainCategoryResource;
@@ -47,7 +48,7 @@ class HomeController extends Controller
     {
         $data = $request->validated();
         $boxes = Box::where('is_offer', 0)->where('main_category_id', $data['main_category_id'])->orderBy('id', 'asc')->get();
-
+        dd($boxes);
 
         $boxes = BoxResource::customCollection($boxes, $data);
 
@@ -59,14 +60,15 @@ class HomeController extends Controller
             $maxPrice = $box->max_price;
 
             foreach ($categories as $category) {
-                
-                foreach ($category->products as $product) {
+                foreach ($category->randomProducts as $product) {
                     array_push($product_array, $product);
                 }
             }
 
+            $products[$box->id] = generateArray($product_array, $box->min, $box->max);
+
         }
-        $result['boxes'] = BoxResource::customCollection($boxes, $data);
+        $result['boxes'] = BoxFinalResource::customCollection($boxes, $data, $products);
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BoxResource extends JsonResource
+class BoxFinalResource extends JsonResource
 {
 
     private static $data;
@@ -28,6 +28,11 @@ class BoxResource extends JsonResource
             $sold_out = 1;
         }
 
+        if (!empty(self::$products)) {
+            $products = self::$products[$this->id];
+        } else {
+            $products = [];
+        }
         return
             [
                 'id' => $this->id,
@@ -38,7 +43,7 @@ class BoxResource extends JsonResource
                 'min_price' => $this->min_price,
                 'max_price' => $this->max_price,
                 'sold_out' => $sold_out,
-                'resource_categories' => BoxCategoriesResource::customcollection($this->categoriesByData($this->main_category_id, self::$data), $category_count),
+                'resource_categories' => BoxCategoriesFinalResource::customcollection($this->categoriesByData($this->main_category_id, self::$data), $category_count, $products),
             ];
     }
 
