@@ -106,7 +106,7 @@ class HomeController extends Controller
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 
-
+   
 
 }
 
