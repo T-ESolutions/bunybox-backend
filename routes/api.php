@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\Api\AddressesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,15 @@ Route::prefix('client')->group(function () {
             Route::post('/profile/update', [AuthController::class, 'profileUpdate']);
             Route::post('/profile/update_sizes', [AuthController::class, 'profileUpdateSizes']);
         });
-
+        Route::group(['prefix' => "addresses"], function () {
+            //addresses
+            Route::get('/', [AddressesController::class, 'index']);
+            Route::get('/details', [AddressesController::class, 'details']);
+            Route::post('/store', [AddressesController::class, 'store']);
+            Route::post('/update', [AddressesController::class, 'update'])->name('addresses.update');
+            Route::post('/make-default', [AddressesController::class, 'makeDefault']);
+            Route::post('/delete', [AddressesController::class, 'delete']);
+        });
 
 
     });
