@@ -64,8 +64,8 @@ class HomeController extends Controller
 
             }
 
-
             $box->products = generateArray($product_array, $minPrice, $maxPrice);
+//            $box->products = $product_array;
 
         }
 
@@ -106,7 +106,6 @@ class HomeController extends Controller
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 
-   
 
 }
 
