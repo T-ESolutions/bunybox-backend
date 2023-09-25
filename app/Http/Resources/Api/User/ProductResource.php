@@ -21,7 +21,7 @@ class ProductResource extends JsonResource
                 'category_title' => $this->category->title,
                 'category_description' => $this->category->description,
                 'product_description' => $this->category->description,
-                
+
 
             ];
     }

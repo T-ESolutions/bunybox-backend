@@ -45,7 +45,8 @@ Route::prefix('client')->group(function () {
 
         Route::get('/home', [HomeController::class, 'home'])->name('home');
         Route::post('/save-sizes-data', [HomeController::class, 'saveSizesData'])->name('saveSizesData');
-        Route::get('/box/details', [HomeController::class, 'boxDetails'])->name('boxDetails');
+        Route::post('/save-sizes-data-refresh/{id}', [HomeController::class, 'saveSizesDataBox'])->name('saveSizesDataRefresh');
+
 
     });
 
