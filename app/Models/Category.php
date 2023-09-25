@@ -71,4 +71,10 @@ class Category extends Model
     }
 
 
+    public function testProducts($product)
+    {
+        return  $product;
+    }
+
+
 }

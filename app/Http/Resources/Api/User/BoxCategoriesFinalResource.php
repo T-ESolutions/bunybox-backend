@@ -21,12 +21,13 @@ class BoxCategoriesFinalResource extends JsonResource
 
 
         $products = self::$products;
+        $new_pro = null;
         foreach ($products as $product){
-            if ($product['category_id'] == $this->id ){
+            if ($product['category_id'] == $this->id){
                 $new_pro = $product;
-                break;
             }
         }
+
 
         return
             [
@@ -34,7 +35,7 @@ class BoxCategoriesFinalResource extends JsonResource
                 'image' => $this->image,
                 'title' => $this->title,
                 'description' => $this->desc,
-                'products' => new ProductResource($new_pro)
+                'product' => new ProductResource($new_pro)
             ];
 
 
