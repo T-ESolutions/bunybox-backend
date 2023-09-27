@@ -60,7 +60,7 @@ class Order extends Model
     public function setAddressDataAttribute($address)
     {
         if (isset($address) && $address != null) {
-            $this->attributes['address'] = json_encode($address);
+            $this->attributes['address_data'] = json_encode($address);
         }
     }
 

@@ -229,6 +229,7 @@ return [
 "payment_method" => "آلية الدفع",
 "address_id" => "العنوان",
 "products_id" => "التصنيف " ,
+"products_id.*" => "التصنيف " ,
 
 
 

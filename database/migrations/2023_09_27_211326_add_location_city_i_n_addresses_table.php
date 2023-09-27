@@ -15,7 +15,7 @@ class AddLocationCityINAddressesTable extends Migration
     public function up()
     {
         Schema::table('addresses', function (Blueprint $table) {
-            $table->enum('location',['in_riyadh','out_riyadh'])->nullable()->after('is_default');
+            $table->enum('location',['in_riyadh','out_riyadh'])->default('in_riyadh')->nullable()->after('is_default');
         });
     }
 
