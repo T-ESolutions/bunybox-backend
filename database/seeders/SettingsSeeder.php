@@ -34,6 +34,8 @@ class SettingsSeeder extends Seeder
             'accessKey' => 'accessKey9A3q9p6V0eKVizqYt9Su9KAMfORbccWrvoJVUCGPKqHBvEgvtJq',
             'in_riyadh_shipping_cost' => 0,
             'out_riyadh_shipping_cost' => 25,
+            'money_gifts' => 2,
+            'product_gifts' => 4,
         ];
 
 
