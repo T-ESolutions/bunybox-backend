@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Setting;
 use App\Models\Store;
 use App\Models\User;
 use App\Models\WalletTransaction;
@@ -81,6 +82,19 @@ function nearest_radius()
 function limousine_first_radius()
 {
     return 3; // 3km
+}
+
+
+if (!function_exists('settings')) {
+    function settings($key)
+    {
+        $setting = Setting::where('key', $key)->first();
+
+        if (!$setting)
+            return "";
+
+        return $setting->value;
+    }
 }
 
 function checkGuard()

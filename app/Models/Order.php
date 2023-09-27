@@ -45,4 +45,23 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class, 'order_id');
     }
+
+
+    public function getAddressDataAttribute($value)
+    {
+        if ($value != null) {
+            return json_decode($value);
+        }
+        return "";
+
+    }
+
+//
+    public function setAddressDataAttribute($address)
+    {
+        if (isset($address) && $address != null) {
+            $this->attributes['address'] = json_encode($address);
+        }
+    }
+
 }
