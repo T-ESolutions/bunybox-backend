@@ -7,6 +7,8 @@ use App\Http\Requests\Api\User\OrderRequest;
 use App\Models\Address;
 use App\Models\Box;
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,9 +35,17 @@ class OrderController extends Controller
             "total" => $shipping_cost + $box->price,
         ]);
 
-        foreach ($request->products_id as $product_id){
-            Box
+        foreach ($request->products_id as $product_id) {
+            $product = Product::whereId($product_id)->first();
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $product_id,
+                'category_id' => $product->category_id,
+                'type' => "basic",
+            ]);
         }
+
+        return msg(true, trans('lang.Success_text'), success());
 
     }
 }
