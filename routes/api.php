@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -22,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['prefix' => "app"], function () {
-Route::get('pages/{type}', [SettingsController::class, 'pages']);
+    Route::get('pages/{type}', [SettingsController::class, 'pages']);
     Route::get('/settings', [SettingsController::class, 'settings']);
     Route::get('/settings/{key}', [SettingsController::class, 'custom_settings']);
 });
@@ -69,6 +70,11 @@ Route::prefix('client')->group(function () {
             Route::post('/delete', [AddressesController::class, 'delete']);
         });
 
+        Route::group(['prefix' => "orders"], function () {
+            //addresses
+            Route::post('/place-order', [OrderController::class, 'placeOrder']);
+
+        });
 
     });
 });
