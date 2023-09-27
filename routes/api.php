@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\AddressesController;
+use App\Http\Controllers\Api\OffersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::prefix('client')->group(function () {
         });
 
         Route::get('/home', [HomeController::class, 'home'])->name('home');
+        Route::get('/offers', [OffersController::class, 'offers'])->name('offers');
         Route::post('/save-sizes-data', [HomeController::class, 'saveSizesData'])->name('saveSizesData');
         Route::post('/save-sizes-data-refresh/{id}', [HomeController::class, 'saveSizesDataBox'])->name('saveSizesDataRefresh');
 
@@ -70,11 +72,15 @@ Route::prefix('client')->group(function () {
             Route::post('/delete', [AddressesController::class, 'delete']);
         });
 
+
         Route::group(['prefix' => "orders"], function () {
             //addresses
             Route::post('/place-order', [OrderController::class, 'placeOrder']);
 
         });
+
+        Route::get('/generate_gift', [HomeController::class, 'generate_gift']);
+
 
     });
 });

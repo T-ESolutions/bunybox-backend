@@ -123,5 +123,10 @@ class Box extends Model
         return $this->belongsToMany(Gift::class, 'gift_boxes', 'box_id', 'gift_id');
     }
 
+    public function offer_products()
+    {
+        return $this->belongsToMany(Product::class, 'box_products', 'box_id', 'product_id');
+    }
+
 
 }

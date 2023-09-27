@@ -106,6 +106,13 @@ class HomeController extends Controller
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 
+    public function generate_gift()
+    {
+        $slider_image = Setting::where('key', 'slider_image')->first();
+        $data['slider'] = $slider_image->image;
+        $data['main_categories'] = MainCategoryResource::collection(MainCategory::orderBy('id', 'asc')->get());
+        return msgdata(true, trans('lang.data_display_success'), $data, success());
+    }
 
 }
 
