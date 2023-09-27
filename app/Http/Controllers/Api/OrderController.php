@@ -19,9 +19,9 @@ class OrderController extends Controller
 
         $address = Address::whereId($request->address_id)->first();
         if ($address->location == "in_riyadh") {
-            $shipping_cost = settings('in_riyadh_shipping_cost');
+            $shipping_cost = (double)settings('in_riyadh_shipping_cost');
         } else {
-            $shipping_cost = settings('out_riyadh_shipping_cost');
+            $shipping_cost = (double)settings('out_riyadh_shipping_cost');
         }
         $box = Box::whereId($request->box_id)->first();
         $order = Order::create([
