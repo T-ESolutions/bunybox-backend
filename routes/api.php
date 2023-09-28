@@ -50,6 +50,7 @@ Route::prefix('client')->group(function () {
         Route::post('/save-sizes-data', [HomeController::class, 'saveSizesData'])->name('saveSizesData');
         Route::post('/save-sizes-data-refresh/{id}', [HomeController::class, 'saveSizesDataBox'])->name('saveSizesDataRefresh');
 
+        Route::get('/execute_pay', [HomeController::class, 'executePay']);
 
     });
 
@@ -79,7 +80,6 @@ Route::prefix('client')->group(function () {
 
         });
 
-        Route::get('/generate_gift', [HomeController::class, 'generate_gift']);
 
 
     });

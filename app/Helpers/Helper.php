@@ -97,6 +97,18 @@ if (!function_exists('settings')) {
     }
 }
 
+if (!function_exists('setting_image')) {
+    function setting_image($key)
+    {
+        $setting = Setting::where('key', $key)->first();
+
+        if (!$setting)
+            return "";
+
+        return $setting->image;
+    }
+}
+
 function checkGuard()
 {
     if (auth()->guard('host')->check()) {

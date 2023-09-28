@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'no_gift_found' => 'no gift found now',
+
     'page_not_found' => 'page not found',
     'login_first' => 'you should login first',
     'country_code' => 'country code ',
