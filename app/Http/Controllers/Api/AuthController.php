@@ -196,17 +196,16 @@ class AuthController extends Controller
 //            $data['image'] = upload($data['image'], 'clients_images');
 //        }
         User::where('id', \auth('user')->user()->id)->update($data);
-        return msg(true, trans('lang.data_updated_s'), success());
+        $result['user_data'] = User::where('id', \auth('user')->user()->id)->first();;
+        return msgdata(true, trans('lang.data_updated_s'), $result,success());
     }
 
     public function profileUpdateSizes(ProfileUpdateSizesRequest $request)
     {
         $data = $request->validated();
-//        if (isset($data['image']) && is_file($data['image'])) {
-//            $data['image'] = upload($data['image'], 'clients_images');
-//        }
         User::where('id', \auth('user')->user()->id)->update($data);
-        return msg(true, trans('lang.data_updated_s'), success());
+        $result['user_data'] = User::where('id', \auth('user')->user()->id)->first();;
+        return msgdata(true, trans('lang.data_updated_s'), $result,success());
     }
 
 
