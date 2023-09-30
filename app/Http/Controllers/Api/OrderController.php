@@ -27,6 +27,11 @@ class OrderController extends Controller
             $shipping_cost = (double)settings('out_riyadh_shipping_cost');
         }
         $box = Box::whereId($request->box_id)->first();
+        if (isset($request->is_offer) && $request->is_offer == 1) {
+            $is_offer = 1;
+        } else {
+            $is_offer = 0;
+        }
         $order = Order::create([
             "user_id" => Auth::guard('user')->id(),
             "box_id" => $request->box_id,
@@ -36,6 +41,8 @@ class OrderController extends Controller
             "price" => $box->price,
             "shipping_cost" => $shipping_cost,
             "total" => $shipping_cost + $box->price,
+            'is_offer' => $is_offer
+
         ]);
 
         foreach ($request->products_id as $product_id) {
