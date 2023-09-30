@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\OrderRequest;
+use App\Http\Resources\Api\User\AddressesResources;
+use App\Http\Resources\Api\User\OrderDetailsResource;
 use App\Http\Resources\Api\User\OrderResource;
 use App\Models\Address;
 use App\Models\Box;
@@ -53,11 +55,24 @@ class OrderController extends Controller
     public function orders()
     {
         $user_id = Auth::guard('user')->id();
-        $orders = Order::where('user_id',$user_id)
-            ->with(['mainCategory','items','box'])
+        $orders = Order::where('user_id', $user_id)
+            ->with(['mainCategory', 'items', 'box'])
             ->paginate(10);
 
         $data = OrderResource::collection($orders)->response()->getData(true);
+        return msgdata(true, trans('lang.data_display_success'), $data, success());
+    }
+
+    public function orderDetails($id)
+    {
+        $user_id = Auth::guard('user')->id();
+        $order = Order::where('user_id', $user_id)
+            ->where('id', $id)
+            ->with(['mainCategory', 'items', 'box'])
+            ->firstOrFail();
+
+
+        $data = new OrderDetailsResource($order);
         return msgdata(true, trans('lang.data_display_success'), $data, success());
     }
 }

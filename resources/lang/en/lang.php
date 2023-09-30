@@ -1010,5 +1010,7 @@ return [
     'cancelled' => 'cancelled',
     'temperature' => 'temperature',
     'operations' => 'Invoices',
+    'not_found' => 'data not found',
+
 
 ];

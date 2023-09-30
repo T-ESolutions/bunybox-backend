@@ -1001,4 +1001,5 @@ return [
     'in_progress' => 'جاري التحميل',
     'cancelled' => 'تم الالغاء',
     'temperature' => 'درجه الحرارة',
+    'not_found' => 'البيانات غير موجوده',
 ];
