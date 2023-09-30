@@ -596,4 +596,10 @@ function arrayUniqueByKey($array, $key)
     return $result;
 }
 
+if (!function_exists('itemsCategory')) {
+    function itemsCategory()
+    {
+
+    }
+}
 
