@@ -7,6 +7,8 @@ use App\Http\Requests\Api\User\AddressMakeDefaultRequest;
 use App\Http\Requests\Api\User\AddressRequest;
 use App\Http\Resources\Api\User\AddressesResources;
 use App\Models\Address;
+use App\Models\Zone;
+use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
 
 
@@ -42,6 +44,20 @@ class AddressesController extends Controller
             $request['is_default'] = 1;
         }
         $request['user_id'] = auth('user')->user()->id;
+
+
+        //check my location in zone to generate shipping cost
+        $point = new Point($request['lat'], $request['lng']);
+        $zone = Zone::contains('coordinates', $point)->whereId(1)->first();
+        if ($zone) {
+            $request['location'] = 'in_riyadh';
+        } else {
+            $request['location'] = 'out_riyadh';
+        }
+        $saudi_zone = Zone::contains('coordinates', $point)->whereId(2)->first();
+        if (!$saudi_zone) {
+            return msg(true, trans('lang.you_are_out_saudi'), not_accepted());
+        }
         Address::create($request);
         return msg(true, trans('lang.added_s'), success());
 
@@ -50,10 +66,21 @@ class AddressesController extends Controller
     public function update(AddressRequest $request)
     {
         $request = $request->validated();
+
+        //check my location in zone to generate shipping cost
+        $point = new Point($request['lat'], $request['lng']);
+        $zone = Zone::contains('coordinates', $point)->whereId(1)->first();
+        if ($zone) {
+            $request['location'] = 'in_riyadh';
+        } else {
+            $request['location'] = 'out_riyadh';
+        }
+        $saudi_zone = Zone::contains('coordinates', $point)->whereId(2)->first();
+        if (!$saudi_zone) {
+            return msg(true, trans('lang.you_are_out_saudi'), not_accepted());
+        }
         Address::where('id', $request['id'])->update($request);
-
         return msg(true, trans('lang.updated_s'), success());
-
     }
 
     public function makeDefault(AddressMakeDefaultRequest $request)

@@ -24,6 +24,7 @@ class Order extends Model
         "is_offer",
         "gift_type",
         "gift_money",
+        "gift_data",
     ];
 
     public function user()

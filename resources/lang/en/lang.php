@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'you_are_out_saudi' => 'The address chosen outside Saudi Arabia cannot be added',
+
     'no_gift_found' => 'no gift found now',
     'zones' => 'delivery zones',
 

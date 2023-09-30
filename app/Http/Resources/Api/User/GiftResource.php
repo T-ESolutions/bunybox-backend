@@ -18,14 +18,17 @@ class GiftResource extends JsonResource
         if (isset($this->amount)) {
             $image = setting_image('gift_money_image');
             $title = $this->amount;
+            $type = 'money';
         } else {
             $image = $this->image;
             $title = $this->title;
+            $type = 'product';
         }
         return
             [
                 'image' => $image,
-                'title' => $title,
+                'title' => (string)$title,
+                'type' => $type,
             ];
 
     }

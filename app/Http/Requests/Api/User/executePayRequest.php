@@ -28,6 +28,7 @@ class executePayRequest extends FormRequest
 
         return [
             'order_id' => 'required|exists:orders,id',
+            'payment_method' => 'required|string',
 
         ];
     }

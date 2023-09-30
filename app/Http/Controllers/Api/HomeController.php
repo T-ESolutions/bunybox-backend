@@ -193,7 +193,17 @@ class HomeController extends Controller
             }
         }
         if ($product_gift) {
+
             $response = new GiftResource($product_gift);
+            $order_data['payment_status'] = 'paid';
+            $order_data['payment_method'] = $data['payment_method'];
+
+            $order_data['gift_type'] = $response['type'] ? 'product' : 'money' ;
+            $order_data['gift_data'] = json_encode($response);
+            if (!$response['type']) {
+                $order_data['gift_money'] = $product_gift->amount;
+            }
+            Order::whereId($data['order_id'])->update($order_data);
             return msgdata(true, trans('lang.data_display_success'), $response, success());
         } else {
             return msg(true, trans('lang.no_gift_found'), failed());

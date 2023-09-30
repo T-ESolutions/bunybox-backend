@@ -19,7 +19,7 @@ class ZoneController extends Controller
     public function index()
     {
         $zones = Zone::latest()->paginate(config('default_pagination'));
-        return view('admin.zones.index', compact('zones'));
+        return view('Admin.zones.index', compact('zones'));
     }
 
     public function getData()
@@ -89,7 +89,7 @@ class ZoneController extends Controller
 
     public function create()
     {
-        return view('admin.zones.create');
+        return view('Admin.zones.create');
     }
 //
 //    public function store(Request $request)
@@ -157,7 +157,7 @@ class ZoneController extends Controller
             return back();
         }
         $zone = Zone::selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->findOrFail($id);
-        return view('admin.zones.edit', compact('zone'));
+        return view('Admin.zones.edit', compact('zone'));
     }
 
     public function update(Request $request, $id)
