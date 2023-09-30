@@ -2,6 +2,7 @@
 
 return [
     'no_gift_found' => 'no gift found now',
+    'zones' => 'delivery zones',
 
     'page_not_found' => 'page not found',
     'login_first' => 'you should login first',

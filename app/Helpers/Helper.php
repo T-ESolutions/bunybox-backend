@@ -97,6 +97,18 @@ if (!function_exists('settings')) {
     }
 }
 
+if (!function_exists('format_coordiantes')) {
+    function format_coordiantes($coordinates)
+    {
+        $data = [];
+        foreach($coordinates as $coord)
+        {
+            $data[] = (object)['lat'=>$coord->getlat(), 'lng'=>$coord->getlng()];
+        }
+        return $data;
+    }
+}
+
 if (!function_exists('setting_image')) {
     function setting_image($key)
     {

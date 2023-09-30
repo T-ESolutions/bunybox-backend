@@ -119,7 +119,7 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Head-->
 <!--begin::Body-->
 <body id="kt_body" style="background-image: url()"
-      class="header-fixed header-tablet-and-mobile-fixed aside-fixed @if(Request::is('/')) aside-secondary-disabled @else aside-secondary-enabled  @endif">
+      class="header-fixed header-tablet-and-mobile-fixed aside-fixed @if(Request::is('/') || request()->routeIs('zones.*') ) aside-secondary-disabled @else aside-secondary-enabled  @endif">
 <!--begin::Main-->
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">

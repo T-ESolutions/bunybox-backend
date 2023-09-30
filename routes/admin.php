@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\ZoneController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -75,4 +77,21 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/change_active', [OperationsController::class, 'changeActive'])->name('.change_active');
 
     });
+
+
+    Route::group(['prefix' => 'zones', 'as' => 'zones'], function () {
+        Route::get('/', [ZoneController::class, 'index'])->name('.index');
+        Route::get('/create', [ZoneController::class, 'create'])->name('.create');
+        Route::get('getData', [ZoneController::class, 'getData'])->name('.datatable');
+        Route::post('/store', [ZoneController::class, 'store'])->name('.store');
+        Route::get('get-all-zone-cordinates/{id?}', [ZoneController::class, 'get_all_zone_cordinates'])->name('.zoneCoordinates');
+        Route::post('search', [ZoneController::class, 'search'])->name('.search');
+
+        Route::get('/edit/{id}', [ZoneController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [ZoneController::class, 'update'])->name('.update');
+
+        Route::post('/delete', [ZoneController::class, 'delete'])->name('.delete');
+
+    });
+
 });
