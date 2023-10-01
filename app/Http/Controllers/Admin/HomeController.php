@@ -21,13 +21,6 @@ class HomeController extends Controller
     }
 
 
-    public function changeActive(Request $request)
-    {
-        $data['status'] = $request->status;
-        $this->objectName::where('id', $request->id)->update($data);
-        return 1;
-    }
-
     public function translate($word){
         return trans('lang.'.$word);
     }

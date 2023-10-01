@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\OperationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AdminsController;
-use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\ZoneController;
+use App\Http\Controllers\frontController;
 
 
 /*
@@ -23,34 +22,21 @@ use App\Http\Controllers\Admin\ZoneController;
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
-Route::post('Login', [\App\Http\Controllers\frontController::class, 'login']);
-Route::get('logout', [\App\Http\Controllers\frontController::class, 'logout']);
+Route::post('Login', [frontController::class, 'login']);
+Route::get('logout', [frontController::class, 'logout']);
 
-Route::get('forget-password', [\App\Http\Controllers\frontController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-Route::post('forget-password', [\App\Http\Controllers\frontController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
-Route::get('reset-password/{token}/{email}', [\App\Http\Controllers\frontController::class, 'showResetPasswordForm'])->name('reset.password.get');
-Route::post('reset-password', [\App\Http\Controllers\frontController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+Route::get('forget-password', [frontController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [frontController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+Route::get('reset-password/{token}/{email}', [frontController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [frontController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 Route::group(['middleware' => ['admin']], function () {
 
-    Route::get('Setting', [\App\Http\Controllers\Admin\AdminsController::class, 'Setting'])->name('profile');
-    Route::post('UpdateProfile', [\App\Http\Controllers\Admin\AdminsController::class, 'UpdateProfile'])->name('UpdateProfile');
+    Route::get('Setting', [AdminsController::class, 'Setting'])->name('profile');
+    Route::post('UpdateProfile', [AdminsController::class, 'UpdateProfile'])->name('UpdateProfile');
 
     Route::get('/', [HomeController::class, 'index'])->name('dashboard.index');
 
-
-//    Route::group(['prefix' => 'users', 'as' => 'users'], function () {
-//
-//        Route::get('/', [UsersController::class, 'index'])->name('.index');
-//        Route::get('/datatable', [UsersController::class, 'datatable'])->name('.datatable');
-//        Route::get('/add-button', [UsersController::class, 'table_buttons'])->name('.add-button');
-//        Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('.edit');
-//        Route::post('/update/{id}', [UsersController::class, 'update'])->name('.update');
-//        Route::post('/store', [UsersController::class, 'store'])->name('.store');
-//        Route::get('/delete', [UsersController::class, 'destroy'])->name('.delete');
-//        Route::post('/change_active', [UsersController::class, 'changeActive'])->name('.change_active');
-//
-//    });
 
     Route::group(['prefix' => 'admins', 'as' => 'admins'], function () {
 
@@ -62,19 +48,6 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/store', [AdminsController::class, 'store'])->name('.store');
         Route::get('/delete', [AdminsController::class, 'destroy'])->name('.delete');
         Route::post('/change_active', [AdminsController::class, 'changeActive'])->name('.change_active');
-
-    });
-    Route::group(['prefix' => 'operations', 'as' => 'operations'], function () {
-
-        Route::get('/', [OperationsController::class, 'index'])->name('.index');
-        Route::get('/datatable', [OperationsController::class, 'datatable'])->name('.datatable');
-        Route::get('/add-button', [OperationsController::class, 'table_buttons'])->name('.add-button');
-        Route::get('/create', [OperationsController::class, 'create'])->name('.create');
-        Route::get('/edit/{id}', [OperationsController::class, 'edit'])->name('.edit');
-        Route::post('/update/{id}', [OperationsController::class, 'update'])->name('.update');
-        Route::post('/store', [OperationsController::class, 'store'])->name('.store');
-        Route::get('/delete', [OperationsController::class, 'destroy'])->name('.delete');
-        Route::post('/change_active', [OperationsController::class, 'changeActive'])->name('.change_active');
 
     });
 

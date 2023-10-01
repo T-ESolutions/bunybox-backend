@@ -26,6 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => "app"], function () {
     Route::get('pages/{type}', [SettingsController::class, 'pages']);
     Route::get('/settings', [SettingsController::class, 'settings']);
+    Route::get('/settings-contact_us', [SettingsController::class, 'settingsContactUs']);
     Route::get('/settings/{key}', [SettingsController::class, 'custom_settings']);
 });
 

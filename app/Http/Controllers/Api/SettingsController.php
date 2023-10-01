@@ -18,6 +18,14 @@ class SettingsController extends Controller
 
     }
 
+    public function settingsContactUs(Request $request)
+    {
+        $settings = Setting::whereIn('key',['facebook','youtube','instagram'])->get();
+//        $screens = (ScreenResources::collection($screens));
+        return msgdata(true , trans('lang.success') , $settings , success() );
+
+    }
+
     public function custom_settings(Request $request, $key)
     {
 //        if($request->header('lang')){
