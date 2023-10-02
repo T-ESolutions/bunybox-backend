@@ -564,26 +564,28 @@ function generateArray($products, $min, $max, $limit = 4)
         }
     }
 
-    $x = array_merge($products, $newArr);
-    $new_product_Arr = arrayUniqueByKey($x, "id");
+    $new_product_Arr = array_merge($products, $newArr);
+    $new_product_Arr = arrayUniqueByKey($new_product_Arr, "id");
+
 
     foreach ($new_product_Arr as $pro) {
         if ((($total + $pro['sel_price']) >= $min) &&
             (($total + $pro['sel_price']) <= $max) &&
-            (!in_array($pro['category_id'], $secondCatsArr))) {
+            (!in_array($pro['category_id'], $secondCatsArr)) &&
+            !in_array($pro, $newArr)) {  // Check for duplicates in $newArr
             array_push($secArr, $pro);
             array_push($secondCatsArr, $pro['category_id']);
         }
     }
 
+
     if (count($secArr) == 0) {
-        if ($element <= 1 && $limit > 3) {
+        if ($element <= 1 ) {
             generateArray($products, $min, $max, $limit - 1);
             $limit--;
             $element++;
         }
     }
-
 
     $data = array_merge($newArr, $secArr);
     $data = arrayUniqueByKey($data, "id");
