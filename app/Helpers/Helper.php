@@ -101,9 +101,8 @@ if (!function_exists('format_coordiantes')) {
     function format_coordiantes($coordinates)
     {
         $data = [];
-        foreach($coordinates as $coord)
-        {
-            $data[] = (object)['lat'=>$coord->getlat(), 'lng'=>$coord->getlng()];
+        foreach ($coordinates as $coord) {
+            $data[] = (object)['lat' => $coord->getlat(), 'lng' => $coord->getlng()];
         }
         return $data;
     }
@@ -580,7 +579,7 @@ function generateArray($products, $min, $max, $limit = 4)
 
 
     if (count($secArr) == 0) {
-        if ($element <= 1 ) {
+        if ($element <= 1) {
             generateArray($products, $min, $max, $limit - 1);
             $limit--;
             $element++;
