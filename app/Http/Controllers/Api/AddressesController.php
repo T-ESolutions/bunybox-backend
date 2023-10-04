@@ -18,7 +18,7 @@ class AddressesController extends Controller
     public function index(Request $request)
     {
         $data = Address::where('user_id', auth('user')->user()->id)
-            ->orderBy('id', 'desc')
+            ->orderBy('is_default', 'desc')
             ->paginate(Config('app.paginate'));
         $data = AddressesResources::collection($data)->response()->getData(true);
         return msgdata(true, trans('lang.data_display_success'), $data, success());
