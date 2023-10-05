@@ -21,7 +21,7 @@ class BoxSeeder extends Seeder
                 'id' => 1,
                 'title_ar' => 'صندوق ب300',
                 'title_en' => 'Box with 300',
-                'image' => null,
+                'image' => 'box.png',
                 'desc_ar' => 'لوريم إيبسوم هو نص عباري وهمي يُستخدم في صناعات المطابع والتنضيد. كتب هذا النص بواسطة الطبيب والفيلسوف المتخصص في علم النفس، "لوريم إيبسوم" عام ١٩٥٠. حيث يمثل "لوريم إيبسوم" نصًا وهميًا في الصناعات',
                 'desc_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -70,7 +70,7 @@ class BoxSeeder extends Seeder
                 'id' => 2,
                 'title_ar' => 'صندوق ب400',
                 'title_en' => 'Box with 400',
-                'image' => null,
+                'image' => 'box.png',
                 'desc_ar' => 'لوريم إيبسوم هو نص عباري وهمي يُستخدم في صناعات المطابع والتنضيد. كتب هذا النص بواسطة الطبيب والفيلسوف المتخصص في علم النفس، "لوريم إيبسوم" عام ١٩٥٠. حيث يمثل "لوريم إيبسوم" نصًا وهميًا في الصناعات',
                 'desc_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -119,7 +119,7 @@ class BoxSeeder extends Seeder
                 'id' => 3,
                 'title_ar' => 'صندوق ب500',
                 'title_en' => 'Box with 500',
-                'image' => null,
+                'image' => 'box.png',
                 'desc_ar' => 'لوريم إيبسوم هو نص عباري وهمي يُستخدم في صناعات المطابع والتنضيد. كتب هذا النص بواسطة الطبيب والفيلسوف المتخصص في علم النفس، "لوريم إيبسوم" عام ١٩٥٠. حيث يمثل "لوريم إيبسوم" نصًا وهميًا في الصناعات',
                 'desc_en' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

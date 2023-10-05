@@ -7,6 +7,8 @@ use Database\Seeders\MainCategorySeed;
 use Database\Seeders\PagesSeeder;
 use Database\Seeders\SettingsSeeder;
 use Database\Seeders\UsersSeeder;
+use Database\Seeders\ProductSeeder;
+use Database\Seeders\OfferSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,5 +27,7 @@ class DatabaseSeeder extends Seeder
          $this->call(PagesSeeder::class);
          $this->call(SettingsSeeder::class);
          $this->call(UsersSeeder::class);
+         $this->call(ProductSeeder::class);
+         $this->call(OfferSeeder::class);
     }
 }

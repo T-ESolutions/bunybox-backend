@@ -63,6 +63,8 @@ class Product extends Model
             $img_name = 'category_' . time() . random_int(0000, 9999) . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('/uploads/product/'), $img_name);
             $this->attributes['image'] = $img_name;
+        }else{
+            $this->attributes['image'] = $image;
         }
     }
 
