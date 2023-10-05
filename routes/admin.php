@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\ZoneController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\frontController;
 
 
@@ -64,6 +65,21 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/update/{id}', [ZoneController::class, 'update'])->name('.update');
 
         Route::post('/delete', [ZoneController::class, 'delete'])->name('.delete');
+
+    });
+
+    Route::group(['prefix' => 'products', 'as' => 'products'], function () {
+        Route::get('/', [ProductController::class, 'index'])->name('.index');
+        Route::get('/create', [ProductController::class, 'create'])->name('.create');
+        Route::get('getData', [ProductController::class, 'getData'])->name('.datatable');
+        Route::post('/store', [ProductController::class, 'store'])->name('.store');
+        Route::get('get-all-zone-cordinates/{id?}', [ProductController::class, 'get_all_zone_cordinates'])->name('.zoneCoordinates');
+        Route::post('search', [ProductController::class, 'search'])->name('.search');
+
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [ProductController::class, 'update'])->name('.update');
+
+        Route::post('/delete', [ProductController::class, 'delete'])->name('.delete');
 
     });
 
