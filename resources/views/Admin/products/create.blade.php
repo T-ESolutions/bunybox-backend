@@ -15,7 +15,7 @@
 @endsection
 @section('header')
     <!--begin::Heading-->
-    <h1 class="text-dark fw-bolder my-0 fs-2"> {{trans('lang.edit')}}</h1>
+    <h1 class="text-dark fw-bolder my-0 fs-2"> {{trans('lang.add')}}</h1>
     <!--end::Heading-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb fw-bold fs-base my-1">
@@ -28,7 +28,7 @@
                 {{trans('lang.'.$route)}} </a>
         </li>
         <li class="breadcrumb-item">
-            {{trans('lang.edit')}}
+            {{trans('lang.add')}}
         </li>
     </ul>
     <!--end::Breadcrumb-->
@@ -40,7 +40,7 @@
     <div id="kt_content_container" class="container-xxl">
 
         <!--begin::Form-->
-        <form action="{{route('products.update',$row->id)}}" method="post" enctype="multipart/form-data"
+        <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data"
               class="form d-flex flex-column flex-lg-row gap-7 gap-lg-10">
         @csrf
         <!--begin::Aside column-->
@@ -84,7 +84,7 @@
                                                 <!--begin::Input-->
                                                 <select class="form-control mb-2" name="category_id" data-control="select2" data-hide-search="false">
                                                     @foreach($categories as $category)
-                                                        <option value="{{$category->id}}" {{$category->id == $row->category_id ? 'selected' : ''}}>{{$category->title_ar}}</option>
+                                                        <option value="{{$category->id}}" >{{$category->title_ar}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -102,7 +102,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="title_ar"
-                                                       class="form-control mb-2" value="{{$row->title_ar}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.name')}} ({{__('lang.ar')}})"
                                                 />
                                                 <!--end::Input-->
@@ -120,7 +120,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="title_en"
-                                                       class="form-control mb-2" value="{{$row->title_en}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.name')}} ({{__('lang.en')}})"
                                                 />
                                                 <!--end::Input-->
@@ -137,7 +137,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="quantity"
-                                                       class="form-control mb-2" value="{{$row->quantity}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.quantity')}}"
                                                 />
                                                 <!--end::Input-->
@@ -154,7 +154,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="buy_price"
-                                                       class="form-control mb-2" value="{{$row->buy_price}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.buy_price')}}"
                                                 />
                                                 <!--end::Input-->
@@ -171,7 +171,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="sel_price"
-                                                       class="form-control mb-2" value="{{$row->sel_price}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.sel_price')}}"
                                                 />
                                                 <!--end::Input-->
@@ -188,7 +188,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="shoes_size"
-                                                       class="form-control mb-2" value="{{$row->shoes_size}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.shoes_size')}}"
                                                 />
                                                 <!--end::Input-->
@@ -205,7 +205,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="size"
-                                                       class="form-control mb-2" value="{{$row->size}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.size')}}"
                                                 />
                                                 <!--end::Input-->
@@ -222,7 +222,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="min_age"
-                                                       class="form-control mb-2" value="{{$row->min_age}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.min_age')}}"
                                                 />
                                                 <!--end::Input-->
@@ -239,7 +239,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="max_age"
-                                                       class="form-control mb-2" value="{{$row->max_age}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.max_age')}}"
                                                 />
                                                 <!--end::Input-->
@@ -256,7 +256,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="min_weight"
-                                                       class="form-control mb-2" value="{{$row->min_weight}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.min_weight')}}"
                                                 />
                                                 <!--end::Input-->
@@ -273,7 +273,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="max_weight"
-                                                       class="form-control mb-2" value="{{$row->max_weight}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.max_weight')}}"
                                                 />
                                                 <!--end::Input-->
@@ -290,7 +290,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="min_height"
-                                                       class="form-control mb-2" value="{{$row->min_height}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.min_height')}}"
                                                 />
                                                 <!--end::Input-->
@@ -307,7 +307,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="max_height"
-                                                       class="form-control mb-2" value="{{$row->max_height}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.max_height')}}"
                                                 />
                                                 <!--end::Input-->
@@ -326,7 +326,7 @@
                                                 <!--begin::Input-->
                                                 <textarea required name="desc_ar"
                                                           placeholder="{{__('lang.description')}} ({{__('lang.ar')}})"
-                                                          class="form-control mb-2">{{$row->desc_ar}}</textarea>
+                                                          class="form-control mb-2"></textarea>
 
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
@@ -344,7 +344,7 @@
                                                 <!--begin::Input-->
                                                 <textarea required name="desc_en"
                                                           placeholder="{{__('lang.description')}} ({{__('lang.en')}})"
-                                                          class="form-control mb-2">{{$row->desc_en}}</textarea>
+                                                          class="form-control mb-2"></textarea>
 
                                                 <!--end::Input-->
                                                 <!--begin::Description-->

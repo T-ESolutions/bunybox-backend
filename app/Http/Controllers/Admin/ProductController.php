@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Models\Product;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
@@ -64,16 +65,6 @@ class ProductController extends Controller
 
     }
 
-    public function get_all_zone_cordinates($id = 0)
-    {
-        $products = Product::where('id', '<>', $id)->active()->get();
-        $data = [];
-        foreach ($products as $zone) {
-            $data[] = format_coordiantes($zone->coordinates[0]);
-        }
-        return response()->json($data, 200);
-    }
-
     public function search(Request $request)
     {
         $key = explode(' ', $request['search']);
@@ -90,62 +81,49 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('Admin.products.create');
+        $categories = Category::get();
+        return view('Admin.products.create',compact('categories'));
     }
-//
-//    public function store(Request $request)
-//    {
-//        $request->validate([
-//            'name' => 'required|unique:products,name|max:191',
-//            'coordinates' => 'required',
-//        ]);
-//
-//        $value = $request->coordinates;
-//        foreach(explode('),(',trim($value,'()')) as $index=>$single_array){
-//            if($index == 0)
-//            {
-//                $lastcord = explode(',',$single_array);
-//            }
-//            $coords = explode(',',$single_array);
-//            $polygon[] = new Point($coords[0], $coords[1]);
-//        }
-//        $zone_id=Product::all()->count() + 1;
-//        $polygon[] = new Point($lastcord[0], $lastcord[1]);
-//        $zone = new Product();
-//        $zone->name = $request->name;
-//        $zone->coordinates = new Polygon([new LineString($polygon)]);
-//        $zone->restaurant_wise_topic =  'zone_'.$zone_id.'_restaurant';
-//        $zone->customer_wise_topic = 'zone_'.$zone_id.'_customer';
-//        $zone->deliveryman_wise_topic = 'zone_'.$zone_id.'_delivery_man';
-//        $zone->save();
-//
-//        session()->flash('success', 'تم الإضافة بنجاح');
-//        return back();
-//    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:products,name',
-            'coordinates' => 'required',
+            'category_id' => 'required|unique:products,id,' . $request->category_id,
+            'title_ar' => 'required|string',
+            'title_en' => 'required|string',
+            'desc_ar' => 'required|string',
+            'desc_en' => 'required|string',
+            'quantity' => 'required|numeric',
+            'buy_price' => 'required|numeric',
+            'sel_price' => 'required|numeric',
+            'shoes_size' => 'required|numeric',
+            'size' => 'required|numeric',
+            'min_age' => 'required|numeric',
+            'max_age' => 'required|numeric',
+            'min_weight' => 'required|numeric',
+            'max_weight' => 'required|numeric',
+            'min_height' => 'required|numeric',
+            'max_height' => 'required|numeric',
         ]);
 
-        $value = $request->coordinates;
-        foreach (explode('),(', trim($value, '()')) as $index => $single_array) {
-            if ($index == 0) {
-                $lastcord = explode(',', $single_array);
-            }
-            $coords = explode(',', $single_array);
-            $polygon[] = new Point($coords[0], $coords[1]);
-        }
-        $zone_id = Product::all()->count() + 1;
-        $polygon[] = new Point($lastcord[0], $lastcord[1]);
-        $zone = new Product();
-        $zone->name = $request->name;
-        $zone->coordinates = new Polygon([new LineString($polygon)]);
-//        $zone->restaurant_wise_topic = 'zone_' . $zone_id . '_restaurant';
-//        $zone->customer_wise_topic = 'zone_' . $zone_id . '_customer';
-//        $zone->deliveryman_wise_topic = 'zone_' . $zone_id . '_delivery_man';
-        $zone->save();
+        $row = new Product();
+        $row->category_id = $request->category_id;
+        $row->title_ar = $request->title_ar;
+        $row->title_en = $request->title_en;
+        $row->desc_ar = $request->desc_ar;
+        $row->desc_en = $request->desc_en;
+        $row->quantity = $request->quantity;
+        $row->buy_price = $request->buy_price;
+        $row->sel_price = $request->sel_price;
+        $row->shoes_size = $request->shoes_size;
+        $row->size = $request->size;
+        $row->min_age = $request->min_age;
+        $row->max_age = $request->max_age;
+        $row->min_weight = $request->min_weight;
+        $row->max_weight = $request->max_weight;
+        $row->min_height = $request->min_height;
+        $row->max_height = $request->max_height;
+        $row->save();
 
         session()->flash('success', 'تم الإضافة بنجاح');
         return back();
@@ -153,36 +131,52 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        if (env('APP_MODE') == 'demo' && $id == 1) {
-            session()->flash('warning', 'آسف! لا يمكنك تحرير هذه المنطقة. الرجاء إضافة منطقة جديدة للتعديل');
-            return back();
-        }
-        $zone = Product::selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->findOrFail($id);
-        return view('Admin.products.edit', compact('zone'));
+        $categories = Category::get();
+        $row = Product::findOrFail($id);
+        return view('Admin.products.edit', compact('row','categories'));
     }
 
     public function update(Request $request, $id)
     {
+        $row = Product::findOrFail($id);
+
         $request->validate([
-            'name' => 'required|unique:products,name,' . $id,
-            'coordinates' => 'required',
+            'category_id' => 'required|unique:products,id,' . $request->category_id,
+            'title_ar' => 'required|string',
+            'title_en' => 'required|string',
+            'desc_ar' => 'required|string',
+            'desc_en' => 'required|string',
+            'quantity' => 'required|numeric',
+            'buy_price' => 'required|numeric',
+            'sel_price' => 'required|numeric',
+            'shoes_size' => 'required|numeric',
+            'size' => 'required|numeric',
+            'min_age' => 'required|numeric',
+            'max_age' => 'required|numeric',
+            'min_weight' => 'required|numeric',
+            'max_weight' => 'required|numeric',
+            'min_height' => 'required|numeric',
+            'max_height' => 'required|numeric',
         ]);
-        $value = $request->coordinates;
-        foreach (explode('),(', trim($value, '()')) as $index => $single_array) {
-            if ($index == 0) {
-                $lastcord = explode(',', $single_array);
-            }
-            $coords = explode(',', $single_array);
-            $polygon[] = new Point($coords[0], $coords[1]);
-        }
-        $polygon[] = new Point($lastcord[0], $lastcord[1]);
-        $zone = Product::findOrFail($id);
-        $zone->name = $request->name;
-        $zone->coordinates = new Polygon([new LineString($polygon)]);
-        $zone->restaurant_wise_topic = 'zone_' . $id . '_restaurant';
-        $zone->customer_wise_topic = 'zone_' . $id . '_customer';
-        $zone->deliveryman_wise_topic = 'zone_' . $id . '_delivery_man';
-        $zone->save();
+
+        $row->category_id = $request->category_id;
+        $row->title_ar = $request->title_ar;
+        $row->title_en = $request->title_en;
+        $row->desc_ar = $request->desc_ar;
+        $row->desc_en = $request->desc_en;
+        $row->quantity = $request->quantity;
+        $row->buy_price = $request->buy_price;
+        $row->sel_price = $request->sel_price;
+        $row->shoes_size = $request->shoes_size;
+        $row->size = $request->size;
+        $row->min_age = $request->min_age;
+        $row->max_age = $request->max_age;
+        $row->min_weight = $request->min_weight;
+        $row->max_weight = $request->max_weight;
+        $row->min_height = $request->min_height;
+        $row->max_height = $request->max_height;
+        $row->save();
+
         session()->flash('success', 'تم التعديل بنجاح');
         return redirect()->back();
 //        return redirect()->route('admin.settings.products');

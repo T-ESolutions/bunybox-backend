@@ -5,7 +5,11 @@
 @section('title',__('lang.admins'))
 @section('header')
     <!--begin::Heading-->
-    <h1 class="text-dark fw-bolder my-0 fs-2">{{trans('lang.'.$route)}} </h1>
+    <h1 class="text-dark fw-bolder my-0 fs-2">
+        {{trans('lang.'.$route)}}
+
+        <a href="{{route('products.create')}}" class="btn btn-success pt-2 pb-2">{{__('lang.add')}}</a>
+    </h1>
     <!--end::Heading-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb fw-bold fs-base my-1">
@@ -17,6 +21,8 @@
             {{trans('lang.'.$route)}}
         </li>
     </ul>
+
+
     <!--end::Breadcrumb-->
 @endsection
 
