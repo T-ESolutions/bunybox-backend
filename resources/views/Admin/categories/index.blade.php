@@ -1,6 +1,6 @@
 @extends('layout.layout')
 @php
-    $route = 'products';
+    $route = 'categories';
 @endphp
 @section('title',__('lang.admins'))
 @section('header')
@@ -44,10 +44,6 @@
                         <tr class="text-start text-muted fw-bolder fs-5 text-uppercase gs-0">
                             <th class="min-w-125px">{{__('lang.image')}}</th>
                             <th class="min-w-125px">{{__('lang.name')}}</th>
-                            <th class="min-w-125px">{{__('lang.category')}}</th>
-                            <th class="min-w-125px">{{__('lang.quantity')}}</th>
-                            <th class="min-w-125px">{{__('lang.buy_price')}}</th>
-                            <th class="min-w-125px">{{__('lang.sell_price')}}</th>
                             <th class="min-w-125px">{{__('lang.Actions')}}</th>
                         </tr>
                         <!--end::Table row-->
@@ -152,10 +148,6 @@
                 columns: [
                     {data: 'image', name: 'image', "searchable": true, "orderable": true},
                     {data: 'title_ar', name: 'title_ar', "searchable": true, "orderable": true},
-                    {data: 'category_id', name: 'category_id', "searchable": true, "orderable": false},
-                    {data: 'quantity', name: 'quantity', "searchable": true, "orderable": false},
-                    {data: 'buy_price', name: 'buy_price', "searchable": true, "orderable": false},
-                    {data: 'sel_price', name: 'sel_price', "searchable": true, "orderable": false},
                     {data: 'actions', name: 'actions', "searchable": false, "orderable": false},
                 ]
             });

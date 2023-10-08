@@ -40,7 +40,7 @@
     <div id="kt_content_container" class="container-xxl">
 
         <!--begin::Form-->
-        <form action="{{route('products.update',$row->id)}}" method="post" enctype="multipart/form-data"
+        <form action="{{route("$route.update",$row->id)}}" method="post" enctype="multipart/form-data"
               class="form d-flex flex-column flex-lg-row gap-7 gap-lg-10">
         @csrf
         <!--begin::Aside column-->
@@ -73,6 +73,42 @@
                                 <div class="card-body pt-0">
                                     <div class="row">
                                         <div class="col-md-12">
+
+                                            <!--begin::Thumbnail settings-->
+                                            <!--begin::Card body-->
+                                            <div class="card-body text-center pt-0">
+                                                <!--begin::Image input-->
+                                                <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="">
+                                                    <!--begin::Preview existing avatar-->
+                                                    <div class="image-input-wrapper w-150px h-150px" style="background-image: url({{$row->image}})"></div>
+                                                    <!--end::Preview existing avatar-->
+                                                    <!--begin::Label-->
+                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="إختر الصورة">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg" />
+                                                        <input type="hidden"  />
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="إلغاء الصورة">
+														<i class="bi bi-x fs-2"></i>
+													</span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="حذف الصورة">
+														<i class="bi bi-x fs-2"></i>
+													</span>
+                                                    <!--end::Remove-->
+                                                </div>
+                                                <!--end::Image input-->
+                                                <!--begin::Description-->
+                                                <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg </div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Card body-->
+                                            <!--end::Thumbnail settings-->
 
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">

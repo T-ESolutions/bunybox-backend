@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\ZoneController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\frontController;
 
 
@@ -73,13 +74,21 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/create', [ProductController::class, 'create'])->name('.create');
         Route::get('getData', [ProductController::class, 'getData'])->name('.datatable');
         Route::post('/store', [ProductController::class, 'store'])->name('.store');
-        Route::get('get-all-zone-cordinates/{id?}', [ProductController::class, 'get_all_zone_cordinates'])->name('.zoneCoordinates');
         Route::post('search', [ProductController::class, 'search'])->name('.search');
-
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('.edit');
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('.update');
-
         Route::post('/delete', [ProductController::class, 'delete'])->name('.delete');
+    });
+
+    Route::group(['prefix' => 'categories', 'as' => 'categories'], function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('.index');
+        Route::get('/create', [CategoryController::class, 'create'])->name('.create');
+        Route::get('getData', [CategoryController::class, 'getData'])->name('.datatable');
+        Route::post('/store', [CategoryController::class, 'store'])->name('.store');
+        Route::post('search', [CategoryController::class, 'search'])->name('.search');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('.update');
+        Route::post('/delete', [CategoryController::class, 'delete'])->name('.delete');
 
     });
 
