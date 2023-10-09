@@ -15,14 +15,14 @@
     </button>
 </div>
 <!--end::Page Custom Javascript-->
- 
+
 <script type="text/javascript">
 
     $("#delete").on("click", function () {
         var dataList = [];
         $("#admins_table .selector:checked").each(function (index) {
             dataList.push($(this).val())
-        })
+        }) 
         if (dataList.length > 0) {
             Swal.fire({
                 title: "{{__('lang.warrning')}} !",
