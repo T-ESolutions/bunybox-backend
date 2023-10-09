@@ -10,7 +10,7 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang="en">
+<html lang="en" @if(Session('lang') =='ar') dir="rtl" @endif>
 <!--begin::Head-->
 <head><base href="../../../">
     <title>Bunny Box || Login </title>
@@ -35,7 +35,7 @@ License: For each use you must have a valid license purchased only from above li
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-<body id="kt_body" class="bg-body">
+<body id="kt_body" class="bg-body" >
 <!--begin::Main-->
 
 @yield('content')
