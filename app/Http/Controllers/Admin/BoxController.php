@@ -185,7 +185,7 @@ class BoxController extends Controller
      */
     public function delete(Request $request)
     {
-        try { 
+        try {
             Box::whereIn('id', $request->id)->delete();
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed']);
