@@ -67,19 +67,7 @@ class OfferController extends Controller
 
     }
 
-    public function search(Request $request)
-    {
-        $key = explode(' ', $request['search']);
-        $products = Box::where(function ($q) use ($key) {
-            foreach ($key as $value) {
-                $q->orWhere('name', 'like', "%{$value}%");
-            }
-        })->limit(50)->get();
-        return response()->json([
-            'view' => view('admin-views.zone.partials._table', compact('products'))->render(),
-            'total' => $products->count()
-        ]);
-    }
+
 
     public function create()
     {
@@ -126,8 +114,7 @@ class OfferController extends Controller
             $boxCategory->save();
         }
 
-        session()->flash('success', 'تم الإضافة بنجاح');
-        return back();
+        return redirect()->back()->with('message', trans('lang.added_s'));
     }
 
     public function edit($id)
@@ -179,9 +166,7 @@ class OfferController extends Controller
                 'box_id' => $row->id,
             ]);
         }
-
-        session()->flash('success', 'تم التعديل بنجاح');
-        return redirect()->back();
+        return redirect()->back()->with('message', trans('lang.updated_s'));
 //        return redirect()->route('admin.settings.offers');
     }
 

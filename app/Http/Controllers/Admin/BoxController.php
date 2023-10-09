@@ -29,7 +29,7 @@ class BoxController extends Controller
     {
         $auth = Auth::guard('admin')->user();
         $model = Box::query();
-        $model->where('is_offer',0);
+        $model->where('is_offer', 0);
         return DataTables::eloquent($model)
             ->addIndexColumn()
             ->editColumn('image', function ($row) {
@@ -37,7 +37,7 @@ class BoxController extends Controller
             })
             ->editColumn('main_category_id', function ($row) {
                 if ($row->mainCategory) {
-                    $category  = $row->mainCategory->title_ar;
+                    $category = $row->mainCategory->title_ar;
                     return "<b class='badge badge-success'>$category</b>";
                 } else {
                     return "-";
@@ -51,7 +51,7 @@ class BoxController extends Controller
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
 //                if ($auth->can('sliders.update')) {
-                $buttons .= '<a href="' . route('boxes.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="'.trans('lang.edit').'">
+                $buttons .= '<a href="' . route('boxes.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
                             <i class="fa fa-edit"></i>
                         </a>';
 //                }
@@ -62,30 +62,18 @@ class BoxController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions', 'image','main_category_id'])
+            ->rawColumns(['actions', 'image', 'main_category_id'])
             ->make();
 
     }
 
-    public function search(Request $request)
-    {
-        $key = explode(' ', $request['search']);
-        $products = Box::where(function ($q) use ($key) {
-            foreach ($key as $value) {
-                $q->orWhere('name', 'like', "%{$value}%");
-            }
-        })->limit(50)->get();
-        return response()->json([
-            'view' => view('admin-views.zone.partials._table', compact('products'))->render(),
-            'total' => $products->count()
-        ]);
-    }
+
 
     public function create()
     {
         $main_categories = MainCategory::get();
         $categories = Category::get();
-        return view('Admin.boxes.create', compact('main_categories','categories'));
+        return view('Admin.boxes.create', compact('main_categories', 'categories'));
     }
 
     public function store(Request $request)
@@ -117,15 +105,15 @@ class BoxController extends Controller
         $row->offer_end_time = null;
         $row->image = $request->image;
         $row->save();
-        foreach ($request->category_id as $category_id){
+        foreach ($request->category_id as $category_id) {
             $boxCategory = new BoxCategory();
             $row->category_id = $category_id;
             $row->box_id = $row->id;
             $boxCategory->save();
         }
 
-        session()->flash('success', 'تم الإضافة بنجاح');
-        return back();
+
+        return redirect()->back()->with('message', trans('lang.added_s'));
     }
 
     public function edit($id)
@@ -134,7 +122,7 @@ class BoxController extends Controller
         $categories = Category::get();
         $boxCategories = BoxCategory::whereBoxId($id)->pluck('category_id')->toArray();
         $row = Box::findOrFail($id);
-        return view('Admin.boxes.edit', compact('row','main_categories','categories','boxCategories'));
+        return view('Admin.boxes.edit', compact('row', 'main_categories', 'categories', 'boxCategories'));
     }
 
     public function update(Request $request, $id)
@@ -169,16 +157,13 @@ class BoxController extends Controller
         $row->save();
 
         BoxCategory::whereBoxId($id)->delete();
-        foreach ($request->category_id as $category_id){
+        foreach ($request->category_id as $category_id) {
             BoxCategory::create([
                 'category_id' => $category_id,
                 'box_id' => $row->id,
             ]);
         }
-
-        session()->flash('success', 'تم التعديل بنجاح');
-        return redirect()->back();
-//        return redirect()->route('admin.settings.boxes');
+        return redirect()->back()->with('message', trans('lang.updated_s'));
     }
 
 }

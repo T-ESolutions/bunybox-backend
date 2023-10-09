@@ -64,19 +64,7 @@ class MainCategoryController extends Controller
 
     }
 
-    public function search(Request $request)
-    {
-        $key = explode(' ', $request['search']);
-        $products = MainCategory::where(function ($q) use ($key) {
-            foreach ($key as $value) {
-                $q->orWhere('name', 'like', "%{$value}%");
-            }
-        })->limit(50)->get();
-        return response()->json([
-            'view' => view('admin-views.zone.partials._table', compact('products'))->render(),
-            'total' => $products->count()
-        ]);
-    }
+
 
     public function create()
     {
@@ -100,9 +88,7 @@ class MainCategoryController extends Controller
         $row->desc_en = $request->desc_en;
         $row->image = $request->image;
         $row->save();
-
-        session()->flash('success', 'تم الإضافة بنجاح');
-        return back();
+        return redirect()->back()->with('message', trans('lang.added_s'));
     }
 
     public function edit($id)
@@ -129,10 +115,7 @@ class MainCategoryController extends Controller
         $row->desc_en = $request->desc_en;
         $row->image = $request->image;
         $row->save();
-
-        session()->flash('success', 'تم التعديل بنجاح');
-        return redirect()->back();
-//        return redirect()->route('admin.settings.main_categories');
+        return redirect()->back()->with('message', trans('lang.added_s'));
     }
 
 }

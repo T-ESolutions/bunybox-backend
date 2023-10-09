@@ -112,7 +112,7 @@
                                 ' <table> ' +
                                 '                        <tbody> ' +
                                 '                                <tr>' +
-                                '                                    <td style="text-align: center">  <p style="padding-right:150px">Monasba</p></td>' +
+                                '                                    <td style="text-align: center">  <p style="padding-right:150px">Bunny Box</p></td>' +
                                 '                                    <td style="text-align: right"> <img src="{{asset('logo.png')}}" width="150px" height="150px" /> </td>' +
                                 '                                    <td style="text-align: right"><p>{{__("lang.title")}} : {{__('lang.'.$route)}}</p>' +
                                 '                                                                  <p>{{__('lang.date')}} : {{ Carbon\Carbon::now()->translatedFormat('l Y/m/d') }}</p>' +

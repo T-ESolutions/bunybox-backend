@@ -10,11 +10,11 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang="en" @if(Session('lang') =='ar')dir="rtl" @endif>
+<html lang="en" @if(Session('lang') =='ar') dir="rtl" @endif>
 <!--begin::Head-->
 <head>
     <base href="../">
-    <title> Rasheed || @yield('title')
+    <title> Bunny Box  || @yield('title')
     </title>
     <meta charset="utf-8"/>
     <meta name="description"
@@ -202,7 +202,13 @@ License: For each use you must have a valid license purchased only from above li
                             <li class="nav-item mb-2 togge" data-bs-toggle="tooltip" data-bs-trigger="hover"
                                 data-bs-placement="right" data-bs-dismiss="click" title="{{trans('lang.basic_menus')}}">
                                 <!--begin::Nav link-->
-                                <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light  @if(request()->segment(1) == '/categories' || request()->segment(1) == 'currencies' || request()->segment(1) == 'pages' || request()->segment(1) == 'news' || request()->segment(1) == 'contacts' || request()->segment(1) == 'subscribes' ||  request()->segment(1) == 'features' || request()->segment(1) == 'logs'  || request()->segment(1) == 'promotioncodes' ) active @endif  "
+                                <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light
+                            @if(request()->segment(1) == 'zones' ||
+                                request()->segment(1) == 'products' ||
+                                request()->segment(1) == 'main_categories' ||
+                                request()->segment(1) == 'categories' ||
+                                request()->segment(1) == 'boxes' ||
+                                request()->segment(1) == 'offers') active @endif  "
                                    data-bs-toggle="tab" href="#kt_aside_nav_tab_menu">
                                     <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
                                     <span class="svg-icon svg-icon-2x">

@@ -157,7 +157,7 @@
                                                 style="padding-left:20px;padding-right:20px;padding-top:10px;text-align:center;width:100%;">
                                                 <h1 style="margin: 0; color: #545ae8; direction: ltr; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 3px; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;">
                                                     <a href="[Unsubscribe]" rel="noopener" style="color: #8a3b8f;"
-                                                       target="_blank"> Monasba</a></h1>
+                                                       target="_blank"> Bunny Box</a></h1>
                                             </td>
                                         </tr>
                                     </table>
