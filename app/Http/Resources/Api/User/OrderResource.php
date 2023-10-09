@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api\User;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -27,7 +28,8 @@ class OrderResource extends JsonResource
                 'box_image' => $this->box->image,
                 'box_title' => $this->box->title,
                 'box_price' => $this->box->price,
-                'box_categories' => $categories_arr
+                'box_categories' => $categories_arr,
+                'ordered_at' => Carbon::parse($this->created_at)->translatedFormat("Y-m-d h:i a"),
 
             ];
     }
