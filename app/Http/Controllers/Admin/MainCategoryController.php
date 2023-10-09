@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
+use App\Models\MainCategory;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
@@ -12,20 +12,20 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
-class CategoryController extends Controller
+class MainCategoryController extends Controller
 {
 
     //for products
     public function index()
     {
-        $results = Category::latest()->paginate(config('default_pagination'));
-        return view('Admin.categories.index', compact('results'));
+        $results = MainCategory::latest()->paginate(config('default_pagination'));
+        return view('Admin.main_categories.index', compact('results'));
     }
 
     public function getData()
     {
         $auth = Auth::guard('admin')->user();
-        $model = Category::query();
+        $model = MainCategory::query();
 
         return DataTables::eloquent($model)
             ->addIndexColumn()
@@ -48,7 +48,7 @@ class CategoryController extends Controller
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
 //                if ($auth->can('sliders.update')) {
-                $buttons .= '<a href="' . route('categories.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="'.trans('lang.edit').'">
+                $buttons .= '<a href="' . route('main_categories.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="'.trans('lang.edit').'">
                             <i class="fa fa-edit"></i>
                         </a>';
 //                }
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     public function search(Request $request)
     {
         $key = explode(' ', $request['search']);
-        $products = Category::where(function ($q) use ($key) {
+        $products = MainCategory::where(function ($q) use ($key) {
             foreach ($key as $value) {
                 $q->orWhere('name', 'like', "%{$value}%");
             }
@@ -80,7 +80,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('Admin.categories.create');
+        return view('Admin.main_categories.create');
     }
 
     public function store(Request $request)
@@ -93,7 +93,7 @@ class CategoryController extends Controller
             'image' => 'required|',
         ]);
 
-        $row = new Category();
+        $row = new MainCategory();
         $row->title_ar = $request->title_ar;
         $row->title_en = $request->title_en;
         $row->desc_ar = $request->desc_ar;
@@ -107,13 +107,13 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $row = Category::findOrFail($id);
-        return view('Admin.categories.edit', compact('row'));
+        $row = MainCategory::findOrFail($id);
+        return view('Admin.main_categories.edit', compact('row'));
     }
 
     public function update(Request $request, $id)
     {
-        $row = Category::findOrFail($id);
+        $row = MainCategory::findOrFail($id);
 
         $request->validate([
             'title_ar' => 'required|string',
@@ -132,7 +132,7 @@ class CategoryController extends Controller
 
         session()->flash('success', 'تم التعديل بنجاح');
         return redirect()->back();
-//        return redirect()->route('admin.settings.categories');
+//        return redirect()->route('admin.settings.main_categories');
     }
 
 }

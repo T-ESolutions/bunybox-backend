@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'ar' => 'عربي',
+    'en' => 'انجليزي',
     'you_are_out_saudi' => 'لا يمكن اضافة العنوان تم اختياره خارج السعودية',
     'zones' => 'مناطق التوصيل',
     'are_you_sure' => 'هل انت متأكد ؟',
@@ -280,6 +282,10 @@ return [
     'SubCategory' => 'الفئات الفرعية  ',
     'MainCategory' => 'الفئات الرئيسية  ',
     'price' => 'السعر  ',
+    'min_price' => 'أقل سعر  ',
+    'max_price' => 'أعلي سعر  ',
+    'offer_price' => ' سعر العرض',
+    'offer_end_time' => 'نهاية العرض',
     'save' => 'حفظ  ',
     'close' => 'الغاء  ',
     'password' => 'كلمة المرور  ',
@@ -438,7 +444,8 @@ return [
     'view_all' => 'عرض الكل',
     'sub_categories' => 'الفئات الفرعية',
     'main_categories' => 'الفئات الرئيسية',
-    'categories' => 'الفئات الرئيسية',
+    'categories' => 'الفئات',
+    'boxes' => 'الصناديق',
     'currencies' => 'العملات',
     'currency_code' => 'الكود',
     'symbol_ar' => 'الرمز عربي',

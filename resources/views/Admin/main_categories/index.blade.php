@@ -1,6 +1,6 @@
 @extends('layout.layout')
 @php
-    $route = 'categories';
+    $route = 'main_categories';
 @endphp
 @section('title',__("lang.$route"))
 @section('header')

@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @php
-    $route = 'categories';
+    $route = 'main_categories';
 @endphp
 @section('title',__("lang.$route"))
 @section('style')
@@ -15,7 +15,7 @@
 @endsection
 @section('header')
     <!--begin::Heading-->
-    <h1 class="text-dark fw-bolder my-0 fs-2"> {{trans('lang.edit')}}</h1>
+    <h1 class="text-dark fw-bolder my-0 fs-2"> {{trans('lang.add')}}</h1>
     <!--end::Heading-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb fw-bold fs-base my-1">
@@ -28,7 +28,7 @@
                 {{trans('lang.'.$route)}} </a>
         </li>
         <li class="breadcrumb-item">
-            {{trans('lang.edit')}}
+            {{trans('lang.add')}}
         </li>
     </ul>
     <!--end::Breadcrumb-->
@@ -40,7 +40,7 @@
     <div id="kt_content_container" class="container-xxl">
 
         <!--begin::Form-->
-        <form action="{{route("$route.update",$row->id)}}" method="post" enctype="multipart/form-data"
+        <form action="{{route("$route.store")}}" method="post" enctype="multipart/form-data"
               class="form d-flex flex-column flex-lg-row gap-7 gap-lg-10">
         @csrf
         <!--begin::Aside column-->
@@ -78,33 +78,45 @@
                                             <!--begin::Card body-->
                                             <div class="card-body text-center pt-0">
                                                 <!--begin::Image input-->
-                                                <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="">
+                                                <div class="image-input image-input-empty image-input-outline mb-3"
+                                                     data-kt-image-input="true"
+                                                     style="background-image: url(assets/media/svg/files/blank-image.svg)">
                                                     <!--begin::Preview existing avatar-->
-                                                    <div class="image-input-wrapper w-150px h-150px" style="background-image: url({{$row->image}})"></div>
+                                                    <div class="image-input-wrapper w-150px h-150px"></div>
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
-                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="إختر الصورة">
+                                                    <label
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                        title="إختر الصورة">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg" />
-                                                        <input type="hidden"  />
+                                                        <input required type="file" name="image"
+                                                               accept=".png, .jpg, .jpeg"/>
+                                                        <input type="hidden" name="avatar_remove"/>
                                                         <!--end::Inputs-->
                                                     </label>
                                                     <!--end::Label-->
                                                     <!--begin::Cancel-->
-                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="إلغاء الصورة">
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                        title="إلغاء الصورة">
 														<i class="bi bi-x fs-2"></i>
 													</span>
                                                     <!--end::Cancel-->
                                                     <!--begin::Remove-->
-                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="حذف الصورة">
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                        title="حذف الصورة">
 														<i class="bi bi-x fs-2"></i>
 													</span>
                                                     <!--end::Remove-->
                                                 </div>
                                                 <!--end::Image input-->
                                                 <!--begin::Description-->
-                                                <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg </div>
+                                                <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg</div>
                                                 <!--end::Description-->
                                             </div>
                                             <!--end::Card body-->
@@ -118,7 +130,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="title_ar"
-                                                       class="form-control mb-2" value="{{$row->title_ar}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.name')}} ({{__('lang.ar')}})"
                                                 />
                                                 <!--end::Input-->
@@ -136,7 +148,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="text" required name="title_en"
-                                                       class="form-control mb-2" value="{{$row->title_en}}"
+                                                       class="form-control mb-2"
                                                        placeholder="{{__('lang.name')}} ({{__('lang.en')}})"
                                                 />
                                                 <!--end::Input-->
@@ -155,7 +167,7 @@
                                                 <!--begin::Input-->
                                                 <textarea required name="desc_ar"
                                                           placeholder="{{__('lang.description')}} ({{__('lang.ar')}})"
-                                                          class="form-control mb-2">{{$row->desc_ar}}</textarea>
+                                                          class="form-control mb-2"></textarea>
 
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
@@ -173,7 +185,7 @@
                                                 <!--begin::Input-->
                                                 <textarea required name="desc_en"
                                                           placeholder="{{__('lang.description')}} ({{__('lang.en')}})"
-                                                          class="form-control mb-2">{{$row->desc_en}}</textarea>
+                                                          class="form-control mb-2"></textarea>
 
                                                 <!--end::Input-->
                                                 <!--begin::Description-->

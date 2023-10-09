@@ -3,7 +3,7 @@
 @php
     $route = 'products';
 @endphp
-
+@section('title',__("lang.$route"))
 @section('style')
     <style>
         @media (min-width: 992px) {
@@ -65,7 +65,7 @@
                             <div class="card card-flush py-4">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h2>{{__('lang.product_details')}}</h2>
+                                        <h2>{{__("lang.$route")}}</h2>
                                     </div>
                                 </div>
                                 <br>

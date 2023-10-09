@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @php
-    $route = 'categories';
+    $route = 'boxes';
 @endphp
 @section('title',__("lang.$route"))
 @section('style')
@@ -113,6 +113,26 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
+                                                <label class="required form-label">
+                                                    {{__('lang.main_categories')}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <select class="form-control mb-2" name="main_category_id" data-control="select2" data-hide-search="false">
+                                                    @foreach($main_categories as $main_category)
+                                                        <option value="{{$main_category->id}}" {{$main_category->id == $row->main_category_id ? 'selected' : ''}}>{{$main_category->title_ar}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="mb-5 fv-row">
+                                                <!--begin::Label-->
                                                 <label class="required form-label">{{__('lang.name')}}
                                                     ({{__('lang.ar')}}) </label>
                                                 <!--end::Label-->
@@ -138,6 +158,60 @@
                                                 <input type="text" required name="title_en"
                                                        class="form-control mb-2" value="{{$row->title_en}}"
                                                        placeholder="{{__('lang.name')}} ({{__('lang.en')}})"
+                                                />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="mb-5 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">{{__('lang.price')}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="number" required name="price"
+                                                       class="form-control mb-2" value="{{$row->price}}"
+                                                       placeholder="{{__('lang.price')}} "
+                                                />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="mb-5 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">{{__('lang.min_price')}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="number" required name="min_price"
+                                                       class="form-control mb-2" value="{{$row->min_price}}"
+                                                       placeholder="{{__('lang.min_price')}} "
+                                                />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="mb-5 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">{{__('lang.max_price')}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="number" required name="max_price"
+                                                       class="form-control mb-2" value="{{$row->max_price}}"
+                                                       placeholder="{{__('lang.max_price')}} "
                                                 />
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
@@ -181,6 +255,28 @@
                                             <!--end::Description-->
                                             </div>
                                             <!--end::Input group-->
+
+                                            <hr>
+                                            <!--begin::Input group-->
+                                            <div class="mb-5 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">
+                                                    {{__('lang.categories')}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <select class="form-control mb-2" name="category_id[]" data-control="select2" data-hide-search="false" multiple>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{$category->id}}" {{in_array($category->id,$boxCategories) ? 'selected' : ''}}>{{$category->title_ar}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <hr>
 
                                         </div>
 

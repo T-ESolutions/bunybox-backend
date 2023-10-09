@@ -2,7 +2,7 @@
 @php
     $route = 'products';
 @endphp
-@section('title',__('lang.admins'))
+@section('title',__("lang.$route"))
 @section('header')
     <!--begin::Heading-->
     <h1 class="text-dark fw-bolder my-0 fs-2">

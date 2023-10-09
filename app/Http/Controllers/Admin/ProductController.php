@@ -88,7 +88,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_id' => 'required|unique:products,id,' . $request->category_id,
+            'category_id' => 'required|exists:products,id',
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
@@ -143,7 +143,7 @@ class ProductController extends Controller
         $row = Product::findOrFail($id);
 
         $request->validate([
-            'category_id' => 'required|unique:products,id,' . $request->category_id,
+            'category_id' => 'required|exists:products,id',
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',

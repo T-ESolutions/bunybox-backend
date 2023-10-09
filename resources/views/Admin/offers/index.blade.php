@@ -1,6 +1,6 @@
 @extends('layout.layout')
 @php
-    $route = 'categories';
+    $route = 'offers';
 @endphp
 @section('title',__("lang.$route"))
 @section('header')
@@ -42,9 +42,15 @@
                         <!--begin::Table row-->
 
                         <tr class="text-start text-muted fw-bolder fs-5 text-uppercase gs-0">
-                            <th class="min-w-125px">{{__('lang.image')}}</th>
-                            <th class="min-w-125px">{{__('lang.name')}}</th>
-                            <th class="min-w-125px">{{__('lang.Actions')}}</th>
+                            <th class="min-w-10px">{{__('lang.image')}}</th>
+                            <th class="min-w-10px">{{__('lang.name')}}</th>
+                            <th class="min-w-10px">{{__('lang.main_category')}}</th>
+                            <th class="min-w-10px">{{__('lang.price')}}</th>
+                            <th class="min-w-10px">{{__('lang.offer_price')}}</th>
+                            <th class="min-w-10px">{{__('lang.offer_end_time')}}</th>
+                            <th class="min-w-10px">{{__('lang.min_price')}}</th>
+                            <th class="min-w-10px">{{__('lang.max_price')}}</th>
+                            <th class="min-w-10px">{{__('lang.Actions')}}</th>
                         </tr>
                         <!--end::Table row-->
                         </thead>
@@ -148,6 +154,12 @@
                 columns: [
                     {data: 'image', name: 'image', "searchable": true, "orderable": true},
                     {data: 'title_ar', name: 'title_ar', "searchable": true, "orderable": true},
+                    {data: 'main_category_id', name: 'main_category_id', "searchable": true, "orderable": true},
+                    {data: 'price', name: 'price', "searchable": true, "orderable": false},
+                    {data: 'offer_price', name: 'offer_price', "searchable": true, "orderable": false},
+                    {data: 'offer_end_time', name: 'offer_end_time', "searchable": true, "orderable": false},
+                    {data: 'min_price', name: 'min_price', "searchable": true, "orderable": false},
+                    {data: 'max_price', name: 'max_price', "searchable": true, "orderable": false},
                     {data: 'actions', name: 'actions', "searchable": false, "orderable": false},
                 ]
             });

@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\ZoneController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MainCategoryController;
+use App\Http\Controllers\Admin\BoxController;
+use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\frontController;
 
 
@@ -80,6 +83,18 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/delete', [ProductController::class, 'delete'])->name('.delete');
     });
 
+    Route::group(['prefix' => 'main_categories', 'as' => 'main_categories'], function () {
+        Route::get('/', [MainCategoryController::class, 'index'])->name('.index');
+        Route::get('/create', [MainCategoryController::class, 'create'])->name('.create');
+        Route::get('getData', [MainCategoryController::class, 'getData'])->name('.datatable');
+        Route::post('/store', [MainCategoryController::class, 'store'])->name('.store');
+        Route::post('search', [MainCategoryController::class, 'search'])->name('.search');
+        Route::get('/edit/{id}', [MainCategoryController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [MainCategoryController::class, 'update'])->name('.update');
+        Route::post('/delete', [MainCategoryController::class, 'delete'])->name('.delete');
+
+    });
+
     Route::group(['prefix' => 'categories', 'as' => 'categories'], function () {
         Route::get('/', [CategoryController::class, 'index'])->name('.index');
         Route::get('/create', [CategoryController::class, 'create'])->name('.create');
@@ -89,6 +104,30 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('.edit');
         Route::post('/update/{id}', [CategoryController::class, 'update'])->name('.update');
         Route::post('/delete', [CategoryController::class, 'delete'])->name('.delete');
+
+    });
+
+    Route::group(['prefix' => 'boxes', 'as' => 'boxes'], function () {
+        Route::get('/', [BoxController::class, 'index'])->name('.index');
+        Route::get('/create', [BoxController::class, 'create'])->name('.create');
+        Route::get('getData', [BoxController::class, 'getData'])->name('.datatable');
+        Route::post('/store', [BoxController::class, 'store'])->name('.store');
+        Route::post('search', [BoxController::class, 'search'])->name('.search');
+        Route::get('/edit/{id}', [BoxController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [BoxController::class, 'update'])->name('.update');
+        Route::post('/delete', [BoxController::class, 'delete'])->name('.delete');
+
+    });
+
+    Route::group(['prefix' => 'offers', 'as' => 'offers'], function () {
+        Route::get('/', [OfferController::class, 'index'])->name('.index');
+        Route::get('/create', [OfferController::class, 'create'])->name('.create');
+        Route::get('getData', [OfferController::class, 'getData'])->name('.datatable');
+        Route::post('/store', [OfferController::class, 'store'])->name('.store');
+        Route::post('search', [OfferController::class, 'search'])->name('.search');
+        Route::get('/edit/{id}', [OfferController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [OfferController::class, 'update'])->name('.update');
+        Route::post('/delete', [OfferController::class, 'delete'])->name('.delete');
 
     });
 
