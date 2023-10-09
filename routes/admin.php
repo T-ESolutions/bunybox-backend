@@ -115,7 +115,8 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('search', [BoxController::class, 'search'])->name('.search');
         Route::get('/edit/{id}', [BoxController::class, 'edit'])->name('.edit');
         Route::post('/update/{id}', [BoxController::class, 'update'])->name('.update');
-        Route::post('/delete', [BoxController::class, 'delete'])->name('.delete');
+        Route::get('/delete', [BoxController::class, 'delete'])->name('.delete');
+        Route::get('/add-button', [BoxController::class, 'table_buttons'])->name('.add-button');
 
     });
 
