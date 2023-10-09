@@ -135,7 +135,7 @@ License: For each use you must have a valid license purchased only from above li
                 <div class="aside-logo d-none d-lg-flex flex-column align-items-center flex-column-auto py-10"
                      id="kt_aside_logo">
                     <a href="{{url('/')}}">
-                        <img alt="Logo" src="{{asset('logo/logo.png')}}" class="h-75px"/>
+                        <img alt="Logo" src="{{asset('logo/logo.png')}}" class="h-50px w-75px"/>
                     </a>
                 </div>
                 <!--end::Logo-->
@@ -371,7 +371,7 @@ License: For each use you must have a valid license purchased only from above li
                         <!--end::Aside mobile toggle-->
                         <!--begin::Logo-->
                         <a href="{{url('/')}}" class="d-flex align-items-center">
-                            <img alt="Logo" src="{{asset('logo.png')}}" class="h-30px"/>
+                            <img alt="Logo" src="{{asset('logo.png')}}" class="h-30px "/>
                         </a>
                         <!--end::Logo-->
                     </div>
