@@ -22,7 +22,7 @@
         var dataList = [];
         $("#admins_table .selector:checked").each(function (index) {
             dataList.push($(this).val())
-        }) 
+        })
         if (dataList.length > 0) {
             Swal.fire({
                 title: "{{__('lang.warrning')}} !",
