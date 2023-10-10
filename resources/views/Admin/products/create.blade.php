@@ -235,7 +235,7 @@
                                                 <label class="required form-label">{{__('lang.shoes_size')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="shoes_size"
+                                                <input type="text" name="shoes_size"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.shoes_size')}}"
                                                 />
@@ -252,7 +252,7 @@
                                                 <label class="required form-label">{{__('lang.size')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="size"
+                                                <input type="text" name="size"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.size')}}"
                                                 />
@@ -269,7 +269,7 @@
                                                 <label class="required form-label">{{__('lang.min_age')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="min_age"
+                                                <input type="text" name="min_age"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.min_age')}}"
                                                 />
@@ -286,7 +286,7 @@
                                                 <label class="required form-label">{{__('lang.max_age')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="max_age"
+                                                <input type="text" name="max_age"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.max_age')}}"
                                                 />
@@ -303,7 +303,7 @@
                                                 <label class="required form-label">{{__('lang.min_weight')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="min_weight"
+                                                <input type="text" name="min_weight"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.min_weight')}}"
                                                 />
@@ -320,7 +320,7 @@
                                                 <label class="required form-label">{{__('lang.max_weight')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="max_weight"
+                                                <input type="text" name="max_weight"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.max_weight')}}"
                                                 />
@@ -337,7 +337,7 @@
                                                 <label class="required form-label">{{__('lang.min_height')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="min_height"
+                                                <input type="text" name="min_height"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.min_height')}}"
                                                 />
@@ -354,7 +354,7 @@
                                                 <label class="required form-label">{{__('lang.max_height')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="max_height"
+                                                <input type="text" name="max_height"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.max_height')}}"
                                                 />

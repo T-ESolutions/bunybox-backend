@@ -32,6 +32,13 @@ class OfferController extends Controller
         $model->where('is_offer',1);
         return DataTables::eloquent($model)
             ->addIndexColumn()
+            ->addColumn('checkbox', function ($row) {
+                $checkbox = '';
+                $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
+                                    <input class="form-check-input selector checkbox" type="checkbox" value="' . $row->id . '" />
+                                </div>';
+                return $checkbox;
+            })
             ->editColumn('image', function ($row) {
                 return '<a class="symbol symbol-50px"><span class="symbol-label" style="background-image:url(' . $row->image . ');"></span></a>';
             })
@@ -62,12 +69,15 @@ class OfferController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions', 'image','main_category_id'])
+            ->rawColumns(['actions', 'image','main_category_id','checkbox'])
             ->make();
 
     }
 
-
+    public function table_buttons()
+    {
+        return view('Admin.offers.button');
+    }
 
     public function create()
     {
@@ -84,24 +94,23 @@ class OfferController extends Controller
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
             'desc_en' => 'required|string',
-            'price' => 'required|numeric',
-            'min_price' => 'required|numeric',
-            'max_price' => 'required|numeric',
+//            'price' => 'required|numeric',
+//            'min_price' => 'required|numeric',
+//            'max_price' => 'required|numeric',
             'offer_price' => 'required|numeric',
             'offer_end_time' => 'required|',
             'image' => 'required|',
-            'category_id' => 'required|Array',
         ]);
 
         $row = new Box();
-        $row->main_category_id = $request->main_category_id;
+        $row->main_category_id = MainCategory::first()->id;
         $row->title_ar = $request->title_ar;
         $row->title_en = $request->title_en;
         $row->desc_ar = $request->desc_ar;
         $row->desc_en = $request->desc_en;
-        $row->price = $request->price;
-        $row->min_price = $request->min_price;
-        $row->max_price = $request->max_price;
+        $row->price = 0;
+        $row->min_price = 0;
+        $row->max_price = 0;
         $row->is_offer = 1;
         $row->offer_price = $request->offer_price;
         $row->offer_end_time = $request->offer_end_time;
@@ -136,23 +145,19 @@ class OfferController extends Controller
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
             'desc_en' => 'required|string',
-            'price' => 'required|numeric',
-            'min_price' => 'required|numeric',
-            'max_price' => 'required|numeric',
             'offer_price' => 'required|numeric',
             'offer_end_time' => 'required|',
             'image' => 'sometimes',
-            'category_id' => 'required|Array',
         ]);
 
-        $row->main_category_id = $request->main_category_id;
+        $row->main_category_id = MainCategory::first()->id;
         $row->title_ar = $request->title_ar;
         $row->title_en = $request->title_en;
         $row->desc_ar = $request->desc_ar;
         $row->desc_en = $request->desc_en;
-        $row->price = $request->price;
-        $row->min_price = $request->min_price;
-        $row->max_price = $request->max_price;
+        $row->price = 0;
+        $row->min_price = 0;
+        $row->max_price = 0;
         $row->is_offer = 1;
         $row->offer_price = $request->offer_price;
         $row->offer_end_time = $request->offer_end_time;
@@ -170,4 +175,19 @@ class OfferController extends Controller
 //        return redirect()->route('admin.settings.offers');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request)
+    {
+        try {
+            Box::whereIn('id', $request->id)->delete();
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed']);
+        }
+        return response()->json(['message' => 'Success']);
+    }
 }

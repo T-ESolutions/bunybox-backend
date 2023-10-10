@@ -8,7 +8,7 @@
     <h1 class="text-dark fw-bolder my-0 fs-2">
         {{trans('lang.'.$route)}}
 
-        <a href="{{route("$route.create")}}" class="btn btn-success pt-2 pb-2">{{__('lang.add')}}</a>
+{{--        <a href="{{route("$route.create")}}" class="btn btn-success pt-2 pb-2">{{__('lang.add')}}</a>--}}
     </h1>
     <!--end::Heading-->
     <!--begin::Breadcrumb-->

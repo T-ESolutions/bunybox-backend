@@ -80,7 +80,9 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('search', [ProductController::class, 'search'])->name('.search');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('.edit');
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('.update');
-        Route::post('/delete', [ProductController::class, 'delete'])->name('.delete');
+        Route::get('/delete', [ProductController::class, 'delete'])->name('.delete');
+        Route::get('/add-button', [ProductController::class, 'table_buttons'])->name('.add-button');
+
     });
 
     Route::group(['prefix' => 'main_categories', 'as' => 'main_categories'], function () {
@@ -103,7 +105,9 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('search', [CategoryController::class, 'search'])->name('.search');
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('.edit');
         Route::post('/update/{id}', [CategoryController::class, 'update'])->name('.update');
-        Route::post('/delete', [CategoryController::class, 'delete'])->name('.delete');
+        Route::get('/delete', [CategoryController::class, 'delete'])->name('.delete');
+        Route::get('/add-button', [CategoryController::class, 'table_buttons'])->name('.add-button');
+
 
     });
 
@@ -128,7 +132,8 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('search', [OfferController::class, 'search'])->name('.search');
         Route::get('/edit/{id}', [OfferController::class, 'edit'])->name('.edit');
         Route::post('/update/{id}', [OfferController::class, 'update'])->name('.update');
-        Route::post('/delete', [OfferController::class, 'delete'])->name('.delete');
+        Route::get('/delete', [OfferController::class, 'delete'])->name('.delete');
+        Route::get('/add-button', [OfferController::class, 'table_buttons'])->name('.add-button');
 
     });
 

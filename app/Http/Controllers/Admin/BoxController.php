@@ -18,7 +18,6 @@ use Yajra\DataTables\Facades\DataTables;
 class BoxController extends Controller
 {
 
-    //for products
     public function index()
     {
         $results = Box::latest()->paginate(config('default_pagination'));

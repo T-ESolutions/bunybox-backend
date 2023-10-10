@@ -30,6 +30,13 @@ class ProductController extends Controller
 
         return DataTables::eloquent($model)
             ->addIndexColumn()
+            ->addColumn('checkbox', function ($row) {
+                $checkbox = '';
+                $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
+                                    <input class="form-check-input selector checkbox" type="checkbox" value="' . $row->id . '" />
+                                </div>';
+                return $checkbox;
+            })
             ->editColumn('image', function ($row) {
                 return '<a class="symbol symbol-50px"><span class="symbol-label" style="background-image:url(' . $row->image . ');"></span></a>';
             })
@@ -60,12 +67,15 @@ class ProductController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions', 'image','category_id'])
+            ->rawColumns(['actions', 'image','category_id','checkbox'])
             ->make();
 
     }
 
-
+    public function table_buttons()
+    {
+        return view('Admin.products.button');
+    }
 
     public function create()
     {
@@ -84,14 +94,14 @@ class ProductController extends Controller
             'quantity' => 'required|numeric',
             'buy_price' => 'required|numeric',
             'sel_price' => 'required|numeric',
-            'shoes_size' => 'required|numeric',
-            'size' => 'required|numeric',
-            'min_age' => 'required|numeric',
-            'max_age' => 'required|numeric',
-            'min_weight' => 'required|numeric',
-            'max_weight' => 'required|numeric',
-            'min_height' => 'required|numeric',
-            'max_height' => 'required|numeric',
+            'shoes_size' => '|numeric',
+            'size' => '|numeric',
+            'min_age' => '|numeric',
+            'max_age' => '|numeric',
+            'min_weight' => '|numeric',
+            'max_weight' => '|numeric',
+            'min_height' => '|numeric',
+            'max_height' => '|numeric',
             'image' => 'required|',
         ]);
 
@@ -137,14 +147,14 @@ class ProductController extends Controller
             'quantity' => 'required|numeric',
             'buy_price' => 'required|numeric',
             'sel_price' => 'required|numeric',
-            'shoes_size' => 'required|numeric',
-            'size' => 'required|numeric',
-            'min_age' => 'required|numeric',
-            'max_age' => 'required|numeric',
-            'min_weight' => 'required|numeric',
-            'max_weight' => 'required|numeric',
-            'min_height' => 'required|numeric',
-            'max_height' => 'required|numeric',
+            'shoes_size' => '|numeric',
+            'size' => '|numeric',
+            'min_age' => '|numeric',
+            'max_age' => '|numeric',
+            'min_weight' => '|numeric',
+            'max_weight' => '|numeric',
+            'min_height' => '|numeric',
+            'max_height' => '|numeric',
             'image' => 'required|',
         ]);
 
@@ -167,6 +177,22 @@ class ProductController extends Controller
         $row->image = $request->image;
         $row->save();
         return redirect()->back()->with('message', trans('lang.updated_s'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request)
+    {
+        try {
+            Product::whereIn('id', $request->id)->delete();
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed']);
+        }
+        return response()->json(['message' => 'Success']);
     }
 
 }
