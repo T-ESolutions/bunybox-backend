@@ -42,12 +42,12 @@ function failed()
 
 function error()
 {
-    return 401;
+    return 400;
 }
 
 function unauthorized()
 {
-    return 403;
+    return 401;
 }
 
 function code_sent()
