@@ -621,7 +621,7 @@ function pay()
 {
 //        $order = Order::findOrFail(Session::get('order_id'));
 //        $amount = $order->grand_total;
-    $amount = rand(100,1000);
+    $amount = rand(100, 1000);
 
 
     $idorder = 'PHP_' . rand(100000000, 999999999);//Customer Order ID
@@ -634,7 +634,6 @@ function pay()
 
     $currencycode = "SAR";
     $amount = number_format($amount, 2, '.', '');
-
 
 
     $ipaddress = "127.0.0.1";
@@ -655,8 +654,8 @@ function pay()
 
     $ipp = $ipaddress;
 //Generate Hash
-    $txn_details= $idorder.'|'.$terminalId.'|'.$password.'|'.$merchant_key.'|'.$amount.'|'.$currencycode;
-    $hash=hash('sha256', $txn_details);
+    $txn_details = $idorder . '|' . $terminalId . '|' . $password . '|' . $merchant_key . '|' . $amount . '|' . $currencycode;
+    $hash = hash('sha256', $txn_details);
 
 
     $fields = array(
@@ -664,22 +663,22 @@ function pay()
         'terminalId' => $terminalId,
         'customerEmail' => "andrewalbert93501@gmail.com",
         'action' => "1",  // action is always 1
-        'merchantIp' =>$ipp,
-        'password'=> $password,
+        'merchantIp' => $ipp,
+        'password' => $password,
         'currency' => $currencycode,
-        'country'=>"SA",
+        'country' => "SA",
         'amount' => $amount,
-        "udf1"              =>"",
+        "udf1" => "",
         // "udf2"              =>"https://urway.sa/urshop/scripts/response.php",//Response page URL
-        "udf2"              =>route('payment.callback'),//Response page URL
-        "udf3"              =>"",
-        "udf4"              =>"",
-        "udf5"              =>"",
+        "udf2" => route('payment.callback'),//Response page URL
+        "udf3" => "",
+        "udf4" => "",
+        "udf5" => "",
         'requestHash' => $hash  //generated Hash
     );
 //        dd($fields);
     $data = json_encode($fields);
-    $ch=curl_init('https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest'); // Will be provided by URWAY
+    $ch = curl_init('https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest'); // Will be provided by URWAY
 //        $ch=curl_init('https://payments.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest'); // Will be provided by URWAY
 
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -692,18 +691,18 @@ function pay()
     curl_setopt($ch, CURLOPT_TIMEOUT, 5);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
     //execute post
-    $server_output =curl_exec($ch);
+    $server_output = curl_exec($ch);
 //  dd($server_output);
     //close connection
     curl_close($ch);
     $result = json_decode($server_output);
 //          dd($result);
     if (!empty($result->payid) && !empty($result->targetUrl)) {
-        $url = $result->targetUrl . '?paymentid=' .  $result->payid;
+        $url = $result->targetUrl . '?paymentid=' . $result->payid;
 //            dd($url);
         return redirect($url);
-        header('Location: '. $url, true, 307);//Redirect to Payment Page
-    }else{
+        header('Location: ' . $url, true, 307);//Redirect to Payment Page
+    } else {
 
 
     }
