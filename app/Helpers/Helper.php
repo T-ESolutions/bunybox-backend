@@ -47,7 +47,7 @@ function error()
 
 function unauthorized()
 {
-    return 401;
+    return 403;
 }
 
 function code_sent()
