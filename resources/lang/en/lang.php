@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'ar' => 'Arabic',
+    'en' => 'English',
     'you_are_out_saudi' => 'The address chosen outside Saudi Arabia cannot be added',
 
     'no_gift_found' => 'no gift found now',
@@ -273,6 +275,10 @@ return [
     'SubCategory' => 'Sub Category  ',
     'MainCategory' => 'Main Category  ',
     'price' => 'price  ',
+    'min_price' => 'minimum price  ',
+    'max_price' => 'maximum price  ',
+    'offer_price' => 'offer price',
+    'offer_end_time' => 'offer end at',
     'save' => 'save  ',
     'close' => 'close  ',
     'password' => 'password',
@@ -441,7 +447,8 @@ return [
     'view_all' => 'view all',
     'sub_categories' => 'sub categories',
     'main_categories' => 'main categories',
-    'categories' => 'main categories',
+    'categories' => 'categories',
+    'boxes' => 'boxes',
     'currencies' => 'currencies',
     'currency_code' => 'code',
     'symbol_ar' => 'symbol arabic',

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4a4455e2fb19de44d4d5912ce97102cf
+class ComposerStaticInitf97b6ec1a2364b30e698018a3636ecb7
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -363,8 +363,8 @@ class ComposerStaticInit4a4455e2fb19de44d4d5912ce97102cf
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -588,7 +588,12 @@ class ComposerStaticInit4a4455e2fb19de44d4d5912ce97102cf
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\ResearchProvidersTrait' => __DIR__ . '/../..' . '/app/Helpers/ResearchProvidersTrait.php',
         'App\\Http\\Controllers\\Admin\\AdminsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminsController.php',
+        'App\\Http\\Controllers\\Admin\\BoxController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BoxController.php',
+        'App\\Http\\Controllers\\Admin\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CategoryController.php',
         'App\\Http\\Controllers\\Admin\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/HomeController.php',
+        'App\\Http\\Controllers\\Admin\\MainCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MainCategoryController.php',
+        'App\\Http\\Controllers\\Admin\\OfferController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/OfferController.php',
+        'App\\Http\\Controllers\\Admin\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProductController.php',
         'App\\Http\\Controllers\\Admin\\SpeakersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SpeakersController.php',
         'App\\Http\\Controllers\\Admin\\ZoneController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ZoneController.php',
         'App\\Http\\Controllers\\Api\\AddressesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AddressesController.php',
@@ -5954,10 +5959,10 @@ class ComposerStaticInit4a4455e2fb19de44d4d5912ce97102cf
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4a4455e2fb19de44d4d5912ce97102cf::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4a4455e2fb19de44d4d5912ce97102cf::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit4a4455e2fb19de44d4d5912ce97102cf::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit4a4455e2fb19de44d4d5912ce97102cf::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf97b6ec1a2364b30e698018a3636ecb7::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf97b6ec1a2364b30e698018a3636ecb7::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitf97b6ec1a2364b30e698018a3636ecb7::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitf97b6ec1a2364b30e698018a3636ecb7::$classMap;
 
         }, null, ClassLoader::class);
     }

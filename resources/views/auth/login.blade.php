@@ -45,7 +45,7 @@
                             <label class="form-label fw-bolder text-dark fs-6 mb-0">{{trans('lang.password')}}</label>
                             <!--end::Label-->
                             <!--begin::Link-->
-                            <a href="{{url('forget-password')}}" class="link-primary fs-6 fw-bolder">{{trans('lang.forget_password')}} </a>
+{{--                            <a href="{{url('forget-password')}}" class="link-primary fs-6 fw-bolder">{{trans('lang.forget_password')}} </a>--}}
                             <!--end::Link-->
                         </div>
                         <!--end::Wrapper-->
