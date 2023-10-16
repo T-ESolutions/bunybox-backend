@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\OffersController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::group(['prefix' => "app"], function () {
     Route::get('pages/{type}', [SettingsController::class, 'pages']);
     Route::get('/settings', [SettingsController::class, 'settings']);
@@ -33,7 +34,6 @@ Route::group(['prefix' => "app"], function () {
 Route::prefix('client')->group(function () {
 
     Route::middleware('guest')->group(function () {
-
 
         Route::prefix('auth')->group(function () {
             Route::post('/login', [AuthController::class, 'login']);
@@ -54,8 +54,6 @@ Route::prefix('client')->group(function () {
         Route::get('/execute_pay', [HomeController::class, 'executePay']);
 
     });
-
-
     Route::group(['middleware' => ['user']], function () {
         Route::prefix('auth')->group(function () {
 //            Route::post('/change-password', [AuthController::class, 'changePassword'])->name('client.change.password');
