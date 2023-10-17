@@ -54,13 +54,15 @@ class HomeController extends Controller
     public function saveSizesData(SaveSizesDataRequest $request)
     {
         $data = $request->validated();
-        $slider_image = [];
+        $slider_images=[];
         $boxes = Box::where('is_offer', 0)
             ->where('main_category_id', $data['main_category_id'])
-            ->orderBy('id', 'asc')->get()->map(function ($q) {
-                array_push($slider_image, $q->slider_image);
+            ->orderBy('id', 'asc')->get()
+            ->map(function ($q) use ($slider_images) {
+                array_push($slider_images, $q->slider_image);
                 return $q;
             });
+
 
 
         foreach ($boxes as $key => $box) {
@@ -80,7 +82,7 @@ class HomeController extends Controller
         }
 
 
-        $result['boxes'] = BoxFinalResource::customCollection($boxes, $data); 
+        $result['boxes'] = BoxFinalResource::customCollection($boxes, $data);
         $result['slider_images'] = $slider_image;
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }

@@ -81,7 +81,7 @@ class Box extends Model
         if (!empty($image)) {
             return asset('uploads/box') . '/' . $image;
         }
-        return asset('defaults/default_image.png');
+        return "";
     }
 
     public function setSliderImageArAttribute($image)
@@ -100,7 +100,7 @@ class Box extends Model
         if (!empty($image)) {
             return asset('uploads/box') . '/' . $image;
         }
-        return asset('defaults/default_image.png');
+        return "";
     }
 
     public function setSliderImageEnAttribute($image)
