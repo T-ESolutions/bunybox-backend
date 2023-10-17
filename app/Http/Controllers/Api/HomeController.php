@@ -83,7 +83,7 @@ class HomeController extends Controller
 
 
         $result['boxes'] = BoxFinalResource::customCollection($boxes, $data);
-        $result['slider_images'] = $slider_image;
+        $result['slider_images'] = $slider_images;
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 
