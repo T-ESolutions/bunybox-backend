@@ -31,6 +31,7 @@ class BoxFinalResource extends JsonResource
         return
             [
                 'id' => $this->id,
+                'hint' => $this->hint,
                 'image' => $this->image,
                 'title' => $this->title,
                 'description' => $this->desc,
@@ -38,7 +39,7 @@ class BoxFinalResource extends JsonResource
                 'min_price' => $this->min_price,
                 'max_price' => $this->max_price,
                 'sold_out' => $sold_out,
-                'categories'=> ProductResource::collection($this->products)
+                'categories' => ProductResource::collection($this->products)
 //                'categories' => BoxCategoriesFinalResource::customcollection($this->categoriesByData($this->main_category_id,
 //                    self::$data), $category_count, $products),
             ];

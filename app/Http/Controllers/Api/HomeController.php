@@ -75,7 +75,7 @@ class HomeController extends Controller
             $box->products = generateArray($product_array, $minPrice, $maxPrice);
 //            $box->products = $product_array;
 
-      
+
             array_push($slider_images, $box->slider_image);
 
 

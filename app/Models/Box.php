@@ -24,11 +24,22 @@ class Box extends Model
         "offer_price",
         "slider_image_ar",
         "slider_image_en",
+        "hint_ar",
+        "hint_en",
     ];
 
 
-    protected $appends = ['title', 'desc', 'box_categories_ids', 'slider_image'];
+    protected $appends = ['title', 'desc', 'box_categories_ids', 'slider_image', 'hint'];
 
+
+    public function getHintAttribute()
+    {
+        if (\app()->getLocale() == "ar") {
+            return $this->hint_ar;
+        } else {
+            return $this->hint_en;
+        }
+    }
 
     public function getSliderImageAttribute()
     {
