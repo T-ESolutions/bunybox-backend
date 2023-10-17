@@ -656,8 +656,6 @@ function pay()
 //Generate Hash
     $txn_details = $idorder . '|' . $terminalId . '|' . $password . '|' . $merchant_key . '|' . $amount . '|' . $currencycode;
     $hash = hash('sha256', $txn_details);
-
-
     $fields = array(
         'trackid' => $idorder,
         'terminalId' => $terminalId,

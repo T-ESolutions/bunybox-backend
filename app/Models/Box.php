@@ -22,10 +22,22 @@ class Box extends Model
         "is_offer",
         "offer_end_time",
         "offer_price",
+        "slider_image_ar",
+        "slider_image_en",
     ];
 
 
-    protected $appends = ['title', 'desc', 'box_categories_ids'];
+    protected $appends = ['title', 'desc', 'box_categories_ids', 'slider_image'];
+
+
+    public function getSliderImageAttribute()
+    {
+        if (\app()->getLocale() == "ar") {
+            return $this->slider_image_ar;
+        } else {
+            return $this->slider_image_en;
+        }
+    }
 
     public function getTitleAttribute()
     {
@@ -59,8 +71,46 @@ class Box extends Model
             $img_name = 'category_' . time() . random_int(0000, 9999) . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('/uploads/box/'), $img_name);
             $this->attributes['image'] = $img_name;
-        }else{
+        } else {
             $this->attributes['image'] = $image;
+        }
+    }
+
+    public function getSliderImageArAttribute($image)
+    {
+        if (!empty($image)) {
+            return asset('uploads/box') . '/' . $image;
+        }
+        return asset('defaults/default_image.png');
+    }
+
+    public function setSliderImageArAttribute($image)
+    {
+        if (is_file($image)) {
+            $img_name = 'slider_image_ar_' . time() . random_int(0000, 9999) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/uploads/box/'), $img_name);
+            $this->attributes['slider_image_ar'] = $img_name;
+        } else {
+            $this->attributes['slider_image_ar'] = $image;
+        }
+    }
+
+    public function getSliderImageEnAttribute($image)
+    {
+        if (!empty($image)) {
+            return asset('uploads/box') . '/' . $image;
+        }
+        return asset('defaults/default_image.png');
+    }
+
+    public function setSliderImageEnAttribute($image)
+    {
+        if (is_file($image)) {
+            $img_name = 'slider_image_en_' . time() . random_int(0000, 9999) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/uploads/box/'), $img_name);
+            $this->attributes['slider_image_en'] = $img_name;
+        } else {
+            $this->attributes['slider_image_en'] = $image;
         }
     }
 

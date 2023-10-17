@@ -363,8 +363,8 @@ class ComposerStaticInitf97b6ec1a2364b30e698018a3636ecb7
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -594,7 +594,6 @@ class ComposerStaticInitf97b6ec1a2364b30e698018a3636ecb7
         'App\\Http\\Controllers\\Admin\\MainCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MainCategoryController.php',
         'App\\Http\\Controllers\\Admin\\OfferController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/OfferController.php',
         'App\\Http\\Controllers\\Admin\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProductController.php',
-        'App\\Http\\Controllers\\Admin\\SpeakersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SpeakersController.php',
         'App\\Http\\Controllers\\Admin\\ZoneController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ZoneController.php',
         'App\\Http\\Controllers\\Api\\AddressesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AddressesController.php',
         'App\\Http\\Controllers\\Api\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AuthController.php',
@@ -606,6 +605,7 @@ class ComposerStaticInitf97b6ec1a2364b30e698018a3636ecb7
         'App\\Http\\Controllers\\frontController' => __DIR__ . '/../..' . '/app/Http/Controllers/frontController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
+        'App\\Http\\Middleware\\AlawysAcceptJson' => __DIR__ . '/../..' . '/app/Http/Middleware/AlawysAcceptJson.php',
         'App\\Http\\Middleware\\ApiUserMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/ApiUserMiddleware.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -831,7 +831,9 @@ class ComposerStaticInitf97b6ec1a2364b30e698018a3636ecb7
         'Database\\Seeders\\BoxSeeder' => __DIR__ . '/../..' . '/database/seeders/BoxSeeder.php',
         'Database\\Seeders\\CategorySeeder' => __DIR__ . '/../..' . '/database/seeders/CategorySeeder.php',
         'Database\\Seeders\\MainCategorySeed' => __DIR__ . '/../..' . '/database/seeders/MainCategorySeed.php',
+        'Database\\Seeders\\OfferSeeder' => __DIR__ . '/../..' . '/database/seeders/OfferSeeder.php',
         'Database\\Seeders\\PagesSeeder' => __DIR__ . '/../..' . '/database/seeders/PagesSeeder.php',
+        'Database\\Seeders\\ProductSeeder' => __DIR__ . '/../..' . '/database/seeders/ProductSeeder.php',
         'Database\\Seeders\\SettingsSeeder' => __DIR__ . '/../..' . '/database/seeders/SettingsSeeder.php',
         'Database\\Seeders\\UsersSeeder' => __DIR__ . '/../..' . '/database/seeders/UsersSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',

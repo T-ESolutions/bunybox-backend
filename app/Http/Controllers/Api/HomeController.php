@@ -69,10 +69,8 @@ class HomeController extends Controller
                 }
 
             }
-
             $box->products = generateArray($product_array, $minPrice, $maxPrice);
 //            $box->products = $product_array;
-
         }
 
 
@@ -89,7 +87,6 @@ class HomeController extends Controller
         $product_gifts = settings('product_gifts');  //4
 
         $last_gift = GiftHistory::orderBy('id', 'desc')->first();
-
 
         if ($last_gift) {
 
@@ -198,7 +195,7 @@ class HomeController extends Controller
             $order_data['payment_status'] = 'paid';
             $order_data['payment_method'] = $data['payment_method'];
 
-            $order_data['gift_type'] = $response['type'] ? 'product' : 'money' ;
+            $order_data['gift_type'] = $response['type'] ? 'product' : 'money';
             $order_data['gift_data'] = json_encode($response);
             if (!$response['type']) {
                 $order_data['gift_money'] = $product_gift->amount;
@@ -230,11 +227,15 @@ class HomeController extends Controller
     public function saveSizesDataBox(SaveSizesDataRequest $request, $id)
     {
         $data = $request->validated();
+        $slider_image = [];
         $boxes = Box::where('is_offer', 0)
             ->where('main_category_id', $data['main_category_id'])
             ->orderBy('id', 'asc')
             ->whereId($id)
-            ->get();
+            ->get()->map(function ($q) {
+                array_push($slider_image, $q->slider_image);
+                return $q;
+            });
 
 
         foreach ($boxes as $key => $box) {
@@ -253,8 +254,8 @@ class HomeController extends Controller
 
         }
 
-
         $result['boxes'] = BoxFinalResource::customCollection($boxes, $data);
+        $result['slider_images'] = $slider_image;
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 
