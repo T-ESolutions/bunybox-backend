@@ -54,7 +54,13 @@ class HomeController extends Controller
     public function saveSizesData(SaveSizesDataRequest $request)
     {
         $data = $request->validated();
-        $boxes = Box::where('is_offer', 0)->where('main_category_id', $data['main_category_id'])->orderBy('id', 'asc')->get();
+        $slider_image = [];
+        $boxes = Box::where('is_offer', 0)
+            ->where('main_category_id', $data['main_category_id'])
+            ->orderBy('id', 'asc')->get()->map(function ($q) {
+                array_push($slider_image, $q->slider_image);
+                return $q;
+            });
 
 
         foreach ($boxes as $key => $box) {
@@ -74,7 +80,8 @@ class HomeController extends Controller
         }
 
 
-        $result['boxes'] = BoxFinalResource::customCollection($boxes, $data);
+        $result['boxes'] = BoxFinalResource::customCollection($boxes, $data); 
+        $result['slider_images'] = $slider_image;
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 
@@ -232,10 +239,7 @@ class HomeController extends Controller
             ->where('main_category_id', $data['main_category_id'])
             ->orderBy('id', 'asc')
             ->whereId($id)
-            ->get()->map(function ($q) {
-                array_push($slider_image, $q->slider_image);
-                return $q;
-            });
+            ->get();
 
 
         foreach ($boxes as $key => $box) {
@@ -255,7 +259,6 @@ class HomeController extends Controller
         }
 
         $result['boxes'] = BoxFinalResource::customCollection($boxes, $data);
-        $result['slider_images'] = $slider_image;
         return msgdata(true, trans('lang.data_display_success'), $result, success());
     }
 
