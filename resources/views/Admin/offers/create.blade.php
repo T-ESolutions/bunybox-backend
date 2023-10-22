@@ -235,13 +235,16 @@
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
                                                 <label class="required form-label">
-                                                    {{__('lang.categories')}}
+                                                    {{__('lang.products')}}
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="category_id[]" data-control="select2" data-hide-search="false" multiple>
-                                                    @foreach($categories as $category)
-                                                        <option value="{{$category->id}}" >{{$category->title_ar}}</option>
+                                                <select class="form-control mb-2" name="product_id[]" data-control="select2" data-hide-search="false" multiple>
+                                                    @foreach($products as $product)
+                                                        <option value="{{$product->id}}" >
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            {{$product->title_ar}} [ {{$product->category->title_ar}} ]
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->

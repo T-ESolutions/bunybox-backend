@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MainCategoryController;
 use App\Http\Controllers\Admin\BoxController;
 use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\frontController;
 
 
@@ -42,6 +43,10 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('dashboard.index');
 
+    Route::group(['prefix' => 'settings', 'as' => 'settings'], function () {
+        Route::get('/edit', [SettingController::class, 'index'])->name('.edit');
+        Route::post('/update', [SettingController::class, 'update'])->name('.update');
+    });
 
     Route::group(['prefix' => 'admins', 'as' => 'admins'], function () {
 

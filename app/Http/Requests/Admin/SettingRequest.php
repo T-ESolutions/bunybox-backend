@@ -24,12 +24,12 @@ class SettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_ar' => 'required|string|max:255',
-            'name_en' => 'required|string|max:255',
-            'phone_1' => 'required|max:255|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'phone_2' => 'required|max:255|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'email_1' => 'required|string|email|max:255',
-            'email_2' => 'required|string|email|max:255',
+            'site_name_ar' => 'sometimes|string|max:255',
+            'site_name_en' => 'sometimes|string|max:255',
+            'phone_1' => 'sometimes|max:255|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'phone_2' => 'sometimes|max:255|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'email_1' => 'sometimes|string|email|max:255',
+            'email_2' => 'sometimes|string|email|max:255',
             'whatsapp' => 'nullable|string|max:255',
             'facebook' => 'nullable|url|max:255',
             'twitter' => 'nullable|url|max:255',
@@ -42,8 +42,8 @@ class SettingRequest extends FormRequest
             'logo_en' => 'nullable|mimes:jpeg,jpg,png',
             'fav_icon' => 'nullable|mimes:ico',
             'shipp_value' => 'nullable|numeric',
-            'working_hours_ar' => 'required|string|max:255',
-            'working_hours_en' => 'required|string|max:255',
+            'working_hours_ar' => 'sometimes|string|max:255',
+            'working_hours_en' => 'sometimes|string|max:255',
             'freeze_days' => 'nullable|numeric'
         ];
     }

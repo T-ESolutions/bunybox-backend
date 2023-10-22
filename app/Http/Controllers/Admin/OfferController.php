@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Box;
 use App\Models\BoxCategory;
+use App\Models\BoxProduct;
 use App\Models\Category;
 use App\Models\MainCategory;
+use App\Models\Product;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
@@ -81,9 +83,10 @@ class OfferController extends Controller
 
     public function create()
     {
-        $main_categories = MainCategory::get();
-        $categories = Category::get();
-        return view('Admin.offers.create', compact('main_categories','categories'));
+//        $main_categories = MainCategory::get();
+//        $categories = Category::get();
+        $products = Product::orderBy('category_id')->get();
+        return view('Admin.offers.create', compact('products'));
     }
 
     public function store(Request $request)
@@ -116,11 +119,11 @@ class OfferController extends Controller
         $row->offer_end_time = $request->offer_end_time;
         $row->image = $request->image;
         $row->save();
-        foreach ($request->category_id as $category_id){
-            $boxCategory = new BoxCategory();
-            $row->category_id = $category_id;
+        foreach ($request->product_id as $product_id){
+            $boxProduct = new BoxProduct();
+            $row->product_id = $product_id;
             $row->box_id = $row->id;
-            $boxCategory->save();
+            $boxProduct->save();
         }
 
         return redirect()->back()->with('message', trans('lang.added_s'));
@@ -128,11 +131,11 @@ class OfferController extends Controller
 
     public function edit($id)
     {
-        $main_categories = MainCategory::get();
-        $categories = Category::get();
-        $boxCategories = BoxCategory::whereBoxId($id)->pluck('category_id')->toArray();
+        $products = Product::orderBy('category_id')->get();
+        $boxProducts = BoxProduct::whereBoxId($id)->pluck('product_id')->toArray();
+
         $row = Box::findOrFail($id);
-        return view('Admin.offers.edit', compact('row','main_categories','categories','boxCategories'));
+        return view('Admin.offers.edit', compact('row','products','boxProducts'));
     }
 
     public function update(Request $request, $id)
@@ -164,10 +167,10 @@ class OfferController extends Controller
         $row->image = $request->image;
         $row->save();
 
-        BoxCategory::whereBoxId($id)->delete();
-        foreach ($request->category_id as $category_id){
-            BoxCategory::create([
-                'category_id' => $category_id,
+        BoxProduct::whereBoxId($id)->delete();
+        foreach ($request->product_id as $product_id){
+            BoxProduct::create([
+                'product_id' => $product_id,
                 'box_id' => $row->id,
             ]);
         }
