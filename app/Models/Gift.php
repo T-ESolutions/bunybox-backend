@@ -59,6 +59,11 @@ class Gift extends Model
         return $this->belongsToMany(MainCategory::class, 'gift_main_categories', 'gift_id', 'main_category_id');
     }
 
+    public function mainCats()
+    {
+        return $this->hasMany(GiftMainCategory::class, 'gift_id',);
+    }
+
     public function boxes()
     {
         return $this->belongsToMany(Box::class, 'gift_boxes', 'gift_id', 'box_id');

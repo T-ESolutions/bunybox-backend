@@ -14,6 +14,16 @@ class GiftMainCategory extends Model
         "main_category_id"
     ];
 
+    protected $appends = [
+        "main_category_ar"
+    ];
+
+    public function getMainCategoryArAttribute()
+    {
+        if($this->mainCategory())
+            return $this->mainCategory()->first()->title_ar;
+    }
+
     public function mainCategory()
     {
         return $this->belongsTo(MainCategory::class, 'main_category_id');

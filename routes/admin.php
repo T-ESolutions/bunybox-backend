@@ -8,7 +8,10 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MainCategoryController;
 use App\Http\Controllers\Admin\BoxController;
+use App\Http\Controllers\Admin\GiftController;
+use App\Http\Controllers\Admin\GiftBoxController;
 use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\frontController;
 
@@ -129,6 +132,32 @@ Route::group(['middleware' => ['admin']], function () {
 
     });
 
+    Route::group(['prefix' => 'gifts', 'as' => 'gifts'], function () {
+        Route::get('/', [GiftController::class, 'index'])->name('.index');
+        Route::get('/create', [GiftController::class, 'create'])->name('.create');
+        Route::get('getData', [GiftController::class, 'getData'])->name('.datatable');
+        Route::post('/store', [GiftController::class, 'store'])->name('.store');
+        Route::post('search', [GiftController::class, 'search'])->name('.search');
+        Route::get('/edit/{id}', [GiftController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [GiftController::class, 'update'])->name('.update');
+        Route::get('/delete', [GiftController::class, 'delete'])->name('.delete');
+        Route::get('/add-button', [GiftController::class, 'table_buttons'])->name('.add-button');
+
+    });
+
+    Route::group(['prefix' => 'gift_boxes', 'as' => 'gift_boxes'], function () {
+        Route::get('/', [GiftBoxController::class, 'index'])->name('.index');
+        Route::get('/create', [GiftBoxController::class, 'create'])->name('.create');
+        Route::get('getData', [GiftBoxController::class, 'getData'])->name('.datatable');
+        Route::post('/store', [GiftBoxController::class, 'store'])->name('.store');
+        Route::post('search', [GiftBoxController::class, 'search'])->name('.search');
+        Route::get('/edit/{id}', [GiftBoxController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [GiftBoxController::class, 'update'])->name('.update');
+        Route::get('/delete', [GiftBoxController::class, 'delete'])->name('.delete');
+        Route::get('/add-button', [GiftBoxController::class, 'table_buttons'])->name('.add-button');
+
+    });
+
     Route::group(['prefix' => 'offers', 'as' => 'offers'], function () {
         Route::get('/', [OfferController::class, 'index'])->name('.index');
         Route::get('/create', [OfferController::class, 'create'])->name('.create');
@@ -140,6 +169,17 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/delete', [OfferController::class, 'delete'])->name('.delete');
         Route::get('/add-button', [OfferController::class, 'table_buttons'])->name('.add-button');
 
+    });
+
+    Route::group(['prefix' => 'pages', 'as' => 'pages'], function () {
+        Route::get('/{type}', [PageController::class, 'index']);
+        Route::get('getData/{type}', [PageController::class, 'getData'])->name('.datatable');
+        Route::get('/create/{type}', [PageController::class, 'create'])->name('.create');
+        Route::post('/store', [PageController::class, 'store'])->name('.store');
+        Route::get('/edit/{type}', [PageController::class, 'edit'])->name('.edit');
+        Route::post('/update', [PageController::class, 'update'])->name('.update');
+        Route::post('/delete', [PageController::class, 'delete'])->name('.delete');
+        Route::post('/delete-multi', [PageController::class, 'table_buttons'])->name('.deleteMulti');
     });
 
 });
