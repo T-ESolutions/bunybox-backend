@@ -30,7 +30,7 @@ class OrderRequest extends FormRequest
 
         return [
             'box_id' => ['required', 'exists:boxes,id'],
-            'main_category_id' => ['required', 'exists:main_categories,id'],
+            'main_category_id' => ['nullable', 'exists:main_categories,id'],
 //            'payment_method' => ['required', 'string'],
             'address_id' => ['required', 'exists:addresses,id',
                 function ($attribute, $value, $fail) {
