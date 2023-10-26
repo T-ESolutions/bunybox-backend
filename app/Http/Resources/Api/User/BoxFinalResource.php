@@ -20,12 +20,13 @@ class BoxFinalResource extends JsonResource
     {
         //generate sold_out....
 
-        $count = 0; 
-        foreach ($this as $product) {
+        $count = 0;
+        foreach ($this->products as $product) {
             if ($product['is_show'] == 1) {
                 $count++;
             }
         }
+
         if ($count >= 2) {
             $sold_out = 0;
         } else {
