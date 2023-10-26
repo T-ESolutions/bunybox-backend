@@ -557,6 +557,7 @@ function generateArray($products, $min, $max, $limit = 4)
     foreach ($products as $product) {
         if ($total < $max && count($newArr) < $limit) {
             if ($total + $product['sel_price'] <= $max && !in_array($product['category_id'], $catsArr)) {
+                $product['is_show'] = 1;
                 array_push($newArr, $product);
                 array_push($catsArr, $product['category_id']);
                 $total += $product['sel_price'];
@@ -573,6 +574,7 @@ function generateArray($products, $min, $max, $limit = 4)
             (($total + $pro['sel_price']) <= $max) &&
             (!in_array($pro['category_id'], $secondCatsArr)) &&
             !in_array($pro, $newArr)) {  // Check for duplicates in $newArr
+            $pro['is_show'] = 0;
             array_push($secArr, $pro);
             array_push($secondCatsArr, $pro['category_id']);
         }
