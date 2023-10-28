@@ -19,15 +19,19 @@ class BoxFinalResource extends JsonResource
     public function toArray($request)
     {
         //generate sold_out....
-        $sold_out = 1;
-        $category_count = count($this->products);
-        if ($category_count >= 2) {
+
+        $count = 0;
+        foreach ($this->products as $product) {
+            if ($product['is_show'] == 1) {
+                $count++;
+            }
+        }
+
+        if ($count >= 2) {
             $sold_out = 0;
         } else {
             $sold_out = 1;
         }
-
-
         return
             [
                 'id' => $this->id,
