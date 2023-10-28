@@ -7,6 +7,7 @@ request()->segment(1) == 'categories'||
 request()->segment(1) == 'boxes' ||
 request()->segment(1) == 'gifts' ||
 request()->segment(1) == 'offers' ||
+request()->segment(1) == 'pages' ||
 request()->segment(1) == 'settings' )
  active show @endif
     " id="kt_aside_nav_tab_menu"
