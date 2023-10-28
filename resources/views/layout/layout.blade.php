@@ -232,9 +232,8 @@ License: For each use you must have a valid license purchased only from above li
                                 data-bs-placement="right" data-bs-dismiss="click" title="{{trans('lang.orders')}}">
                                 <!--begin::Nav link-->
                                 <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light
-                                    @if(request()->segment(1) == 'orders'
-                                         ) active @endif  "
-                                    href="{{url('/orders')}}">
+                                    @if(request()->segment(1) == 'orders' ) active @endif  "
+                                   data-bs-toggle="tab" href="#kt_aside_nav_tab_menu_orders">
                                     <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
                                     <i class="fa fa-cart-plus"></i>
                                     <!--end::Svg Icon-->
@@ -316,6 +315,7 @@ License: For each use you must have a valid license purchased only from above li
                             @include('layout.sidebars.users_menus')
                             @include('layout.sidebars.basic_menus')
                             @include('layout.sidebars.events_menus')
+                            @include('layout.sidebars.orders_menus')
                             {{--                            @include('layout.sidebars.reports_menus')--}}
                             <!--end::Menu-->
 
