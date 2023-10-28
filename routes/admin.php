@@ -75,7 +75,7 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/store', [UserController::class, 'store'])->name('.store');
         Route::get('/delete', [UserController::class, 'destroy'])->name('.delete');
         Route::get('/user-orders/{id?}', [UserController::class, 'userOrders'])->name('.user-orders');
-        Route::get('/get-user-orders{id?}', [UserController::class, 'userOrders'])->name('.userOrdersDatatabe');
+        Route::get('/get-user-orders/{id?}', [UserController::class, 'userOrdersDatatable'])->name('.userOrdersDatatable');
 
     });
 

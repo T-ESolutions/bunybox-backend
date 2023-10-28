@@ -177,10 +177,10 @@ class UserController extends Controller
 
     public function userOrders($user_id)
     {
-        return view('Admin.users.orders');
+        return view('Admin.users.orders' ,compact('user_id'));
     }
 
-    public function userOrdersDatatabe($user_id)
+    public function userOrdersDatatable($user_id)
     {
         $auth = Auth::guard('admin')->user();
         $model = Order::query()->orderBy('id','desc')->where('user_id',$user_id);

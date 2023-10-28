@@ -159,7 +159,7 @@
                     // {extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
                 ],
                 ajax: {
-                    url: '{{ route($route.'.datatable') }}',
+                    url: '{{ route('users.userOrdersDatatable' , $user_id) }}',
                     data: {}
                 },
                 columns: [
