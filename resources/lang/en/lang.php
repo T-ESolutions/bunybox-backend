@@ -1032,6 +1032,8 @@ return [
     'temperature' => 'temperature',
     'operations' => 'Invoices',
     'not_found' => 'data not found',
+    'buy_price' => 'buy price',
+    'sell_price' => 'sell price',
 
 
 ];
