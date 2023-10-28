@@ -28,11 +28,11 @@
                 {{trans('lang.'.$route)}}
 
                 @if($type == 'about_us')
-                    من نحن
+                    ({{__('lang.about_us')}})
                 @elseif($type == 'terms')
-                    الشروط والاحكام
+                    ({{__('lang.terms')}})
                 @elseif($type == 'privacy')
-                    سياسة الخصوصية
+                    ({{__('lang.privacy')}})
                 @endif
             </a>
         </li>
@@ -55,67 +55,6 @@
                 @csrf
                 <input type="hidden" name="row_id" value="{{$row->id}}">
                 <input type="hidden" name="type" value="{{$type}}">
-                <!--begin::Aside column-->
-{{--                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px">--}}
-{{--                    <!--begin::Thumbnail settings-->--}}
-{{--                    <div class="card card-flush py-4">--}}
-{{--                        <!--begin::Card header-->--}}
-{{--                        <div class="card-header">--}}
-{{--                            <!--begin::Card title-->--}}
-{{--                            <div class="card-title">--}}
-{{--                                <h2>الصورة</h2>--}}
-{{--                            </div>--}}
-{{--                            <!--end::Card title-->--}}
-{{--                        </div>--}}
-{{--                        <!--end::Card header-->--}}
-{{--                        <!--begin::Card body-->--}}
-{{--                        <div class="card-body text-center pt-0">--}}
-{{--                            <!--begin::Image input-->--}}
-{{--                            <div class="image-input image-input-empty image-input-outline mb-3"--}}
-{{--                                 data-kt-image-input="true" style="">--}}
-{{--                                <!--begin::Preview existing avatar-->--}}
-{{--                                <div class="image-input-wrapper w-150px h-150px"--}}
-{{--                                     style="background-image: url({{$row->image}})"></div>--}}
-{{--                                <!--end::Preview existing avatar-->--}}
-{{--                                <!--begin::Label-->--}}
-{{--                                <label--}}
-{{--                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"--}}
-{{--                                    data-kt-image-input-action="change" data-bs-toggle="tooltip"--}}
-{{--                                    title="إختر الصورة">--}}
-{{--                                    <i class="bi bi-pencil-fill fs-7"></i>--}}
-{{--                                    <!--begin::Inputs-->--}}
-{{--                                    <input type="file" name="image" accept=".png, .jpg, .jpeg"/>--}}
-{{--                                    <input type="hidden"/>--}}
-{{--                                    <!--end::Inputs-->--}}
-{{--                                </label>--}}
-{{--                                <!--end::Label-->--}}
-{{--                                <!--begin::Cancel-->--}}
-{{--                                <span--}}
-{{--                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"--}}
-{{--                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip"--}}
-{{--                                    title="إلغاء الصورة">--}}
-{{--														<i class="bi bi-x fs-2"></i>--}}
-{{--													</span>--}}
-{{--                                <!--end::Cancel-->--}}
-{{--                                <!--begin::Remove-->--}}
-{{--                                <span--}}
-{{--                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"--}}
-{{--                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="حذف الصورة">--}}
-{{--														<i class="bi bi-x fs-2"></i>--}}
-{{--													</span>--}}
-{{--                                <!--end::Remove-->--}}
-{{--                            </div>--}}
-{{--                            <!--end::Image input-->--}}
-{{--                            <!--begin::Description-->--}}
-{{--                            <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg</div>--}}
-{{--                            <!--end::Description-->--}}
-{{--                        </div>--}}
-{{--                        <!--end::Card body-->--}}
-{{--                    </div>--}}
-{{--                    <!--end::Thumbnail settings-->--}}
-
-{{--                </div>--}}
-                <!--end::Aside column-->
                 <!--begin::Main column-->
                 <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                     <!--begin:::Tabs-->
@@ -153,13 +92,12 @@
                                     <div class="card-header">
                                         <div class="card-title">
                                             <h2>
-                                                بيانات
                                                 @if($type == 'about_us')
-                                                    صفحة عن التطبيق
+                                                    ({{__('lang.about_us')}})
                                                 @elseif($type == 'terms')
-                                                    صفحة الشروط والاحكام
+                                                    ({{__('lang.terms')}})
                                                 @elseif($type == 'privacy')
-                                                    صفحة سياسة الخصوصية
+                                                    ({{__('lang.privacy')}})
                                                 @endif
                                             </h2>
                                         </div>
@@ -171,12 +109,12 @@
 
                                         <div class="mb-10 fv-row">
                                             <!--begin::Label-->
-                                            <label class="required form-label">وصف الصفحات (بالعربي)</label>
+                                            <label class="required form-label">{{__('lang.description')}} ({{__('lang.ar')}})</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <textarea id="editor1" name="title_ar"
                                                       value=""
-                                                      placeholder="وصف الصفحة (بالعربي)">{!!  $row->title_ar !!}</textarea>
+                                                      placeholder="{{__('lang.description')}} ({{__('lang.ar')}})">{!!  $row->title_ar !!}</textarea>
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                         {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
@@ -185,12 +123,12 @@
 
                                         <div class="mb-10 fv-row">
                                             <!--begin::Label-->
-                                            <label class="required form-label">وصف الصفحات (بالإنجليزي)</label>
+                                            <label class="required form-label">{{__('lang.description')}} ({{__('lang.en')}})</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <textarea id="editor2" name="title_en"
                                                       value=""
-                                                      placeholder="وصف الصفحة (بالإنجليزي)">{!!  $row->title_en !!}</textarea>
+                                                      placeholder="{{__('lang.description')}} ({{__('lang.en')}})">{!!  $row->title_en !!}</textarea>
                                             <!--end::Input-->
                                             <!--begin::Description-->
                                         {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}

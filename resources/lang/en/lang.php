@@ -3,6 +3,12 @@
 return [
     'ar' => 'Arabic',
     'en' => 'English',
+    'about_us' => 'About Us',
+    'terms' => 'Terms & Conditions',
+    'privacy' => 'Privacy Policy',
+    'gifts' => 'Gifts',
+    'money_out' => 'money used',
+    'money_remain' => 'money remain',
     'you_are_out_saudi' => 'The address chosen outside Saudi Arabia cannot be added',
 
     'no_gift_found' => 'no gift found now',
@@ -183,6 +189,8 @@ return [
     'payment_status' => 'Payment status',
     'order_date' => 'order date',
     'created_at' => 'created at',
+    'delivered_at' => 'deliver at',
+    'shipping' => 'ship cost',
     'provider' => 'provider',
     'category' => 'section',
     'order_number' => 'Order number',

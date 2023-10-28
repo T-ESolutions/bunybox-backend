@@ -1,9 +1,13 @@
 {{--@if(request()->segment(1) != 'ready' && request()->segment(1) != 'cars') active show @endif--}}
 <div class="tab-pane fade
-@if(request()->segment(1) == 'zones' || request()->segment(1) == 'products' ||
- request()->segment(1) == 'main_categories' || request()->segment(1) == 'categories'
-|| request()->segment(1) == 'boxes' || request()->segment(1) == 'gifts' ||
- request()->segment(1) == 'offers' || request()->segment(1) == 'settings' )
+@if(request()->segment(1) == 'zones' ||
+request()->segment(1) == 'products' ||
+request()->segment(1) == 'main_categories' ||
+request()->segment(1) == 'categories'||
+request()->segment(1) == 'boxes' ||
+request()->segment(1) == 'gifts' ||
+request()->segment(1) == 'offers' ||
+request()->segment(1) == 'settings' )
  active show @endif
     " id="kt_aside_nav_tab_menu"
 

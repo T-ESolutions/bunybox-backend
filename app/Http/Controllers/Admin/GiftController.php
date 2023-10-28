@@ -6,7 +6,6 @@ use App\Models\Box;
 use App\Models\BoxCategory;
 use App\Models\Gift;
 use App\Models\GiftBox;
-use App\Models\GiftCategory;
 use App\Models\Category;
 use App\Models\GiftMainCategory;
 use App\Models\MainCategory;
@@ -98,14 +97,12 @@ class GiftController extends Controller
 
     }
 
-    public
-    function table_buttons()
+    public function table_buttons()
     {
         return view('Admin.gifts.button');
     }
 
-    public
-    function create()
+    public function create()
     {
         $main_categories = MainCategory::get();
         $boxs = Box::get();
@@ -113,8 +110,7 @@ class GiftController extends Controller
         return view('Admin.gifts.create', compact('boxs', 'main_categories'));
     }
 
-    public
-    function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'main_category_id' => 'required|array',
@@ -131,7 +127,7 @@ class GiftController extends Controller
         $row->title_en = $request->title_en;
         $row->money_amount = $request->money_amount;
         $row->money_out = 0;
-        $row->money_remain = $request->money_amount;
+        $row->money_remain = $request->type == 'product' ? 0 : $request->money_amount;
         $row->type = $request->type;
         $row->image = $request->image;
         $row->save();
@@ -154,8 +150,7 @@ class GiftController extends Controller
         return redirect()->back()->with('message', trans('lang.added_s'));
     }
 
-    public
-    function edit($id)
+    public function edit($id)
     {
         $main_categories = MainCategory::get();
         $boxs = Box::get();
@@ -166,8 +161,7 @@ class GiftController extends Controller
             compact('row', 'boxs', 'main_categories', 'gift_main_categories','gift_boxes'));
     }
 
-    public
-    function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $row = Gift::findOrFail($id);
 

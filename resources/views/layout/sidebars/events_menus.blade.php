@@ -1,5 +1,16 @@
 <div class="tab-pane fade
-@if(request()->segment(1) == 'events' || request()->segment(1) == 'event-agenda' || request()->segment(1) == 'eventsRequests'|| request()->segment(1) == 'customfields' || request()->segment(1) == 'tickets' || request()->segment(1) == 'speakers' || request()->segment(1) == 'partners' || request()->segment(1) == 'sponsors' || request()->segment(1) == 'exhibitors'  || request()->segment(1) == 'surveys'  || request()->segment(1) == 'surveyquestions'  ) active show @endif
+    @if(request()->segment(1) == 'events' ||
+    request()->segment(1) == 'event-agenda' ||
+    request()->segment(1) == 'eventsRequests'||
+    request()->segment(1) == 'customfields' ||
+    request()->segment(1) == 'tickets' ||
+    request()->segment(1) == 'speakers' ||
+    request()->segment(1) == 'partners' ||
+    request()->segment(1) == 'sponsors' ||
+    request()->segment(1) == 'exhibitors'  ||
+    request()->segment(1) == 'surveys'  ||
+    request()->segment(1) == 'surveyquestions'  ) active show
+    @endif
     " id="kt_aside_nav_tab_front"
      role="tabpanel">
     <div

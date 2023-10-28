@@ -203,12 +203,12 @@ License: For each use you must have a valid license purchased only from above li
                                 data-bs-placement="right" data-bs-dismiss="click" title="{{trans('lang.basic_menus')}}">
                                 <!--begin::Nav link-->
                                 <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light
-                            @if(request()->segment(1) == 'zones' ||
-                                request()->segment(1) == 'products' ||
-                                request()->segment(1) == 'main_categories' ||
-                                request()->segment(1) == 'categories' ||
-                                request()->segment(1) == 'boxes' ||
-                                request()->segment(1) == 'offers') active @endif  "
+                                    @if(request()->segment(1) == 'zones' ||
+                                        request()->segment(1) == 'products' ||
+                                        request()->segment(1) == 'main_categories' ||
+                                        request()->segment(1) == 'categories' ||
+                                        request()->segment(1) == 'boxes' ||
+                                        request()->segment(1) == 'offers') active @endif  "
                                    data-bs-toggle="tab" href="#kt_aside_nav_tab_menu">
                                     <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
                                     <span class="svg-icon svg-icon-2x">
@@ -223,6 +223,20 @@ License: For each use you must have a valid license purchased only from above li
                                                           fill="black"></rect>
 												</svg>
 											</span>
+                                    <!--end::Svg Icon-->
+                                </a>
+                                <!--end::Nav link-->
+                            </li>
+
+                            <li class="nav-item mb-2 togge" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                data-bs-placement="right" data-bs-dismiss="click" title="{{trans('lang.orders')}}">
+                                <!--begin::Nav link-->
+                                <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light
+                                    @if(request()->segment(1) == 'orders'
+                                         ) active @endif  "
+                                    href="{{url('/orders')}}">
+                                    <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
+                                    <i class="fa fa-cart-plus"></i>
                                     <!--end::Svg Icon-->
                                 </a>
                                 <!--end::Nav link-->

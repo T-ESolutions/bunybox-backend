@@ -26,12 +26,19 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->id,
+            'country_code' => 'required',
             'phone' => 'required|unique:users,phone,' . $this->id,
-            'password' => ['nullable', Password::min(8)->letters()->mixedCase()->numbers()->symbols(), Rule::requiredIf($this->routeIs('users.store'))],
+//            'password' => ['nullable', Password::min(8)->letters()->mixedCase()->numbers()->symbols(), Rule::requiredIf($this->routeIs('users.store'))],
             'image' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg'],
+            'gender' => ['required', 'in:male,female'],
+            'weight' => 'nullable|numeric',
+            'height' => 'nullable|numeric',
+            'age' => 'nullable|numeric',
+            'shoes_size' => 'nullable|numeric',
+
+            'size' => ['nullable', 'in:S,L,XL,Free Size'],
         ];
     }
 }

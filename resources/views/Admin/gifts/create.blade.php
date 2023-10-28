@@ -274,11 +274,11 @@
                 var gift_type  = $(this).val();
                 if(gift_type == 'product'){
                     $("#Gift-Box").css('display','');
-                    // $("#Gift-Money-Amount").css('display','none');
+                    $("#Gift-Money-Amount").css('display','none');
                 }
                 if(gift_type == 'money'){
                     $("#Gift-Box").css('display','none');
-                    // $("#Gift-Money-Amount").css('display','');
+                    $("#Gift-Money-Amount").css('display','');
                 }
             });
         });

@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AdminsController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ZoneController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MainCategoryController;
 use App\Http\Controllers\Admin\BoxController;
 use App\Http\Controllers\Admin\GiftController;
-use App\Http\Controllers\Admin\GiftBoxController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
@@ -64,6 +65,33 @@ Route::group(['middleware' => ['admin']], function () {
 
     });
 
+    Route::group(['prefix' => 'users', 'as' => 'users'], function () {
+
+        Route::get('/', [UserController::class, 'index'])->name('.index');
+        Route::get('/datatable', [UserController::class, 'datatable'])->name('.datatable');
+        Route::get('/add-button', [UserController::class, 'table_buttons'])->name('.add-button');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('.update');
+        Route::post('/store', [UserController::class, 'store'])->name('.store');
+        Route::get('/delete', [UserController::class, 'destroy'])->name('.delete');
+        Route::get('/user-orders/{id?}', [UserController::class, 'userOrders'])->name('.user-orders');
+        Route::get('/get-user-orders{id?}', [UserController::class, 'userOrders'])->name('.userOrdersDatatabe');
+
+    });
+
+    Route::group(['prefix' => 'orders', 'as' => 'orders'], function () {
+
+        Route::get('/', [OrderController::class, 'index'])->name('.index');
+        Route::get('/datatable', [OrderController::class, 'datatable'])->name('.datatable');
+        Route::get('/add-button', [OrderController::class, 'table_buttons'])->name('.add-button');
+        Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [OrderController::class, 'update'])->name('.update');
+        Route::post('/store', [OrderController::class, 'store'])->name('.store');
+        Route::get('/delete', [OrderController::class, 'destroy'])->name('.delete');
+        Route::get('/datatable/{id}', [OrderController::class, 'orderDetails'])->name('.datatable.orderDetails');
+
+
+    });
 
     Route::group(['prefix' => 'zones', 'as' => 'zones'], function () {
         Route::get('/', [ZoneController::class, 'index'])->name('.index');
