@@ -24,7 +24,7 @@ class OrderResource extends JsonResource
         return
             [
                 'id' => $this->id,
-                'main_category_title' => $this->mainCategory->title,
+                'main_category_title' => $this->mainCategory ? $this->mainCategory->title : '',
                 'box_image' => $this->box->image,
                 'box_title' => $this->box->title,
                 'box_price' => $this->box->price,
