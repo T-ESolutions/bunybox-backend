@@ -723,3 +723,28 @@ function callback(Request $request)
 //        }
     //dd($request->all(),session()->get('order_id'));
 }
+
+function generateRandomPositiveNumbers($count) {
+    $numbers = array();
+
+    // Generate random numbers
+    for ($i = 0; $i < $count - 1; $i++) {
+        $randomNumber = mt_rand() / mt_getrandmax(); // Generate a random number between 0 and 1
+        $numbers[] = $randomNumber;
+    }
+
+    // Calculate the last number to ensure the sum equals 1
+    $remainingSum = 1.0 - array_sum($numbers);
+    $numbers[] = $remainingSum;
+
+    // Normalize the numbers to ensure they add up to 1
+    $sum = array_sum($numbers);
+    $normalizedNumbers = array_map(function ($number) use ($sum) {
+        return $number / $sum;
+    }, $numbers);
+
+    return $normalizedNumbers;
+}
+
+// Example usage
+//$randomNumbers = generateRandomNumbers(5);

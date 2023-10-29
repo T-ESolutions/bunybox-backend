@@ -28,6 +28,9 @@ use App\Http\Controllers\frontController;
 |
 */
 
+Route::get('/test', function () {
+    return generateRandomPositiveNumbers(5);
+});
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -89,7 +92,7 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/store', [OrderController::class, 'store'])->name('.store');
         Route::get('/delete', [OrderController::class, 'destroy'])->name('.delete');
         Route::get('/datatable/{id}', [OrderController::class, 'orderDetails'])->name('.datatable.orderDetails');
-
+        Route::post('/change-order-status', [OrderController::class, 'changeOrderStatus'])->name('.changeOrderStatus');
 
     });
 
@@ -170,19 +173,6 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/update/{id}', [GiftController::class, 'update'])->name('.update');
         Route::get('/delete', [GiftController::class, 'delete'])->name('.delete');
         Route::get('/add-button', [GiftController::class, 'table_buttons'])->name('.add-button');
-
-    });
-
-    Route::group(['prefix' => 'gift_boxes', 'as' => 'gift_boxes'], function () {
-        Route::get('/', [GiftBoxController::class, 'index'])->name('.index');
-        Route::get('/create', [GiftBoxController::class, 'create'])->name('.create');
-        Route::get('getData', [GiftBoxController::class, 'getData'])->name('.datatable');
-        Route::post('/store', [GiftBoxController::class, 'store'])->name('.store');
-        Route::post('search', [GiftBoxController::class, 'search'])->name('.search');
-        Route::get('/edit/{id}', [GiftBoxController::class, 'edit'])->name('.edit');
-        Route::post('/update/{id}', [GiftBoxController::class, 'update'])->name('.update');
-        Route::get('/delete', [GiftBoxController::class, 'delete'])->name('.delete');
-        Route::get('/add-button', [GiftBoxController::class, 'table_buttons'])->name('.add-button');
 
     });
 

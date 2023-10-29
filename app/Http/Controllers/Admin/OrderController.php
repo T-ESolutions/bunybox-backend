@@ -177,9 +177,10 @@ class OrderController extends Controller
             ->addColumn('actions', function ($row) {
                 $buttons = '';
 //                if ($auth->can('sliders.update')) {
-                    $buttons .= '<a href="'.route('orders.edit',[$row->id]).'" class="btn btn-success btn-circle btn-sm m-1" title="عرض التفاصيل" target="_blank">
+                    $buttons .= '<a href="'.route('orders.edit',[$row->id]).'" class="btn btn-success btn-circle btn-sm m-1" title="'.__('lang.show_details').'" target="_blank">
                             <i class="fa fa-eye"></i>
                         </a>';
+                    $buttons .= '<a href="#" data-id="'.$row->id.'" data-status="'.$row->status.'" data-status="'.$row->status.'" title="'.__('lang.change_status').'" class="btn btn-sm btn-primary changeStatus" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button"><i class="fa fa-edit"></i></a>';
 //                }
 //                if ($auth->can('sliders.delete')) {
 //                    $buttons .= '<a class="btn btn-danger btn-sm delete btn-circle m-1" data-id="'.$row->id.'"  title="حذف">
@@ -250,5 +251,22 @@ class OrderController extends Controller
             })
             ->rawColumns(['actions','checkbox','product','category','type'])
             ->make();
+    }
+
+    public function changeOrderStatus(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'row_id' => 'required|exists:orders,id',
+        ]);
+        if (!is_array($validator) && $validator->fails()) {
+            session()->flash('success', 'حدث خطأ ما');
+            return redirect()->back();
+        }
+        $row = Order::whereId($request->row_id)->first();
+        $row->status = $request->status;
+        $row->save();
+
+        session()->flash('success', 'تم التعديل بنجاح');
+        return redirect()->back();
     }
 }

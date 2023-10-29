@@ -8,6 +8,7 @@ use App\Models\Gift;
 use App\Models\GiftBox;
 use App\Models\Category;
 use App\Models\GiftMainCategory;
+use App\Models\GiftMoneyDetail;
 use App\Models\MainCategory;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
@@ -113,11 +114,12 @@ class GiftController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'main_category_id' => 'required|array',
-            'box_id' => 'sometimes|array',
+            'main_category_id' => 'required_if:type,product|array',
+            'box_id' => 'required_if:type,product|array',
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
-            'money_amount' => 'nullable|numeric',
+            'money_amount' => 'required_if:type,money',
+            'num_of_gifts' => 'required_if:type,money',
             'type' => 'required|in:product,money',
             'image' => 'required|',
         ]);
@@ -125,19 +127,26 @@ class GiftController extends Controller
         $row = new Gift();
         $row->title_ar = $request->title_ar;
         $row->title_en = $request->title_en;
-        $row->money_amount = $request->money_amount;
+        $row->money_amount = $request->type == 'product' ? 0 : $request->money_amount;
         $row->money_out = 0;
         $row->money_remain = $request->type == 'product' ? 0 : $request->money_amount;
         $row->type = $request->type;
         $row->image = $request->image;
         $row->save();
 
-        foreach ($request->main_category_id as $main_category_id) {
-            $giftMainCategory = new GiftMainCategory();
-            $giftMainCategory->main_category_id = $main_category_id;
-            $giftMainCategory->gift_id = $row->id;
-            $giftMainCategory->save();
+        //$request->type == 'money'
+        if ($request->type == 'money') {
+            $divided = $request->money_amount / $request->num_of_gifts;
+            for ($i=0 ; $i < $request->num_of_gifts ; $i++) {
+                GiftMoneyDetail::create([
+                    'gift_id' => $row->id,
+                    'amount' => $divided,
+                    'is_selected' => 0,
+                ]);
+            }
         }
+        //---
+        //$request->type == 'product'
         if ($request->type == 'product') {
             foreach ($request->box_id as $box_id) {
                 $giftBox = new GiftBox();
@@ -145,7 +154,14 @@ class GiftController extends Controller
                 $giftBox->gift_id = $row->id;
                 $giftBox->save();
             }
+            foreach ($request->main_category_id as $main_category_id) {
+                $giftMainCategory = new GiftMainCategory();
+                $giftMainCategory->main_category_id = $main_category_id;
+                $giftMainCategory->gift_id = $row->id;
+                $giftMainCategory->save();
+            }
         }
+        //---
 
         return redirect()->back()->with('message', trans('lang.added_s'));
     }

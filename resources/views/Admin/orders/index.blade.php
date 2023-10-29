@@ -80,6 +80,89 @@
     </div>
     <!--end::Post-->
 
+    <!--begin::Modal - change status-->
+    <div class="modal fade" id="kt_modal_create_app" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-900px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Status-->
+                <div class="card card-flush py-4">
+                    <!--begin::Card header-->
+                    <div class="card-header">
+                        <!--begin::Card title-->
+                        <div class="card-title text-center">
+                            <h2>{{__('lang.change_status')}}</h2>
+                            &nbsp;
+                            &nbsp;
+                            -
+                            &nbsp;
+                            &nbsp;
+                            <h2 class="text-center">{{__('lang.order_status')}}
+                                &nbsp;
+                                :
+                                &nbsp;
+                            </h2>
+                            <h2 id="statusText" class="text-primary text-center"></h2>
+                        </div>
+                        <!--end::Card title-->
+                        <!--begin::Close-->
+                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                            <span class="svg-icon svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+									<rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
+								</svg>
+							</span>
+                            <!--end::Svg Icon-->
+                        </div>
+                        <!--end::Close-->
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <form id="submit_btn" method="post" action="{{route('orders.changeOrderStatus')}}">
+                        @csrf
+                        <input type="hidden" name="row_id" id="row_id">
+                        <div class="card-body pt-0">
+                            <!--begin::Select2-->
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <select name="status" required class="form-select mb-2" data-control="select2"
+                                            data-hide-search="true" data-placeholder="{{__('lang.choose_status')}}"
+                                            id="kt_ecommerce_add_product_status_select">
+                                        <option></option>
+                                        <option value="ordered">
+                                            ordered
+                                        </option>
+                                        <option value="shipped">
+                                            shipped
+                                        </option>
+                                        <option value="delivered">
+                                            delivered
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--end::Select2-->
+                        </div>
+                        <!--end::Card body-->
+                        <div class="modal-footer">
+                            <button type="submit" data-dismiss="modal" class="btn btn-primary submit_btn">تأكيد</button>
+                        </div>
+                    </form>
+                </div>
+                <!--end::Status-->
+            </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+    <!--end::Modal - change status-->
+
 @endsection
 
 @section('script')
@@ -188,6 +271,25 @@
         });
     </script>
 
+    <script>
+        $(document).on("click", ".changeStatus", function () {
+            var row_id = $(this).data('id');
+            var status_val = $(this).data('status');
+            $(".card #row_id").val(row_id);
+
+            if(status_val == 'delivered'){
+                $(".card #statusText").html("delivered");
+            }else if(status_val == 'shipped'){
+                $(".card #statusText").html("shipped");
+            }else if(status_val == 'ordered'){
+                $(".card #statusText").html("ordered");
+            }
+        });
+
+        $('.submit_btn').on('click', function () {
+            $('#submit_btn').submit();
+        })
+    </script>
 
 @endsection
 

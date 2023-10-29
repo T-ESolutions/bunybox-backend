@@ -113,26 +113,6 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">
-                                                    {{__('lang.main_categories')}}
-                                                </label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <select class="form-control mb-2" name="main_category_id[]" data-control="select2" data-hide-search="false" multiple>
-                                                    @foreach($main_categories as $main_category)
-                                                        <option value="{{$main_category->id}}" {{in_array($main_category->id,$gift_main_categories) ? 'selected' : ''}}>{{$main_category->title_ar}}</option>
-                                                    @endforeach
-                                                </select>
-                                                <!--end::Input-->
-                                                <!--begin::Description-->
-                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                            <!--end::Description-->
-                                            </div>
-                                            <!--end::Input group-->
-
-                                            <!--begin::Input group-->
-                                            <div class="mb-5 fv-row">
-                                                <!--begin::Label-->
                                                 <label class="required form-label">{{__('lang.name')}}
                                                     ({{__('lang.ar')}}) </label>
                                                 <!--end::Label-->
@@ -197,6 +177,26 @@
                                                        value="{{$row->money_amount}}"
                                                        placeholder="{{__('lang.price')}} "
                                                 />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="mb-5 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">
+                                                    {{__('lang.main_categories')}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <select class="form-control mb-2" name="main_category_id[]" data-control="select2" data-hide-search="false" multiple>
+                                                    @foreach($main_categories as $main_category)
+                                                        <option value="{{$main_category->id}}" {{in_array($main_category->id,$gift_main_categories) ? 'selected' : ''}}>{{$main_category->title_ar}}</option>
+                                                    @endforeach
+                                                </select>
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
                                             {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}

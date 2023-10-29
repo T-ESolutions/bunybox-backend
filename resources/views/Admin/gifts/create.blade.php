@@ -125,26 +125,6 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">
-                                                    {{__('lang.main_categories')}}
-                                                </label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <select class="form-control mb-2" name="main_category_id[]" data-control="select2" data-hide-search="false" multiple>
-                                                    @foreach($main_categories as $main_category)
-                                                        <option value="{{$main_category->id}}" >{{$main_category->title_ar}}</option>
-                                                    @endforeach
-                                                </select>
-                                                <!--end::Input-->
-                                                <!--begin::Description-->
-                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                            <!--end::Description-->
-                                            </div>
-                                            <!--end::Input group-->
-
-                                            <!--begin::Input group-->
-                                            <div class="mb-5 fv-row">
-                                                <!--begin::Label-->
                                                 <label class="required form-label">{{__('lang.name')}}
                                                     ({{__('lang.ar')}}) </label>
                                                 <!--end::Label-->
@@ -216,6 +196,44 @@
                                             <!--end::Input group-->
 
                                             <!--begin::Input group-->
+                                            <div class="mb-5 fv-row" id="Gift-Num-Of-Gifts" >
+                                                <!--begin::Label-->
+                                                <label class="required form-label">{{__('lang.num_of_gifts')}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="number" name="num_of_gifts"
+                                                       class="form-control mb-2"
+                                                       placeholder="{{__('lang.num_of_gifts')}} "
+                                                />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="mb-5 fv-row" id="Gift-Main-Category" style="display: none">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">
+                                                    {{__('lang.main_categories')}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <select class="form-control mb-2" name="main_category_id[]" data-control="select2" data-hide-search="false" multiple>
+                                                    @foreach($main_categories as $main_category)
+                                                        <option value="{{$main_category->id}}" >{{$main_category->title_ar}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
                                             <div class="mb-5 fv-row" id="Gift-Box" style="display: none">
                                                 <!--begin::Label-->
                                                 <label class="required form-label">
@@ -274,11 +292,15 @@
                 var gift_type  = $(this).val();
                 if(gift_type == 'product'){
                     $("#Gift-Box").css('display','');
+                    $("#Gift-Main-Category").css('display','');
                     $("#Gift-Money-Amount").css('display','none');
+                    $("#Gift-Num-Of-Gifts").css('display','none');
                 }
                 if(gift_type == 'money'){
                     $("#Gift-Box").css('display','none');
+                    $("#Gift-Main-Category").css('display','none');
                     $("#Gift-Money-Amount").css('display','');
+                    $("#Gift-Num-Of-Gifts").css('display','');
                 }
             });
         });
