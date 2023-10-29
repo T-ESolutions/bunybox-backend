@@ -408,8 +408,8 @@ License: For each use you must have a valid license purchased only from above li
                     <!--begin::Copyright-->
                     <div class="text-dark order-2 order-md-1">
                         <span class="text-gray-400 fw-bold me-1">{{trans('lang.created_by')}}</span>
-                        <a href="javascript:void($this);"
-                           class="text-muted text-hover-primary fw-bold me-2 fs-6">Exas2030</a>
+                        <a href="https://tesolutionspro.com/"
+                           class="text-muted text-hover-primary fw-bold me-2 fs-6">TESolutions</a>
                     </div>
                     <!--end::Copyright-->
                     <!--begin::Menu-->
