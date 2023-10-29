@@ -180,7 +180,8 @@
                                      data-kt-image-input="true" style="">
                                     <!--begin::Preview existing avatar-->
                                     <div class="image-input-wrapper w-150px h-150px"
-                                         style="background-image: url({{url('/').'/uploads/Settings/'.\App\Models\Setting::where('key', 'fav_icon')->first()->value}})"></div>
+                                         style="background-image:  url( @if(\App\Models\Setting::where('key', 'fav_icon')->first()) {{url('/').'/uploads/Settings/'.\App\Models\Setting::where('key', 'fav_icon')->first()->value}} @endif)"></div>
+
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Label-->
                                     <label
