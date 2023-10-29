@@ -63,6 +63,7 @@ class OrderController extends Controller
     {
         $user_id = Auth::guard('user')->id();
         $orders = Order::where('user_id', $user_id)
+            ->orderBy('id', 'desc')
             ->with(['mainCategory', 'items', 'box'])
             ->paginate(10);
 
