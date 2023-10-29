@@ -125,7 +125,7 @@ class OrderController extends Controller
             })
             ->addColumn('user_name',function ($row){
                 $user_name = $row->user->name;
-                $main_category_name = $row->mainCategory->title_ar;
+                $main_category_name = $row->mainCategory ? $row->mainCategory->title_ar : "";
                 return '<a href="'.route('users.edit',[$row->user_id]).'" target="_blank" class="" title="العميل">
                             '.$user_name.'
                         </a><br>
