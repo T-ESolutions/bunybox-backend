@@ -21,15 +21,23 @@ class OrderController extends Controller
     {
 
         $address = Address::whereId($request->address_id)->first();
-
+        $box = Box::whereId($request->box_id)->first();
 //        todo::validate that total price less than max
+
+        if ($request->main_category_id !=null){
+            $products_sum = Product::whereIn('id',$request->products_id)
+                ->sum('sel_price'); 
+            if ($products_sum > $box->max_price){
+                return msg(false, trans('lang.invalid_products'), failed());
+            }
+        }
 
         if ($address->location == "in_riyadh") {
             $shipping_cost = (double)settings('in_riyadh_shipping_cost');
         } else {
             $shipping_cost = (double)settings('out_riyadh_shipping_cost');
         }
-        $box = Box::whereId($request->box_id)->first();
+
         if (isset($request->is_offer) && $request->is_offer == 1) {
             $is_offer = 1;
         } else {
