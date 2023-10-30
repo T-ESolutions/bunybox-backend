@@ -26,7 +26,7 @@ class OrderController extends Controller
 
         if ($request->main_category_id !=null){
             $products_sum = Product::whereIn('id',$request->products_id)
-                ->sum('sel_price'); 
+                ->sum('sel_price');
             if ($products_sum > $box->max_price){
                 return msg(false, trans('lang.invalid_products'), failed());
             }
