@@ -21,6 +21,9 @@ class OrderController extends Controller
     {
 
         $address = Address::whereId($request->address_id)->first();
+
+//        todo::validate that total price less than max
+
         if ($address->location == "in_riyadh") {
             $shipping_cost = (double)settings('in_riyadh_shipping_cost');
         } else {
@@ -66,6 +69,7 @@ class OrderController extends Controller
             ->orderBy('id', 'desc')
             ->with(['mainCategory', 'items', 'box'])
             ->paginate(10);
+
 
         $data = OrderResource::collection($orders)->response()->getData(true);
         return msgdata(true, trans('lang.data_display_success'), $data, success());
