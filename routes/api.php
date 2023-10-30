@@ -78,6 +78,8 @@ Route::prefix('client')->group(function () {
             Route::post('/place-order', [OrderController::class, 'placeOrder']);
             Route::get('/orders', [OrderController::class, 'orders']);
             Route::get('/order-details/{id}', [OrderController::class, 'orderDetails']);
+            Route::post('/store-transaction-id', [OrderController::class, 'storeOrderTransactionId']);
+            Route::post('/pay-order', [OrderController::class, 'payOrder']);
 
         });
 

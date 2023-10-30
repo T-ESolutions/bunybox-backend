@@ -209,6 +209,8 @@ License: For each use you must have a valid license purchased only from above li
                                         request()->segment(1) == 'categories' ||
                                         request()->segment(1) == 'boxes' ||
                                          request()->segment(1) == 'pages' ||
+                                         request()->segment(1) == 'gifts' ||
+                                         request()->segment(1) == 'settings' ||
                                         request()->segment(1) == 'offers') active @endif  "
                                    data-bs-toggle="tab" href="#kt_aside_nav_tab_menu">
                                     <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->

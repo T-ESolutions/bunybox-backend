@@ -25,6 +25,7 @@ class Order extends Model
         "gift_type",
         "gift_money",
         "gift_data",
+        "transaction_id",
     ];
 
     public function user()
