@@ -67,7 +67,8 @@ class OrderController extends Controller
             ]);
         }
 
-        return msgdata(true, trans('lang.Success_text'), $order ,success());
+        $data = new OrderDetailsResource($order);
+        return msgdata(true, trans('lang.Success_text'), $data ,success());
 
     }
 
