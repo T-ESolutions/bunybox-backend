@@ -53,7 +53,7 @@ class OrderController extends Controller
             "price" => $box->price,
             "shipping_cost" => $shipping_cost,
             "total" => $shipping_cost + $box->price,
-            'is_offer' => $is_offer
+            'is_offer' => $is_offer,
 
         ]);
 
@@ -67,8 +67,9 @@ class OrderController extends Controller
             ]);
         }
 
+        $order = Order::whereId($order->id)->first();
         $data = new OrderDetailsResource($order);
-        return msgdata(true, trans('lang.Success_text'), $data ,success());
+        return msgdata(true, trans('lang.Success_text'), $data, success());
 
     }
 
