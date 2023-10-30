@@ -25,7 +25,6 @@ class OrderController extends Controller
         $address = Address::whereId($request->address_id)->first();
         $box = Box::whereId($request->box_id)->first();
 //        todo::validate that total price less than max
-
         if ($request->main_category_id != null) {
             $products_sum = Product::whereIn('id', $request->products_id)
                 ->sum('sel_price');
@@ -68,7 +67,7 @@ class OrderController extends Controller
             ]);
         }
 
-        return msg(true, trans('lang.Success_text'), success());
+        return msgdata(true, trans('lang.Success_text'), $order ,success());
 
     }
 
