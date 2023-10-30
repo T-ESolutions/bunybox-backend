@@ -227,9 +227,9 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="category_id[]" data-control="select2" data-hide-search="false" multiple>
+                                                <select class="form-control mb-2" name="product_id[]" data-control="select2" data-hide-search="false" multiple>
                                                     @foreach($products as $product)
-                                                        <option value="{{$product->id}}" {{in_array($product->id,$boxProducts) ? 'selected' : ''}}>{{$product->title_ar}}  [ {{$product->category->title_ar}} ]</option>
+                                                        <option value="{{$product->id}}" {{(in_array($product->id,$boxProducts)) ? "selected" : ""}}>{{$product->title_ar}}  [ {{$product->category->title_ar}} ]</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->

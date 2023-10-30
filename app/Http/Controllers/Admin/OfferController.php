@@ -30,7 +30,7 @@ class OfferController extends Controller
     public function getData()
     {
         $auth = Auth::guard('admin')->user();
-        $model = Box::query();
+        $model = Box::query()->orderBy('id','desc');
         $model->where('is_offer',1);
         return DataTables::eloquent($model)
             ->addIndexColumn()
@@ -92,7 +92,7 @@ class OfferController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'main_category_id' => 'required|exists:main_categories,id',
+//            'main_category_id' => 'required|exists:main_categories,id',
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
@@ -103,10 +103,12 @@ class OfferController extends Controller
             'offer_price' => 'required|numeric',
             'offer_end_time' => 'required|',
             'image' => 'required|',
+            'product_id' => 'required|array',
         ]);
 
         $row = new Box();
-        $row->main_category_id = MainCategory::first()->id;
+//        $row->main_category_id = MainCategory::first()->id;
+        $row->main_category_id = null;
         $row->title_ar = $request->title_ar;
         $row->title_en = $request->title_en;
         $row->desc_ar = $request->desc_ar;
@@ -120,10 +122,10 @@ class OfferController extends Controller
         $row->image = $request->image;
         $row->save();
         foreach ($request->product_id as $product_id){
-            $boxProduct = new BoxProduct();
-            $row->product_id = $product_id;
-            $row->box_id = $row->id;
-            $boxProduct->save();
+            BoxProduct::create([
+                'product_id' => $product_id,
+                'box_id' => $row->id,
+            ]);
         }
 
         return redirect()->back()->with('message', trans('lang.added_s'));
@@ -143,7 +145,7 @@ class OfferController extends Controller
         $row = Box::findOrFail($id);
 
         $request->validate([
-            'main_category_id' => 'required|exists:main_categories,id',
+//            'main_category_id' => 'required|exists:main_categories,id',
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
@@ -151,9 +153,11 @@ class OfferController extends Controller
             'offer_price' => 'required|numeric',
             'offer_end_time' => 'required|',
             'image' => 'sometimes',
+            'product_id' => 'required|array',
         ]);
 
-        $row->main_category_id = MainCategory::first()->id;
+//        $row->main_category_id = MainCategory::first()->id;
+        $row->main_category_id = null;
         $row->title_ar = $request->title_ar;
         $row->title_en = $request->title_en;
         $row->desc_ar = $request->desc_ar;
@@ -166,7 +170,7 @@ class OfferController extends Controller
         $row->offer_end_time = $request->offer_end_time;
         $row->image = $request->image;
         $row->save();
-
+//dd($request->product_id);
         BoxProduct::whereBoxId($id)->delete();
         foreach ($request->product_id as $product_id){
             BoxProduct::create([
