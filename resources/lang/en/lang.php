@@ -1037,6 +1037,7 @@ return [
     'not_found' => 'data not found',
     'buy_price' => 'buy price',
     'sell_price' => 'sell price',
+    'num_of_gifts' => 'numbers of gifts ',
 
 
 ];

@@ -1028,5 +1028,6 @@ return [
     'temperature' => 'درجه الحرارة',
     'not_found' => 'البيانات غير موجوده',
     'buy_price' => 'سعر الشراء',
-    'sell_price' => 'سعر البيع',
+    'sell_price' => 'سعر البيع', 
+    'num_of_gifts' => 'عدد الهدايا ',
 ];
