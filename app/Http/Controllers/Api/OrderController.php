@@ -16,6 +16,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -164,5 +165,50 @@ class OrderController extends Controller
         return json_decode($response);
     }
 
+    public function generatePaymentLink()
+    {
+        $user = Auth::guard('user')->user();
+
+        $amount = 100;
+        $error_url = "https://bunybox.net/public/api/pay-error";
+        $callback_url = "https://bunybox.net/public/api/orders/pay-order";
+
+        $first_name = $user->name;
+        $last_name = $user->name;
+        $email = $user->email;
+        $code = $user->country_code;
+        $phone = $user->phone;
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://api.tap.company/v2/charges",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS =>  "{\"amount\":$amount,\"currency\":\"SAR\",\"customer_initiated\":true,\"threeDSecure\":true,\"save_card\":false,\"description\":\"Please Complete The Current Payment\",\"metadata\":{\"udf1\":\"Metadata 1\"},\"reference\":{\"transaction\":\"txn_01\",\"order\":\"ord_01\"},\"receipt\":{\"email\":true,\"sms\":true},\"customer\":{\"first_name\":\"$first_name\",\"middle_name\":\"-\",\"last_name\":\"$last_name\",\"email\":\"$email\",\"phone\":{\"country_code\":$code,\"number\":$phone}},\"source\":{\"id\":\"src_all\"},\"post\":{\"url\":\"$callback_url\"},\"redirect\":{\"url\":\"$callback_url\"}}",
+            CURLOPT_HTTPHEADER => [
+                "Authorization: Bearer sk_test_pJ8K61wBTgO3WzXRaf5omI7D",
+                "accept: application/json",
+                "content-type: application/json"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+        $result = json_decode($response);
+//        dd($result);
+        // status = INITIATED
+        return msgdata(true, trans('lang.Success_text'), $result, success());
+    }
 
 }

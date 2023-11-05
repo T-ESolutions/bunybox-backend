@@ -80,6 +80,7 @@ Route::prefix('client')->group(function () {
             Route::get('/order-details/{id}', [OrderController::class, 'orderDetails']);
             Route::post('/store-transaction-id', [OrderController::class, 'storeOrderTransactionId']);
             Route::post('/pay-order', [OrderController::class, 'payOrder']);
+            Route::get('/generate-payment-link', [OrderController::class, 'generatePaymentLink']);
 
         });
 
