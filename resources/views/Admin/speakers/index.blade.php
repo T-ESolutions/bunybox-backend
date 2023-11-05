@@ -107,7 +107,7 @@
                                 ' <table> ' +
                                 '                        <tbody> ' +
                                 '                                <tr>' +
-                                '                                    <td style="text-align: right"> <img src="{{asset('logo.png')}}" width="150px" height="150px" /> </td>' +
+                                '                                    <td style="text-align: right"> <img src="{{asset('logo/logo.png')}}" width="150px" height="150px" /> </td>' +
                                 '                                    <td style="text-align: right"><p>{{__("lang.title")}} : {{__('lang.'.$route)}}</p>' +
                                 '                                                                  <p>{{__('lang.date')}} : {{ Carbon\Carbon::now()->translatedFormat('l Y/m/d') }}</p>' +
                                 '                                                                  <p>{{__('lang.time')}} : {{ Carbon\Carbon::now()->translatedFormat('h:i a') }}</p></td>' +
