@@ -152,7 +152,7 @@
 
     {{--    for map--}}
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi4yKthIBU-bHeuQHPgpJmdXnuLxKGc1s&libraries=drawing,places&v=3.45.8"></script>
+        src="https://maps.googleapis.com/maps/api/js?key={{env('map_key')}}&libraries=drawing,places&v=3.45.8"></script>
 
     <script>
         auto_grow();
