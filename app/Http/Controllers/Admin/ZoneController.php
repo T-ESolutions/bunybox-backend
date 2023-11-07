@@ -166,24 +166,30 @@ class ZoneController extends Controller
             'name' => 'required|unique:zones,name,' . $id,
             'coordinates' => 'required',
         ]);
-        $value = $request->coordinates;
-        foreach (explode('),(', trim($value, '()')) as $index => $single_array) {
-            if ($index == 0) {
-                $lastcord = explode(',', $single_array);
+        try {
+            $value = $request->coordinates;
+            foreach (explode('),(', trim($value, '()')) as $index => $single_array) {
+                if ($index == 0) {
+                    $lastcord = explode(',', $single_array);
+                }
+                $coords = explode(',', $single_array);
+                $polygon[] = new Point($coords[0], $coords[1]);
             }
-            $coords = explode(',', $single_array);
-            $polygon[] = new Point($coords[0], $coords[1]);
+            $polygon[] = new Point($lastcord[0], $lastcord[1]);
+            $zone = Zone::findOrFail($id);
+            $zone->name = $request->name;
+            $zone->coordinates = new Polygon([new LineString($polygon)]);
+            $zone->restaurant_wise_topic = 'zone_' . $id . '_restaurant';
+            $zone->customer_wise_topic = 'zone_' . $id . '_customer';
+            $zone->deliveryman_wise_topic = 'zone_' . $id . '_delivery_man';
+            $zone->save();
+            session()->flash('success', 'تم التعديل بنجاح');
+            return redirect()->back();
+        }catch (\Exception $ex){
+            session()->flash('error_message', 'يجب اختيار منطقة صحيحه');
+            return redirect()->back();
+
         }
-        $polygon[] = new Point($lastcord[0], $lastcord[1]);
-        $zone = Zone::findOrFail($id);
-        $zone->name = $request->name;
-        $zone->coordinates = new Polygon([new LineString($polygon)]);
-        $zone->restaurant_wise_topic = 'zone_' . $id . '_restaurant';
-        $zone->customer_wise_topic = 'zone_' . $id . '_customer';
-        $zone->deliveryman_wise_topic = 'zone_' . $id . '_delivery_man';
-        $zone->save();
-        session()->flash('success', 'تم التعديل بنجاح');
-        return redirect()->back();
 //        return redirect()->route('admin.settings.zones');
     }
 
