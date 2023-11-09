@@ -33,7 +33,8 @@ request()->segment(1) == 'settings' )
 
 
 
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('main_categories'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('main_categories.*')) active @endif "
                    href="{{route('main_categories.index')}}">
                    <span class="menu-icon">
@@ -58,8 +59,10 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
 
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('categories'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('categories.*')) active @endif "
                    href="{{route('categories.index')}}">
                    <span class="menu-icon">
@@ -84,8 +87,10 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
 
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('products'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('products.*')) active @endif "
                    href="{{route('products.index')}}">
                    <span class="menu-icon">
@@ -110,8 +115,10 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
 
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('boxes'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('boxes.*')) active @endif "
                    href="{{route('boxes.index')}}">
                    <span class="menu-icon">
@@ -136,9 +143,11 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
 
             <hr>
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('gifts'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('gifts.*')) active @endif "
                    href="{{route('gifts.index')}}">
                    <span class="menu-icon">
@@ -163,10 +172,11 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
-
+            @endif
             <hr>
 
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('offers'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('offers.*')) active @endif "
                    href="{{route('offers.index')}}">
                    <span class="menu-icon">
@@ -191,9 +201,11 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
 
             <hr>
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('about_us'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('pages.*') && request()->segment(3) == 'about_us') active @endif "
                    href="{{route('pages.edit',['about_us'])}}">
                    <span class="menu-icon">
@@ -218,8 +230,10 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
 
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('terms'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('pages.*') && request()->segment(3) == 'terms') active @endif "
                    href="{{route('pages.edit',['terms'])}}">
                    <span class="menu-icon">
@@ -244,8 +258,10 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
 
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('privacy'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('pages.*') && request()->segment(3) == 'privacy') active @endif "
                    href="{{route('pages.edit',['privacy'])}}">
                    <span class="menu-icon">
@@ -270,9 +286,11 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
             <hr>
 
-            <div class="menu-item">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('zones'))
+                <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('zones.*')) active @endif "
                    href="{{route('zones.index')}}">
                    <span class="menu-icon">
@@ -297,7 +315,9 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
 
+            @if(auth()->guard('admin')->user()->hasPermissionTo('settings'))
             <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('settings.*')) active @endif "
                    href="{{route('settings.edit')}}">
@@ -323,6 +343,7 @@ request()->segment(1) == 'settings' )
 
                 </a>
             </div>
+            @endif
 
         </div>
     </div>

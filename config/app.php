@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Teckwei1993\Otp\OtpServiceProvider::class,
       Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

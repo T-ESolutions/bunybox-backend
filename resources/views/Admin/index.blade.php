@@ -27,185 +27,187 @@
         <!--begin::Post-->
         <div class="row g-5 g-xl-12">
 
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="{{route('admins.index')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body">
+            @if(auth()->guard('admin')->user()->hasPermissionTo('Dashboard'))
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{route('admins.index')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body">
 
-                        <i class="fa fa-user-check text-dark fa-3x"></i>
-                        <!--end::Svg Icon-->
-                        <div class="text-dark fw-bolder fs-2 mb-2 mt-5">{{$data['admins']}}</div>
-                        <div class="fw-bold text-dark fs-2">{{__("lang.admins")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="{{route('users.index')}}" class="card bg-body hoverable card-xl-stretch mb-xl-8 ">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm008.svg-->
-                        <i class="fa fa-user-plus text-info fa-3x"></i>
-                        <div class="text-info fw-bolder fs-2 mb-2 mt-5">{{$data['users']}}</div>
-                        <div class="fw-bold text-info fs-2">{{__("lang.users")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="{{route('boxes.index')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
-                        <i class="fa fa-boxes fa-3x text-warning"></i>
-                        <!--end::Svg Icon-->
-                        <div class="text-warning fw-bolder fs-2 mb-2 mt-5">{{$data['boxes']}}</div>
-                        <div class="fw-bold text-warning fs-2">{{__("lang.boxes")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="{{route('gifts.index')}}" class="card bg-body hoverable card-xl-stretch mb-5 mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
-                        <i class="fa fa-gift text-success fa-3x"></i>
-                        <!--end::Svg Icon-->
-                        <div class="text-success fw-bolder fs-2 mb-2 mt-5">{{$data['gifts']}}</div>
-                        <div class="fw-bold text-success fs-2">{{__("lang.gifts")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
+                            <i class="fa fa-user-check text-dark fa-3x"></i>
+                            <!--end::Svg Icon-->
+                            <div class="text-dark fw-bolder fs-2 mb-2 mt-5">{{$data['admins']}}</div>
+                            <div class="fw-bold text-dark fs-2">{{__("lang.admins")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{route('users.index')}}" class="card bg-body hoverable card-xl-stretch mb-xl-8 ">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm008.svg-->
+                            <i class="fa fa-user-plus text-info fa-3x"></i>
+                            <div class="text-info fw-bolder fs-2 mb-2 mt-5">{{$data['users']}}</div>
+                            <div class="fw-bold text-info fs-2">{{__("lang.users")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{route('boxes.index')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
+                            <i class="fa fa-boxes fa-3x text-warning"></i>
+                            <!--end::Svg Icon-->
+                            <div class="text-warning fw-bolder fs-2 mb-2 mt-5">{{$data['boxes']}}</div>
+                            <div class="fw-bold text-warning fs-2">{{__("lang.boxes")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{route('gifts.index')}}" class="card bg-body hoverable card-xl-stretch mb-5 mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
+                            <i class="fa fa-gift text-success fa-3x"></i>
+                            <!--end::Svg Icon-->
+                            <div class="text-success fw-bolder fs-2 mb-2 mt-5">{{$data['gifts']}}</div>
+                            <div class="fw-bold text-success fs-2">{{__("lang.gifts")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
 
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="{{route('main_categories.index')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body">
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{route('main_categories.index')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body">
 
-                        <i class="fa fa-layer-group text-dark fa-3x"></i>
-                        <!--end::Svg Icon-->
-                        <div class="text-dark fw-bolder fs-2 mb-2 mt-5">{{$data['main_categories']}}</div>
-                        <div class="fw-bold text-dark fs-2">{{__("lang.main_categories")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="{{route('categories.index')}}" class="card bg-body hoverable card-xl-stretch mb-xl-8 ">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm008.svg-->
-                        <i class="fa fa-layer-group text-info fa-3x"></i>
-                        <div class="text-info fw-bolder fs-2 mb-2 mt-5">{{$data['categories']}}</div>
-                        <div class="fw-bold text-info fs-2">{{__("lang.categories")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="{{route('offers.index')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
-                        <i class="fa fa-recycle fa-3x text-warning"></i>
-                        <!--end::Svg Icon-->
-                        <div class="text-warning fw-bolder fs-2 mb-2 mt-5">{{$data['offers']}}</div>
-                        <div class="fw-bold text-warning fs-2">{{__("lang.offers")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="{{route('products.index')}}" class="card bg-body hoverable card-xl-stretch mb-5 mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
-                        <i class="fa fa-circle text-success fa-3x"></i>
-                        <!--end::Svg Icon-->
-                        <div class="text-success fw-bolder fs-2 mb-2 mt-5">{{$data['products']}}</div>
-                        <div class="fw-bold text-success fs-2">{{__("lang.products")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
+                            <i class="fa fa-layer-group text-dark fa-3x"></i>
+                            <!--end::Svg Icon-->
+                            <div class="text-dark fw-bolder fs-2 mb-2 mt-5">{{$data['main_categories']}}</div>
+                            <div class="fw-bold text-dark fs-2">{{__("lang.main_categories")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{route('categories.index')}}" class="card bg-body hoverable card-xl-stretch mb-xl-8 ">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm008.svg-->
+                            <i class="fa fa-layer-group text-info fa-3x"></i>
+                            <div class="text-info fw-bolder fs-2 mb-2 mt-5">{{$data['categories']}}</div>
+                            <div class="fw-bold text-info fs-2">{{__("lang.categories")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{route('offers.index')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
+                            <i class="fa fa-recycle fa-3x text-warning"></i>
+                            <!--end::Svg Icon-->
+                            <div class="text-warning fw-bolder fs-2 mb-2 mt-5">{{$data['offers']}}</div>
+                            <div class="fw-bold text-warning fs-2">{{__("lang.offers")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{route('products.index')}}" class="card bg-body hoverable card-xl-stretch mb-5 mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
+                            <i class="fa fa-circle text-success fa-3x"></i>
+                            <!--end::Svg Icon-->
+                            <div class="text-success fw-bolder fs-2 mb-2 mt-5">{{$data['products']}}</div>
+                            <div class="fw-bold text-success fs-2">{{__("lang.products")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
 
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="#" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body">
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="#" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body">
 
-                        <i class="fa fa-cart-plus text-dark fa-3x"></i>
-                        <!--end::Svg Icon-->
-                        <div class="text-dark fw-bolder fs-2 mb-2 mt-5">{{$data['orders']}}</div>
-                        <div class="fw-bold text-dark fs-2">{{__("lang.orders")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8 ">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm008.svg-->
-                        <i class="fa fa-cart-plus text-info fa-3x"></i>
-                        <div class="text-info fw-bolder fs-2 mb-2 mt-5">{{$data['ordered_orders']}}</div>
-                        <div class="fw-bold text-info fs-2">{{__("lang.ordered_orders")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="#" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
-                        <i class="fa fa-cart-plus fa-3x text-warning"></i>
-                        <!--end::Svg Icon-->
-                        <div class="text-warning fw-bolder fs-2 mb-2 mt-5">{{$data['shipped_orders']}}</div>
-                        <div class="fw-bold text-warning fs-2">{{__("lang.shipped_orders")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
-            <div class="col-xl-3">
-                <!--begin::Statistics Widget 5-->
-                <a href="#" class="card bg-body hoverable card-xl-stretch mb-5 mb-xl-8">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
-                        <i class="fa fa-cart-plus text-success fa-3x"></i>
-                        <!--end::Svg Icon-->
-                        <div class="text-success fw-bolder fs-2 mb-2 mt-5">{{$data['delivered_orders']}}</div>
-                        <div class="fw-bold text-success fs-2">{{__("lang.delivered_orders")}}</div>
-                    </div>
-                    <!--end::Body-->
-                </a>
-                <!--end::Statistics Widget 5-->
-            </div>
+                            <i class="fa fa-cart-plus text-dark fa-3x"></i>
+                            <!--end::Svg Icon-->
+                            <div class="text-dark fw-bolder fs-2 mb-2 mt-5">{{$data['orders']}}</div>
+                            <div class="fw-bold text-dark fs-2">{{__("lang.orders")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8 ">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm008.svg-->
+                            <i class="fa fa-cart-plus text-info fa-3x"></i>
+                            <div class="text-info fw-bolder fs-2 mb-2 mt-5">{{$data['ordered_orders']}}</div>
+                            <div class="fw-bold text-info fs-2">{{__("lang.ordered_orders")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="#" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
+                            <i class="fa fa-cart-plus fa-3x text-warning"></i>
+                            <!--end::Svg Icon-->
+                            <div class="text-warning fw-bolder fs-2 mb-2 mt-5">{{$data['shipped_orders']}}</div>
+                            <div class="fw-bold text-warning fs-2">{{__("lang.shipped_orders")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+                <div class="col-xl-3">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="#" class="card bg-body hoverable card-xl-stretch mb-5 mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
+                            <i class="fa fa-cart-plus text-success fa-3x"></i>
+                            <!--end::Svg Icon-->
+                            <div class="text-success fw-bolder fs-2 mb-2 mt-5">{{$data['delivered_orders']}}</div>
+                            <div class="fw-bold text-success fs-2">{{__("lang.delivered_orders")}}</div>
+                        </div>
+                        <!--end::Body-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
+                </div>
+            @endif
         </div>
 
 {{--        <div class="content flex-row-fluid" id="kt_content">--}}
