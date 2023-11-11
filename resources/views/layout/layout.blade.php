@@ -149,6 +149,7 @@ License: For each use you must have a valid license purchased only from above li
                          data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-offset="0px">
                         <!--begin::Nav-->
                         <ul class="nav flex-column">
+                            @if(auth()->guard('admin')->user()->hasPermissionTo('Dashboard'))
                             <!--begin::Nav item-->
                             <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
                                 data-bs-placement="right" data-bs-dismiss="click" title="{{trans('lang.Dashboard')}}">
@@ -174,6 +175,7 @@ License: For each use you must have a valid license purchased only from above li
                                 </a>
                                 <!--end::Nav link-->
                             </li>
+                            @endif
 
                             <!--end::Nav item-->
                             <!--begin::Nav item-->

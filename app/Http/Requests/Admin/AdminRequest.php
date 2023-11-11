@@ -32,6 +32,7 @@ class AdminRequest extends FormRequest
             'password' => ['nullable', Password::min(8)->letters()->mixedCase()->numbers()->symbols(),
                 Rule::requiredIf($this->routeIs('admins.store'))],
             'image' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg'],
+            'permissions' => ['nullable', 'array'],
 
         ];
     }

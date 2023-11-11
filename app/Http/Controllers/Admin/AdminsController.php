@@ -8,6 +8,7 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 use Yajra\DataTables\DataTables;
 
 class AdminsController extends Controller
@@ -50,7 +51,8 @@ class AdminsController extends Controller
 
     public function table_buttons()
     {
-        return view($this->viewPath . '.button');
+        $permissions = Permission::get();
+        return view($this->viewPath . '.button',compact('permissions'));
     }
 
     /**
@@ -75,7 +77,8 @@ class AdminsController extends Controller
         $data = $request->validated();
 
         $result = $this->objectName::create($data);
-        createLog($result, 1, $this->route, "#", $result->name);
+//        createLog($result, 1, $this->route, "#", $result->name);
+        $result->givePermissionTo($request->permissions);
 
         return redirect(route($this->route . '.index'))->with('message', trans('lang.added_s'));
     }
@@ -100,8 +103,9 @@ class AdminsController extends Controller
      */
     public function edit($id)
     {
+        $permissions = Permission::get();
         $data = $this->objectName::findOrFail($id);
-        return view($this->viewPath . '.edit', compact('data'));
+        return view($this->viewPath . '.edit', compact('data','permissions'));
     }
 
     /**
@@ -120,8 +124,8 @@ class AdminsController extends Controller
         $result = $this->objectName::whereId($request->id)->first();
         $result->update($data);
 
-        editLog($result, 1, $this->route, "#", $result->name);
-
+//        editLog($result, 1, $this->route, "#", $result->name);
+        $result->syncPermissions($request->permissions);
         return redirect(route($this->route . '.index'))->with('message', trans('lang.updated_s'));
     }
 

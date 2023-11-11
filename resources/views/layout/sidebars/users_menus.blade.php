@@ -17,6 +17,8 @@
                     </h2>
                 </div>
             </div>
+
+            @if(auth()->guard('admin')->user()->hasPermissionTo('Admins'))
             <div class="menu-item">
                 <a class="menu-link @if(request()->routeIs('admins.*')) active @endif "
                    href="{{url('/admins')}}">
@@ -42,7 +44,9 @@
                     <span class="menu-title">{{__('lang.Admins')}}</span>
                 </a>
             </div>
+            @endif
 
+            @if(auth()->guard('admin')->user()->hasPermissionTo('users'))
             <div class="menu-item">
                 <a class="menu-link @if(request()->routeIs('users.*')) active @endif "
                    href="{{url('/users')}}">
@@ -68,6 +72,7 @@
                     <span class="menu-title">{{__('lang.users')}}</span>
                 </a>
             </div>
+            @endif
 
             </a>
         </div>

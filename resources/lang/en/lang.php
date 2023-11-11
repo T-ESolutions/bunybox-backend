@@ -6,6 +6,7 @@ return [
 
     'ar' => 'Arabic',
     'en' => 'English',
+    'permissions' => 'Permissions',
     'about_us' => 'About Us',
     'terms' => 'Terms & Conditions',
     'privacy' => 'Privacy Policy',

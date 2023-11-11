@@ -93,6 +93,8 @@
         <span class="form-text text-muted">{{trans('lang.allows_files_type')}}:  png, jpg, jpeg , svg.</span>
     </div>
 </div>
+
+
 <script>
     var myInput = document.getElementById("psw");
     var letter = document.getElementById("letter");
@@ -168,6 +170,26 @@
         }
     }
 </script>
+
+<hr class="pt-2">
+<div>
+    <label class="required col-xl-3 col-lg-3 col-form-label text-right">{{trans('lang.permissions')}}</label>
+    <div class="row">
+        @foreach($permissions as $perm)
+            <div class="col-md-4 mb-4">
+                <div class="" >
+                    <input class="checkbox_animated" id="{{$perm->id}}" value="{{$perm->name}}"
+                           @if(isset($data) && $data->hasPermissionTo($perm->name)) checked
+                           @endif
+                           type="checkbox" name="permissions[]">
+                    <label class="mb-0" for="{{$perm->id}}">{{trans('lang.'.$perm->name)}}</label>
+
+                </div>
+            </div>
+
+        @endforeach
+    </div>
+</div>
 
 @push('scripts')
 
