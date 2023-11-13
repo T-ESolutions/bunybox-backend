@@ -87,7 +87,7 @@ class PermissionSeeder extends Seeder
         foreach ($data as $row){
             Permission::updateOrCreate($row);
         }
-        $user = Admin::whereEmail('admin@gmail.com')->first();
+        $user = Admin::first();
         $user->givePermissionTo(Permission::pluck('name')->toArray());
     }
 }

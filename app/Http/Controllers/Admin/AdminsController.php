@@ -169,7 +169,7 @@ class AdminsController extends Controller
         $result = Admin::whereId(Auth::guard('admin')->id())->first();
         $result->update($data);
 
-        editLog($result, 1, 'admins', "#", $result->name);
+
 
         return back()->with('message', trans('lang.updated_s'));
     }

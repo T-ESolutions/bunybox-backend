@@ -7,21 +7,40 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Get the migration connection name.
+     * The database schema.
+     *
+     * @var \Illuminate\Database\Schema\Builder
      */
-    public function getConnection(): string|null
+    protected $schema;
+
+    /**
+     * Create a new migration instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->schema = Schema::connection($this->getConnection());
+    }
+
+    /**
+     * Get the migration connection name.
+     *
+     * @return string|null
+     */
+    public function getConnection()
     {
         return config('telescope.storage.database.connection');
     }
 
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        $schema = Schema::connection($this->getConnection());
-
-        $schema->create('telescope_entries', function (Blueprint $table) {
+        $this->schema->create('telescope_entries', function (Blueprint $table) {
             $table->bigIncrements('sequence');
             $table->uuid('uuid');
             $table->uuid('batch_id');
@@ -38,7 +57,7 @@ return new class extends Migration
             $table->index(['type', 'should_display_on_index']);
         });
 
-        $schema->create('telescope_entries_tags', function (Blueprint $table) {
+        $this->schema->create('telescope_entries_tags', function (Blueprint $table) {
             $table->uuid('entry_uuid');
             $table->string('tag');
 
@@ -51,20 +70,20 @@ return new class extends Migration
                   ->onDelete('cascade');
         });
 
-        $schema->create('telescope_monitoring', function (Blueprint $table) {
+        $this->schema->create('telescope_monitoring', function (Blueprint $table) {
             $table->string('tag');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        $schema = Schema::connection($this->getConnection());
-
-        $schema->dropIfExists('telescope_entries_tags');
-        $schema->dropIfExists('telescope_entries');
-        $schema->dropIfExists('telescope_monitoring');
+        $this->schema->dropIfExists('telescope_entries_tags');
+        $this->schema->dropIfExists('telescope_entries');
+        $this->schema->dropIfExists('telescope_monitoring');
     }
 };

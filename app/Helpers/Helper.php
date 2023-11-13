@@ -123,9 +123,7 @@ if (!function_exists('setting_image')) {
 
 function checkGuard()
 {
-    if (auth()->guard('host')->check()) {
-        return auth()->guard('host')->user();
-    } else if (auth()->guard('admin')->check()) {
+    if (auth()->guard('admin')->check()) {
         return auth()->guard('admin')->user();
     } else {
         return 0;
@@ -724,7 +722,8 @@ function callback(Request $request)
     //dd($request->all(),session()->get('order_id'));
 }
 
-function generateRandomPositiveNumbers($count) {
+function generateRandomPositiveNumbers($count)
+{
     $numbers = array();
 
     // Generate random numbers

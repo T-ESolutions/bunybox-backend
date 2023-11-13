@@ -1,11 +1,5 @@
 <script type="text/ecmascript-6">
-    import StylesMixin from './../../mixins/entriesStyles';
-
     export default {
-        mixins: [
-            StylesMixin,
-        ],
-
         data() {
             return {
                 entry: null,
@@ -21,40 +15,29 @@
     <preview-screen title="HTTP Client Request Details" resource="client-requests" :id="$route.params.id">
         <template slot="table-parameters" slot-scope="slotProps">
         <tr>
-            <td class="table-fit text-muted">Method</td>
+            <td class="table-fit font-weight-bold">Method</td>
             <td>
-                <span class="badge" :class="'badge-'+requestMethodClass(slotProps.entry.content.method)">
-                    {{slotProps.entry.content.method}}
-                </span>
+                {{slotProps.entry.content.method}}
             </td>
         </tr>
 
         <tr>
-            <td class="table-fit text-muted">URI</td>
+            <td class="table-fit font-weight-bold">URI</td>
             <td>
                 {{slotProps.entry.content.uri}}
             </td>
         </tr>
 
         <tr>
-            <td class="table-fit text-muted">Status</td>
+            <td class="table-fit font-weight-bold">Status</td>
             <td>
-                <span class="badge" :class="'badge-'+requestStatusClass(slotProps.entry.content.response_status !== undefined ? slotProps.entry.content.response_status : null)">
-                    {{slotProps.entry.content.response_status !== undefined ? slotProps.entry.content.response_status : 'N/A'}}
-                </span>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="table-fit text-muted">Duration</td>
-            <td>
-                {{slotProps.entry.content.duration || '-'}}ms
+                {{slotProps.entry.content.response_status !== undefined ? slotProps.entry.content.response_status : 'N/A'}}
             </td>
         </tr>
         </template>
 
         <div slot="after-attributes-card" slot-scope="slotProps">
-            <div class="card mt-5 overflow-hidden">
+            <div class="card mt-5">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a class="nav-link" :class="{active: currentRequestTab=='payload'}" href="#" v-on:click.prevent="currentRequestTab='payload'">Payload</a>
@@ -64,12 +47,11 @@
                     </li>
                 </ul>
                 <div class="code-bg p-4 mb-0 text-white">
-                    <copy-clipboard :data="slotProps.entry.content[currentRequestTab]">
-                        <vue-json-pretty :data="slotProps.entry.content[currentRequestTab]"></vue-json-pretty>
-                    </copy-clipboard>
+                    <vue-json-pretty :data="slotProps.entry.content.payload" v-if="currentRequestTab=='payload'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.content.headers" v-if="currentRequestTab=='headers'"></vue-json-pretty>
                 </div>
             </div>
-            <div class="card mt-5 overflow-hidden" v-if="slotProps.entry.content.response_status">
+            <div class="card mt-5" v-if="slotProps.entry.content.response_status">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a class="nav-link" :class="{active: currentResponseTab=='response'}" href="#" v-on:click.prevent="currentResponseTab='response'">Response</a>
@@ -79,16 +61,8 @@
                     </li>
                 </ul>
                 <div class="code-bg p-4 mb-0 text-white">
-                    <template v-if="currentResponseTab=='response'">
-                        <copy-clipboard :data="slotProps.entry.content.response">
-                            <vue-json-pretty :data="slotProps.entry.content.response"></vue-json-pretty>
-                        </copy-clipboard>
-                    </template>
-                    <template v-if="currentResponseTab=='headers'">
-                        <copy-clipboard :data="slotProps.entry.content.response_headers">
-                            <vue-json-pretty :data="slotProps.entry.content.response_headers"></vue-json-pretty>
-                        </copy-clipboard>
-                    </template>
+                    <vue-json-pretty :data="slotProps.entry.content.response" v-if="currentResponseTab=='response'"></vue-json-pretty>
+                    <vue-json-pretty :data="slotProps.entry.content.response_headers" v-if="currentResponseTab=='headers'"></vue-json-pretty>
                 </div>
             </div>
         </div>

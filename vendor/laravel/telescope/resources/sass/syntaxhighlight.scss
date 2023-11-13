@@ -1,6 +1,5 @@
 .vjs-tree {
     font-family: $font-family-monospace;
-    color: #bfc7d5 !important;
 
     .vjs-tree__content {
         border-left: 1px dotted rgba(204, 204, 204, 0.28) !important;
@@ -21,10 +20,7 @@
         color: #a291f5 !important;
     }
     .vjs-value__string {
-        color: #c3e88d !important;
-    }
-    .vjs-key {
-        color: #c3cbd3 !important;
+        color: #dacb4d !important;
     }
 }
 
@@ -44,7 +40,7 @@
 .hljs-variable,
 .hljs-template-tag,
 .hljs-template-variable {
-    color: #c3e88d;
+    color: #dacb4d;
 }
 
 .hljs-comment,

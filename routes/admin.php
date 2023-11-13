@@ -44,10 +44,8 @@ Route::get('reset-password/{token}/{email}', [frontController::class, 'showReset
 Route::post('reset-password', [frontController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 Route::group(['middleware' => ['admin']], function () {
-
     Route::get('Setting', [AdminsController::class, 'Setting'])->name('profile');
     Route::post('UpdateProfile', [AdminsController::class, 'UpdateProfile'])->name('UpdateProfile');
-
     Route::get('/', [HomeController::class, 'index'])->name('dashboard.index');
 
     Route::group(['prefix' => 'settings', 'as' => 'settings'], function () {

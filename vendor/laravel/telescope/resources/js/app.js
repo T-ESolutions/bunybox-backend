@@ -41,7 +41,6 @@ Vue.component('related-entries', require('./components/RelatedEntries.vue').defa
 Vue.component('index-screen', require('./components/IndexScreen.vue').default);
 Vue.component('preview-screen', require('./components/PreviewScreen.vue').default);
 Vue.component('alert', require('./components/Alert.vue').default);
-Vue.component('copy-clipboard', require('./components/CopyClipboard.vue').default);
 
 Vue.mixin(Base);
 
@@ -66,14 +65,6 @@ new Vue({
         };
     },
 
-    created() {
-        window.addEventListener('keydown', this.keydownListener);
-    },
-
-    destroyed() {
-        window.removeEventListener('keydown', this.keydownListener);
-    },
-
     methods: {
         autoLoadNewEntries() {
             if (!this.autoLoadsNewEntries) {
@@ -92,17 +83,9 @@ new Vue({
             this.recording = !this.recording;
         },
 
-        clearEntries(shouldConfirm = true) {
-            if (shouldConfirm && !confirm('Are you sure you want to delete all Telescope data?')) {
-                return;
-            }
-
-            axios.delete(Telescope.basePath + '/telescope-api/entries').then((response) => location.reload());
-        },
-
-        keydownListener(event) {
-            if (event.metaKey && event.key === 'k') {
-                this.clearEntries(false);
+        clearEntries() {
+            if (confirm('Are you sure you want to delete all Telescope data?')) {
+                axios.delete(Telescope.basePath + '/telescope-api/entries').then((response) => location.reload());
             }
         },
     },

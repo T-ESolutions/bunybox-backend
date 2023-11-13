@@ -86,7 +86,7 @@
     <label class="required col-xl-3 col-lg-3 col-form-label text-right">{{trans('lang.image')}}</label>
     <div class="col-lg-9 col-xl-12">
         <input accept="image/*" type="file"
-               @if(request()->segment(2) != 'edit' && request()->segment(2) != 'Setting') required @endif name="image"
+               @if(request()->segment(2) != 'edit' && request()->segment(1) != 'Setting') required @endif name="image"
                class="dropify"
                data-default-file="{{old('price',$data->image ?? '')}}"
                @if(request()->segment(2) == 'edit') data-show-remove="false" @endif >
@@ -171,26 +171,27 @@
     }
 </script>
 
-<hr class="pt-2">
-<div>
-    <label class="required col-xl-3 col-lg-3 col-form-label text-right">{{trans('lang.permissions')}}</label>
-    <div class="row">
-        @foreach($permissions as $perm)
-            <div class="col-md-4 mb-4">
-                <div class="" >
-                    <input class="checkbox_animated" id="{{$perm->id}}" value="{{$perm->name}}"
-                           @if(isset($data) && $data->hasPermissionTo($perm->name)) checked
-                           @endif
-                           type="checkbox" name="permissions[]">
-                    <label class="mb-0" for="{{$perm->id}}">{{trans('lang.'.$perm->name)}}</label>
+@if(request()->segment(1) !=="Setting")
+    <hr class="pt-2">
+    <div>
+        <label class="required col-xl-3 col-lg-3 col-form-label text-right">{{trans('lang.permissions')}}</label>
+        <div class="row">
+            @foreach($permissions as $perm)
+                <div class="col-md-4 mb-4">
+                    <div class="">
+                        <input class="checkbox_animated" id="{{$perm->id}}" value="{{$perm->name}}"
+                               @if(isset($data) && $data->hasPermissionTo($perm->name)) checked
+                               @endif
+                               type="checkbox" name="permissions[]">
+                        <label class="mb-0" for="{{$perm->id}}">{{trans('lang.'.$perm->name)}}</label>
 
+                    </div>
                 </div>
-            </div>
 
-        @endforeach
+            @endforeach
+        </div>
     </div>
-</div>
-
+@endif
 @push('scripts')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
