@@ -13,18 +13,29 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PageController extends Controller
 {
+    public function permission(){
+        return (auth()->guard('admin')->user()->can('privacy') ||
+            auth()->guard('admin')->user()->can('terms') ||
+            auth()->guard('admin')->user()->can('about_us'));
+    }
     public function index($type)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         return view('Admin.pages.index',compact('type'));
     }
 
     public function create($type)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         return view('Admin.pages.create',compact('type'));
     }
 
     public function store(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $validator = Validator::make($request->all(), [
             'title_ar' => 'required',
             'title_en' => 'required',
@@ -47,6 +58,7 @@ class PageController extends Controller
 
     public function edit($type)
     {
+        if(!$this->permission()) return "Not Authorized";
 
         $row = Page::where('type',$type)->first();
         if (!$row){
@@ -58,6 +70,8 @@ class PageController extends Controller
 
     public function update(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $validator = Validator::make($request->all(), [
             'row_id' => 'required|exists:pages,id',
             'type' => 'required|in:about_us,terms,privacy',

@@ -14,16 +14,22 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
+    public function permission(){
+        return auth()->guard('admin')->user()->can('categories');
+    }
 
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $results = Category::latest()->paginate(config('default_pagination'));
         return view('Admin.categories.index', compact('results'));
     }
 
     public function getData()
     {
-        $auth = Auth::guard('admin')->user();
+        if(!$this->permission()) return "Not Authorized";
+
         $model = Category::query();
 
         return DataTables::eloquent($model)
@@ -77,11 +83,15 @@ class CategoryController extends Controller
 
     public function create()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         return view('Admin.categories.create');
     }
 
     public function store(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $request->validate([
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
@@ -103,12 +113,16 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $row = Category::findOrFail($id);
         return view('Admin.categories.edit', compact('row'));
     }
 
     public function update(Request $request, $id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $row = Category::findOrFail($id);
 
         $request->validate([

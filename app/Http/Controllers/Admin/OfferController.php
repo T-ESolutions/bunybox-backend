@@ -19,21 +19,30 @@ use Yajra\DataTables\Facades\DataTables;
 
 class OfferController extends Controller
 {
+    public function permission(){
+        return auth()->guard('admin')->user()->can('offers');
+    }
 
     //for products
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $results = Box::latest()->paginate(config('default_pagination'));
         return view('Admin.offers.index', compact('results'));
     }
 
     public function getData()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $auth = Auth::guard('admin')->user();
         $model = Box::query()->orderBy('id','desc');
         $model->where('is_offer',1);
         return DataTables::eloquent($model)
             ->addIndexColumn()
+            ->addColumn('active', 'Admin.boxes.active_btn')
+
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
                 $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -71,7 +80,7 @@ class OfferController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions', 'image','main_category_id','checkbox'])
+            ->rawColumns(['actions','active','image','main_category_id','checkbox'])
             ->make();
 
     }
@@ -83,6 +92,8 @@ class OfferController extends Controller
 
     public function create()
     {
+        if(!$this->permission()) return "Not Authorized";
+
 //        $main_categories = MainCategory::get();
 //        $categories = Category::get();
         $products = Product::orderBy('category_id')->get();
@@ -91,6 +102,8 @@ class OfferController extends Controller
 
     public function store(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $request->validate([
 //            'main_category_id' => 'required|exists:main_categories,id',
             'title_ar' => 'required|string',
@@ -133,6 +146,8 @@ class OfferController extends Controller
 
     public function edit($id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $products = Product::orderBy('category_id')->get();
         $boxProducts = BoxProduct::whereBoxId($id)->pluck('product_id')->toArray();
 
@@ -142,6 +157,8 @@ class OfferController extends Controller
 
     public function update(Request $request, $id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $row = Box::findOrFail($id);
 
         $request->validate([
@@ -196,5 +213,15 @@ class OfferController extends Controller
             return response()->json(['message' => 'Failed']);
         }
         return response()->json(['message' => 'Success']);
+    }
+
+    public function changeActive(Request $request)
+    {
+        $box = Box::where('id', $request->id)->first();
+        if($box->active == 0)
+            Box::where('id', $request->id)->update(['active' => 1]);
+        else
+            Box::where('id', $request->id)->update(['active' => 0]);
+        return 1;
     }
 }

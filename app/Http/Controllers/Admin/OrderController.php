@@ -20,18 +20,28 @@ use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
 {
+    public function permission(){
+        return auth()->guard('admin')->user()->can('orders');
+    }
+
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         return view('Admin.orders.index');
     }
 
     public function create()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         return view('Admin.orders.create',compact('status'));
     }
 
     public function store(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $validator = Validator::make($request->all(), [
             'title_ar' => 'required',
             'title_en' => 'required',
@@ -54,6 +64,8 @@ class OrderController extends Controller
 
     public function edit($id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $order = Order::findOrFail($id);
 
         if (!$order){
@@ -111,6 +123,8 @@ class OrderController extends Controller
 
     public function datatable()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $auth = Auth::guard('admin')->user();
         $model = Order::query()->orderBy('id','desc');
 
@@ -198,6 +212,8 @@ class OrderController extends Controller
 
     public function orderDetails(Request $request,$order_id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $auth = Auth::guard('admin')->user();
         $model = OrderItem::query()
             ->where('order_id',$order_id);
@@ -255,6 +271,8 @@ class OrderController extends Controller
 
     public function changeOrderStatus(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $validator = Validator::make($request->all(), [
             'row_id' => 'required|exists:orders,id',
         ]);

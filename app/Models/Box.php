@@ -26,6 +26,7 @@ class Box extends Model
         "slider_image_en",
         "hint_ar",
         "hint_en",
+        "active",
     ];
 
 

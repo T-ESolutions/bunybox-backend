@@ -16,6 +16,10 @@ class AdminsController extends Controller
     protected $viewPath = 'Admin.admins';
     private $route = 'admins';
 
+    public function permission(){
+        return auth()->guard('admin')->user()->can('Admins');
+    }
+
     public function __construct(Admin $model)
     {
         $this->objectName = $model;
@@ -23,12 +27,16 @@ class AdminsController extends Controller
 
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         return view($this->viewPath . '.index');
     }
 
 
     public function datatable(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $data = $this->objectName::orderBy('id', 'desc');
         return DataTables::of($data)
             ->addColumn('checkbox', function ($row) {
@@ -74,6 +82,8 @@ class AdminsController extends Controller
 
     public function store(AdminRequest $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $data = $request->validated();
 
         $result = $this->objectName::create($data);
@@ -103,6 +113,8 @@ class AdminsController extends Controller
      */
     public function edit($id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $permissions = Permission::get();
         $data = $this->objectName::findOrFail($id);
         return view($this->viewPath . '.edit', compact('data','permissions'));
@@ -117,6 +129,8 @@ class AdminsController extends Controller
      */
     public function update(AdminRequest $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $edit = $this->objectName::find($request->id);
 
         $data = $request->validated();

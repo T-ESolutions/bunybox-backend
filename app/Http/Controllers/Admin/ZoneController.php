@@ -14,16 +14,23 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ZoneController extends Controller
 {
+    public function permission(){
+        return auth()->guard('admin')->user()->can('zones');
+    }
 
     //for zones
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $zones = Zone::latest()->paginate(config('default_pagination'));
         return view('Admin.zones.index', compact('zones'));
     }
 
     public function getData()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $auth = Auth::guard('admin')->user();
         $model = Zone::query();
 
@@ -65,6 +72,8 @@ class ZoneController extends Controller
 
     public function get_all_zone_cordinates($id = 0)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $zones = Zone::where('id', '<>', $id)->active()->get();
         $data = [];
         foreach ($zones as $zone) {
@@ -75,6 +84,8 @@ class ZoneController extends Controller
 
     public function search(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $key = explode(' ', $request['search']);
         $zones = Zone::where(function ($q) use ($key) {
             foreach ($key as $value) {

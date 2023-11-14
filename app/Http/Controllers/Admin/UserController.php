@@ -15,19 +15,29 @@ use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
+    public function permission(){
+        return auth()->guard('admin')->user()->can('users');
+    }
+
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         return view('Admin.users.index');
     }
 
 
     public function create()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         return view('Admin.users.create');
     }
 
     public function store(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $validator = Validator::make($request->all(), [
             'code' => 'required',
             'type' => 'required|in:fixed,percent',
@@ -62,6 +72,8 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $data = User::where('id',$id)->first();
         if (!$data){
             session()->flash('error', 'الحقل غير موجود');
@@ -72,6 +84,8 @@ class UserController extends Controller
 
     public function update(UserRequest $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $data = $request->validated();
 
         $row = User::whereId($request->id)->first();

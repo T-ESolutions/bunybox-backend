@@ -21,15 +21,22 @@ use Yajra\DataTables\Facades\DataTables;
 
 class GiftController extends Controller
 {
+    public function permission(){
+        return auth()->guard('admin')->user()->can('gifts');
+    }
 
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $results = Gift::latest()->paginate(config('default_pagination'));
         return view('Admin.gifts.index', compact('results'));
     }
 
     public function getData()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $auth = Auth::guard('admin')->user();
         $model = Gift::query();
         return DataTables::eloquent($model)
@@ -105,6 +112,8 @@ class GiftController extends Controller
 
     public function create()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $main_categories = MainCategory::get();
         $boxs = Box::get();
 
@@ -113,6 +122,8 @@ class GiftController extends Controller
 
     public function store(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $request->validate([
             'main_category_id' => 'required_if:type,product|array',
             'box_id' => 'required_if:type,product|array',
@@ -168,6 +179,8 @@ class GiftController extends Controller
 
     public function edit($id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $main_categories = MainCategory::get();
         $boxs = Box::get();
         $gift_main_categories = GiftMainCategory::whereGiftId($id)->pluck('main_category_id')->toArray();
@@ -179,6 +192,8 @@ class GiftController extends Controller
 
     public function update(Request $request, $id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $row = Gift::findOrFail($id);
 
         $request->validate([

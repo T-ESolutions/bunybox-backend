@@ -14,16 +14,23 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MainCategoryController extends Controller
 {
+    public function permission(){
+        return auth()->guard('admin')->user()->can('main_categories');
+    }
 
     //for products
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $results = MainCategory::latest()->paginate(config('default_pagination'));
         return view('Admin.main_categories.index', compact('results'));
     }
 
     public function getData()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $auth = Auth::guard('admin')->user();
         $model = MainCategory::query();
 
@@ -68,11 +75,15 @@ class MainCategoryController extends Controller
 
     public function create()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         return view('Admin.main_categories.create');
     }
 
     public function store(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $request->validate([
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
@@ -93,12 +104,16 @@ class MainCategoryController extends Controller
 
     public function edit($id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $row = MainCategory::findOrFail($id);
         return view('Admin.main_categories.edit', compact('row'));
     }
 
     public function update(Request $request, $id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $row = MainCategory::findOrFail($id);
 
         $request->validate([

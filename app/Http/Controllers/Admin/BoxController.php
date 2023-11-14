@@ -17,20 +17,28 @@ use Yajra\DataTables\Facades\DataTables;
 
 class BoxController extends Controller
 {
+    public function permission(){
+        return auth()->guard('admin')->user()->can('boxes');
+    }
 
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $results = Box::latest()->paginate(config('default_pagination'));
         return view('Admin.boxes.index', compact('results'));
     }
 
     public function getData()
     {
-        $auth = Auth::guard('admin')->user();
+        if(!$this->permission()) return "Not Authorized";
+
         $model = Box::query();
         $model->where('is_offer', 0);
         return DataTables::eloquent($model)
             ->addIndexColumn()
+            ->addColumn('active', 'Admin.boxes.active_btn')
+
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
                 $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -54,7 +62,7 @@ class BoxController extends Controller
 //                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="'.$row->id.'" />
 //                                    </div>';
 //            })
-            ->addColumn('actions', function ($row) use ($auth) {
+            ->addColumn('actions', function ($row) {
                 $buttons = '';
 //                if ($auth->can('sliders.update')) {
                 $buttons .= '<a href="' . route('boxes.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
@@ -68,7 +76,7 @@ class BoxController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions', 'checkbox', 'image', 'main_category_id'])
+            ->rawColumns(['actions','active','checkbox', 'image', 'main_category_id'])
             ->make();
 
     }
@@ -80,6 +88,8 @@ class BoxController extends Controller
 
     public function create()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $main_categories = MainCategory::get();
         $categories = Category::get();
         return view('Admin.boxes.create', compact('main_categories', 'categories'));
@@ -87,6 +97,8 @@ class BoxController extends Controller
 
     public function store(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $request->validate([
             'main_category_id' => 'required|exists:main_categories,id',
             'title_ar' => 'required|string',
@@ -127,6 +139,8 @@ class BoxController extends Controller
 
     public function edit($id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $main_categories = MainCategory::get();
         $categories = Category::get();
         $boxCategories = BoxCategory::whereBoxId($id)->pluck('category_id')->toArray();
@@ -136,6 +150,8 @@ class BoxController extends Controller
 
     public function update(Request $request, $id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $row = Box::findOrFail($id);
 
         $request->validate([
@@ -184,11 +200,23 @@ class BoxController extends Controller
      */
     public function delete(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         try {
             Box::whereIn('id', $request->id)->delete();
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed']);
         }
         return response()->json(['message' => 'Success']);
+    }
+
+    public function changeActive(Request $request)
+    {
+        $box = Box::where('id', $request->id)->first();
+        if($box->active == 0)
+            Box::where('id', $request->id)->update(['active' => 1]);
+        else
+            Box::where('id', $request->id)->update(['active' => 0]);
+        return 1;
     }
 }

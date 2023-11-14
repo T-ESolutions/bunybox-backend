@@ -15,16 +15,23 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
+    public function permission(){
+        return auth()->guard('admin')->user()->can('products');
+    }
 
     //for products
     public function index()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $results = Product::latest()->paginate(config('default_pagination'));
         return view('Admin.products.index', compact('results'));
     }
 
     public function getData()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $auth = Auth::guard('admin')->user();
         $model = Product::query();
 
@@ -79,12 +86,16 @@ class ProductController extends Controller
 
     public function create()
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $categories = Category::get();
         return view('Admin.products.create',compact('categories'));
     }
 
     public function store(Request $request)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $request->validate([
             'category_id' => 'required|exists:products,id',
             'title_ar' => 'required|string',
@@ -129,6 +140,8 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $categories = Category::get();
         $row = Product::findOrFail($id);
         return view('Admin.products.edit', compact('row','categories'));
@@ -136,6 +149,8 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        if(!$this->permission()) return "Not Authorized";
+
         $row = Product::findOrFail($id);
 
         $request->validate([

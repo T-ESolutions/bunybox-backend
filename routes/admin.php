@@ -160,6 +160,8 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/update/{id}', [BoxController::class, 'update'])->name('.update');
         Route::get('/delete', [BoxController::class, 'delete'])->name('.delete');
         Route::get('/add-button', [BoxController::class, 'table_buttons'])->name('.add-button');
+        Route::post('/change_active', [BoxController::class, 'changeActive'])->name('.change_active');
+
 
     });
 
