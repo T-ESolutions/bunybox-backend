@@ -44,10 +44,8 @@ Route::get('reset-password/{token}/{email}', [frontController::class, 'showReset
 Route::post('reset-password', [frontController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 Route::group(['middleware' => ['admin']], function () {
-
     Route::get('Setting', [AdminsController::class, 'Setting'])->name('profile');
     Route::post('UpdateProfile', [AdminsController::class, 'UpdateProfile'])->name('UpdateProfile');
-
     Route::get('/', [HomeController::class, 'index'])->name('dashboard.index');
 
     Route::group(['prefix' => 'settings', 'as' => 'settings'], function () {
@@ -121,6 +119,7 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('.update');
         Route::get('/delete', [ProductController::class, 'delete'])->name('.delete');
         Route::get('/add-button', [ProductController::class, 'table_buttons'])->name('.add-button');
+        Route::post('/change_active', [ProductController::class, 'changeActive'])->name('.change_active');
 
     });
 
@@ -133,6 +132,7 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/edit/{id}', [MainCategoryController::class, 'edit'])->name('.edit');
         Route::post('/update/{id}', [MainCategoryController::class, 'update'])->name('.update');
         Route::post('/delete', [MainCategoryController::class, 'delete'])->name('.delete');
+        Route::post('/change_active', [MainCategoryController::class, 'changeActive'])->name('.change_active');
 
     });
 
@@ -146,7 +146,7 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/update/{id}', [CategoryController::class, 'update'])->name('.update');
         Route::get('/delete', [CategoryController::class, 'delete'])->name('.delete');
         Route::get('/add-button', [CategoryController::class, 'table_buttons'])->name('.add-button');
-
+        Route::post('/change_active', [CategoryController::class, 'changeActive'])->name('.change_active');
 
     });
 
@@ -175,6 +175,8 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/update/{id}', [GiftController::class, 'update'])->name('.update');
         Route::get('/delete', [GiftController::class, 'delete'])->name('.delete');
         Route::get('/add-button', [GiftController::class, 'table_buttons'])->name('.add-button');
+        Route::post('/change_active', [GiftController::class, 'changeActive'])->name('.change_active');
+
 
     });
 

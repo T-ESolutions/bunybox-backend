@@ -37,6 +37,8 @@ class ProductController extends Controller
 
         return DataTables::eloquent($model)
             ->addIndexColumn()
+            ->addColumn('active', 'Admin.products.active_btn')
+
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
                 $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -74,7 +76,7 @@ class ProductController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions', 'image','category_id','checkbox'])
+            ->rawColumns(['actions','active', 'image','category_id','checkbox'])
             ->make();
 
     }
@@ -208,6 +210,16 @@ class ProductController extends Controller
             return response()->json(['message' => 'Failed']);
         }
         return response()->json(['message' => 'Success']);
+    }
+
+    public function changeActive(Request $request)
+    {
+        $box = Product::where('id', $request->id)->first();
+        if($box->active == 0)
+            Product::where('id', $request->id)->update(['active' => 1]);
+        else
+            Product::where('id', $request->id)->update(['active' => 0]);
+        return 1;
     }
 
 }

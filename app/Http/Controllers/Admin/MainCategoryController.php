@@ -36,6 +36,8 @@ class MainCategoryController extends Controller
 
         return DataTables::eloquent($model)
             ->addIndexColumn()
+            ->addColumn('active', 'Admin.main_categories.active_btn')
+
             ->editColumn('image', function ($row) {
                 return '<a class="symbol symbol-50px"><span class="symbol-label" style="background-image:url(' . $row->image . ');"></span></a>';
             })
@@ -66,7 +68,7 @@ class MainCategoryController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions', 'image'])
+            ->rawColumns(['actions', 'active','image'])
             ->make();
 
     }
@@ -133,4 +135,13 @@ class MainCategoryController extends Controller
         return redirect()->back()->with('message', trans('lang.added_s'));
     }
 
+    public function changeActive(Request $request)
+    {
+        $box = MainCategory::where('id', $request->id)->first();
+        if($box->active == 0)
+            MainCategory::where('id', $request->id)->update(['active' => 1]);
+        else
+            MainCategory::where('id', $request->id)->update(['active' => 0]);
+        return 1;
+    }
 }

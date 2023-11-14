@@ -15,6 +15,7 @@ class MainCategory extends Model
         'image',
         'desc_ar',
         'desc_en',
+        'active'
     ];
 
     protected $appends = ['title', 'desc'];

@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'this_account_has_order_not_completed' => 'هذا الحساب لديه طلب لم يكتمل بعد , يرجى الانتهاء من طلباتك أولا',
+
+    'account_deleted_s' => 'تم حذف حسابك بنجاح',
     'ar' => 'عربي',
     'en' => 'انجليزي',
     'permissions' => 'الصلاحيات',

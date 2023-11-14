@@ -30,10 +30,14 @@ class CategoryController extends Controller
     {
         if(!$this->permission()) return "Not Authorized";
 
+        $auth = Auth::guard('admin')->user();
+
         $model = Category::query();
 
         return DataTables::eloquent($model)
             ->addIndexColumn()
+            ->addColumn('active', 'Admin.categories.active_btn')
+
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
                 $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -71,7 +75,7 @@ class CategoryController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions', 'image','checkbox'])
+            ->rawColumns(['actions','active', 'image','checkbox'])
             ->make();
 
     }
@@ -156,6 +160,16 @@ class CategoryController extends Controller
             return response()->json(['message' => 'Failed']);
         }
         return response()->json(['message' => 'Success']);
+    }
+
+    public function changeActive(Request $request)
+    {
+        $box = Category::where('id', $request->id)->first();
+        if($box->active == 0)
+            Category::where('id', $request->id)->update(['active' => 1]);
+        else
+            Category::where('id', $request->id)->update(['active' => 0]);
+        return 1;
     }
 
 }

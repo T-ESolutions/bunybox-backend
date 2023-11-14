@@ -49,6 +49,7 @@
                             </th>
                             <th class="min-w-10px">{{__('lang.image')}}</th>
                             <th class="min-w-10px">{{__('lang.name')}}</th>
+                            <th class="min-w-10px">{{__('lang.status')}}</th>
                             <th class="min-w-10px">{{__('lang.type')}}</th>
                             <th class="min-w-10px">{{__('lang.price')}}</th>
                             <th class="min-w-10px">{{__('lang.money_out')}}</th>
@@ -160,6 +161,7 @@
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                     {data: 'image', name: 'image', "searchable": true, "orderable": true},
                     {data: 'title_ar', name: 'title_ar', "searchable": true, "orderable": true},
+                    {data: 'active', name: 'active', "searchable": true, "orderable": true},
                     {data: 'type', name: 'main_category_id', "searchable": false, "orderable": true},
                     {data: 'money_amount', name: 'money_amount', "searchable": true, "orderable": false},
                     {data: 'money_out', name: 'money_out', "searchable": true, "orderable": false},
@@ -179,6 +181,26 @@
         });
     </script>
 
+    <script>
+
+        $("#admins_table").find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).prop("checked", true);
+                    $(this).parents('tr').addClass("active");
+                } else {
+                    $(this).prop("checked", false);
+                    $(this).parents('tr').removeClass("active");
+                }
+            });
+        });
+
+        $("#admins_table").on('change', 'tbody tr .checkboxes', function () {
+            $(this).parents('tr').toggleClass("active");
+        });
+    </script>
 
 @endsection
 

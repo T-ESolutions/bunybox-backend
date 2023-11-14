@@ -17,6 +17,7 @@ class Gift extends Model
         "money_amount",
         "money_out",
         "money_remain",
+        'active'
     ];
 
 

@@ -33,9 +33,11 @@ class OrderController extends Controller
 
     public function create()
     {
+
         if(!$this->permission()) return "Not Authorized";
 
         return view('Admin.orders.create',compact('status'));
+
     }
 
     public function store(Request $request)
@@ -58,8 +60,8 @@ class OrderController extends Controller
         $row->title_en = $request->title_en;
         $row->type = $request->type;
         $row->save();
-            session()->flash('success', 'تم الإضافة بنجاح');
-        return redirect()->route('admin.orders',[$request->status]);
+        session()->flash('success', 'تم الإضافة بنجاح');
+        return redirect()->route('admin.orders', [$request->status]);
     }
 
     public function edit($id)
@@ -68,7 +70,7 @@ class OrderController extends Controller
 
         $order = Order::findOrFail($id);
 
-        if (!$order){
+        if (!$order) {
             session()->flash('error', 'الحقل غير موجود');
             return redirect()->back();
         }
@@ -86,7 +88,7 @@ class OrderController extends Controller
             return response()->json(['message' => 'Failed']);
         }
 
-        $row = Order::where('id',$request->row_id)->first();
+        $row = Order::where('id', $request->row_id)->first();
 //        if (!empty($city->getOriginal('image'))){
 //            unlinkFile($city->getOriginal('image'), 'cities');
 //        }
@@ -94,12 +96,13 @@ class OrderController extends Controller
         session()->flash('success', 'تم الحذف بنجاح');
         return response()->json(['message' => 'Success']);
     }
+
     public function deleteMulti(Request $request)
     {
         $ids_array = explode(',', $request->ids);
         foreach ($ids_array as $id) {
-            $delete =$this->destroy($id);
-            if (!$delete){
+            $delete = $this->destroy($id);
+            if (!$delete) {
                 session()->flash('success', 'حدث خطأ ما');
                 return redirect()->back();
             }
@@ -107,9 +110,10 @@ class OrderController extends Controller
         session()->flash('success', 'تم الحذف بنجاح');
         return redirect()->back();
     }
+
     public function destroy($id)
     {
-        $row = Order::where('id',$id)->first();
+        $row = Order::where('id', $id)->first();
 //        if (!empty($city->getOriginal('image'))){
 //            unlinkFile($city->getOriginal('image'), 'cities');
 //        }
@@ -126,7 +130,7 @@ class OrderController extends Controller
         if(!$this->permission()) return "Not Authorized";
 
         $auth = Auth::guard('admin')->user();
-        $model = Order::query()->orderBy('id','desc');
+        $model = Order::query()->orderBy('id', 'desc');
 
         return DataTables::eloquent($model)
             ->addIndexColumn()
@@ -137,17 +141,17 @@ class OrderController extends Controller
                                 </div>';
                 return $checkbox;
             })
-            ->addColumn('user_name',function ($row){
+            ->addColumn('user_name', function ($row) {
                 $user_name = $row->user->name;
                 $main_category_name = $row->mainCategory ? $row->mainCategory->title_ar : "";
-                return '<a href="'.route('users.edit',[$row->user_id]).'" target="_blank" class="" title="العميل">
-                            '.$user_name.'
+                return '<a href="' . route('users.edit', [$row->user_id]) . '" target="_blank" class="" title="العميل">
+                            ' . $user_name . '
                         </a><br>
                         <b  class="badge badge-secondary">
-                            '.$main_category_name.'
+                            ' . $main_category_name . '
                         </b>';
             })
-            ->addColumn('box',function ($row){
+            ->addColumn('box', function ($row) {
                 $box = $row->box->title_ar;
 
                 if ($row->is_offer == 1)
@@ -155,17 +159,17 @@ class OrderController extends Controller
                 else
                     $offer = '';
 
-                return '<a href="'.route('boxes.edit',[$row->box_id]).'" target="_blank" class="" title="الصندوق">
-                            '.$box.'
-                        </a>'.$offer;
+                return '<a href="' . route('boxes.edit', [$row->box_id]) . '" target="_blank" class="" title="الصندوق">
+                            ' . $box . '
+                        </a>' . $offer;
             })
-            ->editColumn('created_at',function ($row){
+            ->editColumn('created_at', function ($row) {
                 return Carbon::parse($row->created_at)->format("Y-m-d (H:i) A");
             })
-            ->editColumn('delivered_at',function ($row){
+            ->editColumn('delivered_at', function ($row) {
                 return Carbon::parse($row->created_at)->format("Y-m-d (H:i) A");
             })
-            ->editColumn('status',function ($row){
+            ->editColumn('status', function ($row) {
                 if ($row->status == 'ordered')
                     return '<b class="badge badge-info">' . $row->status . '</b>';
                 elseif ($row->status == 'shipped')
@@ -175,7 +179,7 @@ class OrderController extends Controller
                 else
                     return '-';
             })
-            ->editColumn('payment_status',function ($row){
+            ->editColumn('payment_status', function ($row) {
                 if ($row->payment_status == 'unpaid')
                     return '<b class="badge badge-dark">' . $row->payment_status . '</b>';
                 elseif ($row->payment_status == 'paid')
@@ -191,10 +195,10 @@ class OrderController extends Controller
             ->addColumn('actions', function ($row) {
                 $buttons = '';
 //                if ($auth->can('sliders.update')) {
-                    $buttons .= '<a href="'.route('orders.edit',[$row->id]).'" class="btn btn-success btn-circle btn-sm m-1" title="'.__('lang.show_details').'" target="_blank">
+                $buttons .= '<a href="' . route('orders.edit', [$row->id]) . '" class="btn btn-success btn-circle btn-sm m-1" title="' . __('lang.show_details') . '" target="_blank">
                             <i class="fa fa-eye"></i>
                         </a>';
-                    $buttons .= '<a href="#" data-id="'.$row->id.'" data-status="'.$row->status.'" data-status="'.$row->status.'" title="'.__('lang.change_status').'" class="btn btn-sm btn-primary changeStatus" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button"><i class="fa fa-edit"></i></a>';
+                $buttons .= '<a href="#" data-id="' . $row->id . '" data-status="' . $row->status . '" data-status="' . $row->status . '" title="' . __('lang.change_status') . '" class="btn btn-sm btn-primary changeStatus" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button"><i class="fa fa-edit"></i></a>';
 //                }
 //                if ($auth->can('sliders.delete')) {
 //                    $buttons .= '<a class="btn btn-danger btn-sm delete btn-circle m-1" data-id="'.$row->id.'"  title="حذف">
@@ -203,20 +207,20 @@ class OrderController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions','checkbox','box',
-                'user_name','status','payment_status',
-                'created_at','order_id'])
+            ->rawColumns(['actions', 'checkbox', 'box',
+                'user_name', 'status', 'payment_status',
+                'created_at', 'order_id'])
             ->make();
 
     }
 
-    public function orderDetails(Request $request,$order_id)
+    public function orderDetails(Request $request, $order_id)
     {
         if(!$this->permission()) return "Not Authorized";
 
         $auth = Auth::guard('admin')->user();
         $model = OrderItem::query()
-            ->where('order_id',$order_id);
+            ->where('order_id', $order_id);
 
         return DataTables::eloquent($model)
             ->addIndexColumn()
@@ -227,19 +231,19 @@ class OrderController extends Controller
                                 </div>';
                 return $checkbox;
             })
-            ->addColumn('product',function ($row){
+            ->addColumn('product', function ($row) {
                 $box = $row->product->title_ar;
-                return '<a href="'.route('products.edit',[$row->product_id]).'" target="_blank" class="" title="الصندوق">
-                            '.$box.'
+                return '<a href="' . route('products.edit', [$row->product_id]) . '" target="_blank" class="" title="الصندوق">
+                            ' . $box . '
                         </a>';
             })
-            ->addColumn('category',function ($row){
+            ->addColumn('category', function ($row) {
                 $box = $row->category->title_ar;
-                return '<a href="'.route('categories.edit',[$row->category_id]).'" target="_blank" class="" title="الصندوق">
-                            '.$box.'
+                return '<a href="' . route('categories.edit', [$row->category_id]) . '" target="_blank" class="" title="الصندوق">
+                            ' . $box . '
                         </a>';
             })
-            ->editColumn('type',function ($row){
+            ->editColumn('type', function ($row) {
                 if ($row->type == 'basic')
                     return '<b class="badge badge-info">' . $row->type . '</b>';
                 elseif ($row->type == 'selected')
@@ -249,10 +253,10 @@ class OrderController extends Controller
                 else
                     return '-';
             })
-            ->addColumn('actions', function ($row) use ($auth){
+            ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
 //                if ($auth->can('sliders.update')) {
-                $buttons .= '<a href="#" data-id="'.$row->id.'" data-status="'.$row->status.'" class="btn btn-sm btn-primary changeStatus" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" title="تغيير الحالة" id="kt_toolbar_primary_button"><i class="fa fa-edit"></i></a>';
+                $buttons .= '<a href="#" data-id="' . $row->id . '" data-status="' . $row->status . '" class="btn btn-sm btn-primary changeStatus" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" title="تغيير الحالة" id="kt_toolbar_primary_button"><i class="fa fa-edit"></i></a>';
 
 //                $buttons .= '<a href="'.route('admin.orders.edit',[$row->id]).'" class="btn btn-success btn-circle btn-sm m-1" title="عرض التفاصيل" target="_blank">
 //                            <i class="fa fa-eye"></i>
@@ -265,7 +269,7 @@ class OrderController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions','checkbox','product','category','type'])
+            ->rawColumns(['actions', 'checkbox', 'product', 'category', 'type'])
             ->make();
     }
 

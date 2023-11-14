@@ -27,6 +27,7 @@ class Product extends Model
         "max_weight",
         "min_height",
         "max_height",
+        'active'
     ];
 
     protected $appends = ['title', 'desc'];

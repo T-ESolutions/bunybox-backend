@@ -11,6 +11,7 @@ use App\Http\Requests\Api\User\UserRequest;
 use App\Http\Requests\Api\User\VerifyPhoneRequest;
 use App\Http\Requests\Api\User\ResendVerifyPhoneRequest;
 use App\Http\Resources\Api\User\UserResource;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -139,7 +140,7 @@ class AuthController extends Controller
                     if (isset($data['fcm_token'])) {
                         Auth::guard('user')->user()->update(['fcm_token' => $data['fcm_token']]);
                     }
-                    return msgdata(true, trans('lang.phone_verified_s'), $result,success());
+                    return msgdata(true, trans('lang.phone_verified_s'), $result, success());
                 } else {
                     return msg(false, trans('lang.client_not_found'), failed());
                 }
@@ -197,7 +198,7 @@ class AuthController extends Controller
 //        }
         User::where('id', \auth('user')->user()->id)->update($data);
         $result['user_data'] = User::where('id', \auth('user')->user()->id)->first();;
-        return msgdata(true, trans('lang.data_updated_s'), $result,success());
+        return msgdata(true, trans('lang.data_updated_s'), $result, success());
     }
 
     public function profileUpdateSizes(ProfileUpdateSizesRequest $request)
@@ -205,7 +206,7 @@ class AuthController extends Controller
         $data = $request->validated();
         User::where('id', \auth('user')->user()->id)->update($data);
         $result['user_data'] = User::where('id', \auth('user')->user()->id)->first();;
-        return msgdata(true, trans('lang.data_updated_s'), $result,success());
+        return msgdata(true, trans('lang.data_updated_s'), $result, success());
     }
 
 
@@ -315,6 +316,16 @@ class AuthController extends Controller
     {
         auth('user')->logout();
         return msg(true, trans('lang.logout_s'), success());
+    }
+
+    public function deleteAccount(Request $request)
+    {
+        $exists_order = Order::whereIn('status', ['ordered', 'shipped'])->first();
+        if ($exists_order) {
+            return msg(false, trans('lang.this_account_has_order_not_completed'), failed());
+        }
+        User::whereId(auth('user')->user()->id)->forceDelete();
+        return msg(true, trans('lang.account_deleted_s'), success());
     }
 }
 

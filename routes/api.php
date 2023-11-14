@@ -55,6 +55,8 @@ Route::prefix('client')->group(function () {
 
     });
     Route::group(['middleware' => ['user']], function () {
+        Route::get('/delete-account', [AuthController::class, 'deleteAccount']);
+
         Route::prefix('auth')->group(function () {
 //            Route::post('/change-password', [AuthController::class, 'changePassword'])->name('client.change.password');
             Route::get('/logout', [AuthController::class, 'logout'])->name('client.logout');

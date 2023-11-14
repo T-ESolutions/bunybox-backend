@@ -41,6 +41,8 @@ class GiftController extends Controller
         $model = Gift::query();
         return DataTables::eloquent($model)
             ->addIndexColumn()
+            ->addColumn('active', 'Admin.gifts.active_btn')
+
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
                 $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -100,7 +102,7 @@ class GiftController extends Controller
                 return $buttons;
             })
             ->
-            rawColumns(['actions', 'checkbox', 'image', 'type','boxes','main_cats'])
+            rawColumns(['actions','active', 'checkbox', 'image', 'type','boxes','main_cats'])
             ->make();
 
     }
@@ -241,5 +243,15 @@ class GiftController extends Controller
             return response()->json(['message' => 'Failed']);
         }
         return response()->json(['message' => 'Success']);
+    }
+
+    public function changeActive(Request $request)
+    {
+        $box = Gift::where('id', $request->id)->first();
+        if($box->active == 0)
+            Gift::where('id', $request->id)->update(['active' => 1]);
+        else
+            Gift::where('id', $request->id)->update(['active' => 0]);
+        return 1;
     }
 }

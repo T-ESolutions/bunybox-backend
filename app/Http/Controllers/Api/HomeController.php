@@ -48,6 +48,7 @@ class HomeController extends Controller
         $slider_image = Setting::where('key', 'slider_image')->first();
         $data['slider'] = $slider_image->image;
         $data['main_categories'] = MainCategoryResource::collection(MainCategory::orderBy('id', 'asc')->get());
+        $data['check_token'] = auth('user')->check() ? true : false;
         return msgdata(true, trans('lang.data_display_success'), $data, success());
     }
 
