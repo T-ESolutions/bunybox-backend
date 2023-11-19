@@ -37,6 +37,7 @@ class UserRequest extends FormRequest
             'height' => 'nullable|numeric',
             'age' => 'nullable|numeric',
             'shoes_size' => 'nullable|numeric',
+            'is_active' => 'required|in:0,1',
 
             'size' => ['nullable', 'in:S,L,XL,Free Size'],
         ];

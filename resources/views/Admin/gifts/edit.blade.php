@@ -185,7 +185,7 @@
                                             <!--end::Input group-->
 
                                             <!--begin::Input group-->
-                                            <div class="mb-5 fv-row">
+                                            <div class="mb-5 fv-row" @if($row->type =='money') style="display: none" @endif>
                                                 <!--begin::Label-->
                                                 <label class="required form-label">
                                                     {{__('lang.main_categories')}}
@@ -204,6 +204,23 @@
                                             </div>
                                             <!--end::Input group-->
 
+{{--                                        @if($row->type =='money')--}}
+                                            <div class="mb-5 fv-row  "  @if($row->type !='money') style="display: none" @endif id="Gift-Num-Of-Gifts" >
+                                                <!--begin::Label-->
+                                                <label class="required form-label">{{__('lang.num_of_gifts')}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="number" name="num_of_gifts"
+                                                       class="form-control mb-2"
+                                                       placeholder="{{__('lang.num_of_gifts')}} "
+                                                       value="{{\App\Models\GiftMoneyDetail::where('gift_id',$row->id)->count()}}"
+                                                />
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row" id="Gift-Box"  @if($row->type =='money') style="display: none" @endif>
                                                 <!--begin::Label-->

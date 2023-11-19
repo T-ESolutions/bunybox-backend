@@ -2,12 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     use HasFactory;
+
+    protected static function booted()
+    {
+        if (request()->segment(1) == "api") {
+
+
+            static::addGlobalScope('active', function (Builder $builder) {
+                $builder->where('active', 1);
+            });
+        }
+    }
 
     protected $fillable = [
         "title_ar",
@@ -64,7 +76,7 @@ class Product extends Model
             $img_name = 'category_' . time() . random_int(0000, 9999) . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('/uploads/product/'), $img_name);
             $this->attributes['image'] = $img_name;
-        }else{
+        } else {
             $this->attributes['image'] = $image;
         }
     }

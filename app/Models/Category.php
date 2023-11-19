@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,16 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected static function booted()
+    {
+        if (request()->segment(1) == "api") {
+
+
+            static::addGlobalScope('active', function (Builder $builder) {
+                $builder->where('active', 1);
+            });
+        }
+    }
 
     protected $fillable = [
         'title_ar',

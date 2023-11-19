@@ -16,7 +16,8 @@ class AdminsController extends Controller
     protected $viewPath = 'Admin.admins';
     private $route = 'admins';
 
-    public function permission(){
+    public function permission()
+    {
         return auth()->guard('admin')->user()->can('Admins');
     }
 
@@ -27,7 +28,7 @@ class AdminsController extends Controller
 
     public function index()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         return view($this->viewPath . '.index');
     }
@@ -35,7 +36,7 @@ class AdminsController extends Controller
 
     public function datatable(Request $request)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $data = $this->objectName::orderBy('id', 'desc');
         return DataTables::of($data)
@@ -60,7 +61,7 @@ class AdminsController extends Controller
     public function table_buttons()
     {
         $permissions = Permission::get();
-        return view($this->viewPath . '.button',compact('permissions'));
+        return view($this->viewPath . '.button', compact('permissions'));
     }
 
     /**
@@ -82,7 +83,7 @@ class AdminsController extends Controller
 
     public function store(AdminRequest $request)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $data = $request->validated();
 
@@ -113,11 +114,11 @@ class AdminsController extends Controller
      */
     public function edit($id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $permissions = Permission::get();
         $data = $this->objectName::findOrFail($id);
-        return view($this->viewPath . '.edit', compact('data','permissions'));
+        return view($this->viewPath . '.edit', compact('data', 'permissions'));
     }
 
     /**
@@ -129,7 +130,7 @@ class AdminsController extends Controller
      */
     public function update(AdminRequest $request)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $edit = $this->objectName::find($request->id);
 
@@ -152,10 +153,6 @@ class AdminsController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $results = $this->objectName::whereIn('id', $request->id)->get();
-            foreach ($results as $key => $result) {
-                delLog($result, 1, $this->route, $result->name);
-            }
 
             $this->objectName::whereIn('id', $request->id)->delete();
         } catch (\Exception $e) {
@@ -177,12 +174,12 @@ class AdminsController extends Controller
         return view('Admin.admins.Profile', compact('data'));
     }
 
-    public function UpdateProfile(AdminRequest $request){
+    public function UpdateProfile(AdminRequest $request)
+    {
 
         $data = $request->validated();
         $result = Admin::whereId(Auth::guard('admin')->id())->first();
         $result->update($data);
-
 
 
         return back()->with('message', trans('lang.updated_s'));

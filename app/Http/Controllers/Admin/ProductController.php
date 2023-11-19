@@ -15,14 +15,15 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
-    public function permission(){
+    public function permission()
+    {
         return auth()->guard('admin')->user()->can('products');
     }
 
     //for products
     public function index()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $results = Product::latest()->paginate(config('default_pagination'));
         return view('Admin.products.index', compact('results'));
@@ -30,7 +31,7 @@ class ProductController extends Controller
 
     public function getData()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $auth = Auth::guard('admin')->user();
         $model = Product::query();
@@ -38,7 +39,6 @@ class ProductController extends Controller
         return DataTables::eloquent($model)
             ->addIndexColumn()
             ->addColumn('active', 'Admin.products.active_btn')
-
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
                 $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -51,7 +51,7 @@ class ProductController extends Controller
             })
             ->editColumn('category_id', function ($row) {
                 if ($row->category) {
-                    $category  = $row->category->title_ar;
+                    $category = $row->category->title_ar;
                     return "<b class='badge badge-success'>$category</b>";
                 } else {
                     return "-";
@@ -65,7 +65,7 @@ class ProductController extends Controller
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
 //                if ($auth->can('sliders.update')) {
-                $buttons .= '<a href="' . route('products.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="'.trans('lang.edit').'">
+                $buttons .= '<a href="' . route('products.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
                             <i class="fa fa-edit"></i>
                         </a>';
 //                }
@@ -76,7 +76,7 @@ class ProductController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions','active', 'image','category_id','checkbox'])
+            ->rawColumns(['actions', 'active', 'image', 'category_id', 'checkbox'])
             ->make();
 
     }
@@ -88,15 +88,15 @@ class ProductController extends Controller
 
     public function create()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $categories = Category::get();
-        return view('Admin.products.create',compact('categories'));
+        return view('Admin.products.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $request->validate([
             'category_id' => 'required|exists:products,id',
@@ -107,14 +107,14 @@ class ProductController extends Controller
             'quantity' => 'required|numeric',
             'buy_price' => 'required|numeric',
             'sel_price' => 'required|numeric',
-            'shoes_size' => '|numeric',
-            'size' => '|numeric',
-            'min_age' => '|numeric',
-            'max_age' => '|numeric',
-            'min_weight' => '|numeric',
-            'max_weight' => '|numeric',
-            'min_height' => '|numeric',
-            'max_height' => '|numeric',
+            'shoes_size' => 'nullable|numeric',
+            'size' => 'nullable|numeric',
+            'min_age' => 'nullable|numeric',
+            'max_age' => 'nullable|numeric',
+            'min_weight' => 'nullable|numeric',
+            'max_weight' => 'nullable|numeric',
+            'min_height' => 'nullable|numeric',
+            'max_height' => 'nullable|numeric',
             'image' => 'required|',
         ]);
 
@@ -142,16 +142,16 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $categories = Category::get();
         $row = Product::findOrFail($id);
-        return view('Admin.products.edit', compact('row','categories'));
+        return view('Admin.products.edit', compact('row', 'categories'));
     }
 
     public function update(Request $request, $id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $row = Product::findOrFail($id);
 
@@ -164,14 +164,14 @@ class ProductController extends Controller
             'quantity' => 'required|numeric',
             'buy_price' => 'required|numeric',
             'sel_price' => 'required|numeric',
-            'shoes_size' => '|numeric',
-            'size' => '|numeric',
-            'min_age' => '|numeric',
-            'max_age' => '|numeric',
-            'min_weight' => '|numeric',
-            'max_weight' => '|numeric',
-            'min_height' => '|numeric',
-            'max_height' => '|numeric',
+            'shoes_size' => 'nullable|numeric',
+            'size' => 'nullable|numeric',
+            'min_age' => 'nullable|numeric',
+            'max_age' => 'nullable|numeric',
+            'min_weight' => 'nullable|numeric',
+            'max_weight' => 'nullable|numeric',
+            'min_height' => 'nullable|numeric',
+            'max_height' => 'nullable|numeric',
             'image' => 'required|',
         ]);
 
@@ -191,7 +191,10 @@ class ProductController extends Controller
         $row->max_weight = $request->max_weight;
         $row->min_height = $request->min_height;
         $row->max_height = $request->max_height;
-        $row->image = $request->image;
+        if ($request->image != null) {
+            $row->image = $request->image;
+        }
+
         $row->save();
         return redirect()->back()->with('message', trans('lang.updated_s'));
     }
@@ -215,7 +218,7 @@ class ProductController extends Controller
     public function changeActive(Request $request)
     {
         $box = Product::where('id', $request->id)->first();
-        if($box->active == 0)
+        if ($box->active == 0)
             Product::where('id', $request->id)->update(['active' => 1]);
         else
             Product::where('id', $request->id)->update(['active' => 0]);

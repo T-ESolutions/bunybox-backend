@@ -49,7 +49,7 @@
                             <th class="min-w-10px">{{__('lang.image')}}</th>
                             <th class="min-w-10px">{{__('lang.name')}}</th>
                             <th class="min-w-10px">{{__('lang.status')}}</th>
-                            <th class="min-w-10px">{{__('lang.main_category')}}</th>
+{{--                            <th class="min-w-10px">{{__('lang.main_category')}}</th>--}}
 {{--                            <th class="min-w-10px">{{__('lang.price')}}</th>--}}
                             <th class="min-w-10px">{{__('lang.offer_price')}}</th>
                             <th class="min-w-10px">{{__('lang.offer_end_time')}}</th>

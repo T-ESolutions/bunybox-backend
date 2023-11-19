@@ -121,56 +121,31 @@
     <!--end::Input-->
 </div>
 
-{{--<div class="fv-row mb-7">--}}
-{{--    <!--begin::Label-->--}}
-{{--    <label class="fw-bold fs-6 mb-2">{{__('lang.password')}}</label>--}}
-{{--    <!--end::Label-->--}}
-{{--    <!--begin::Input-->--}}
-{{--    <input type="password" minlength="8"--}}
-{{--           @if(request()->segment(2) != 'edit' && request()->segment(1) != 'Setting') required--}}
-{{--           @endif name="password"--}}
-{{--           value="" AUTOCOMPLETE="off"--}}
-{{--           class="form-control @error('password') is-invalid @enderror "--}}
-{{--           placeholder=""--}}
-{{--           id="psw"--}}
-{{--    >--}}
-{{--    <input type="password" name="password"--}}
-{{--           class="form-control form-control-solid mb-3 mb-lg-0"--}}
-{{--           placeholder="" value="{{old('password')}}"/>--}}
 
-{{--<!--end::Input-->--}}
-{{--    <div class="row">--}}
-{{--        <div class="col-md-12">--}}
-{{--            <div id="message">--}}
-{{--                <p id="letter" class="invalid">{{__('lang.letter')}}</p>--}}
-{{--                <p id="capital" class="invalid">{{__('lang.capital')}}</p>--}}
-{{--                <p id="number" class="invalid">{{__('lang.number')}}</p>--}}
-{{--                <p id="symbol" class="invalid">{{__('lang.symbol')}}</p>--}}
-{{--                <p id="length" class="invalid">{{__('lang.length')}}</p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+<div class="fv-row mb-7">
+    <!--begin::Label-->
+    <label class=" fw-bold fs-6 mb-2">{{__('lang.active')}}</label>
+    <!--end::Label-->
+    <div
+        class="form-check form-switch form-check-custom form-check-solid">
 
-{{--</div>--}}
-{{--<div class="fv-row mb-7">--}}
-{{--    <div--}}
-{{--        class="form-check form-switch form-check-custom form-check-solid">--}}
-{{--        <label class="form-check-label" for="flexSwitchDefault">{{__('lang.active')}}</label>--}}
-{{--        <input class="form-check-input" name="status" type="hidden"--}}
-{{--               value="inactive" id="flexSwitchDefault"/>--}}
-{{--        <input class="form-check-input form-control form-control-solid mb-3 mb-lg-0"--}}
-{{--               name="status" type="checkbox"--}}
-{{--               value="active" @if(isset($data)) @if($data->status == 'active') checked--}}
-{{--               @endif @endif id="flexSwitchDefault"/>--}}
-{{--    </div>--}}
-{{--</div>--}}
+        <input class="form-check-input" name="is_active" type="hidden"
+               value="0" id="flexSwitchDefault"/>
+        <input
+            class="form-check-input form-control form-control-solid mb-3 mb-lg-0"
+            value="1" name="is_active" type="checkbox" @if(request()->segment(2)=="edit") @if($data->is_active == 1) checked @endif @endif
+            id="flexSwitchDefault"/>
+    </div>
+
+</div>
+
 
 
 <div class="form-group row">
     <label class=" col-xl-3 col-lg-3 col-form-label text-right">{{trans('lang.image')}}</label>
     <div class="col-lg-9 col-xl-12">
         <input accept="image/*" type="file"
-                name="image"
+               name="image"
                class="dropify"
                data-default-file="{{old('price',$data->image ?? '')}}"
                @if(request()->segment(2) == 'edit') data-show-remove="false" @endif >

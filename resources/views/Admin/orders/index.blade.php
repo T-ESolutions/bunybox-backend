@@ -47,7 +47,7 @@
                             {{--                                    </div>--}}
                             {{--                                </th>--}}
                             <th class=" min-w-1px">#</th>
-                            <th class=" min-w-1px">{{__('lang.orders')}}</th>
+                            <th class=" min-w-1px">{{__('lang.order_num')}}</th>
                             <th class=" min-w-1px">{{__('lang.status')}}</th>
                             <th class=" min-w-1px">{{__('lang.payment_status')}}</th>
                             <th class=" min-w-1px">{{__('lang.payment_method')}}</th>

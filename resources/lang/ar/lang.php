@@ -1035,4 +1035,14 @@ return [
     'sell_price' => 'سعر البيع',
     'num_of_gifts' => 'عدد الهدايا ',
     'invalid_products' => 'المنتجات غير صحيحه , برجاء المحاوله مره ثانيه ',
+
+    'sel_price' => 'سعر البيع',
+    'shoes_size' => 'مقاس الجزمه',
+    'size' => 'المقاس',
+    'min_age' => 'اقل عمر',
+    'max_age' => 'اقصى عمر',
+    'min_weight' => 'اقل وزن',
+    'max_weight' => 'اقصى وزن',
+    'min_height' => 'اقل طول',
+    'max_height' => 'اقصى طول',
 ];

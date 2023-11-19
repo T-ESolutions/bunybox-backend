@@ -1043,6 +1043,18 @@ return [
     'sell_price' => 'sell price',
     'num_of_gifts' => 'numbers of gifts ',
     'invalid_products' => 'invalid products , please try again ',
+    'sel_price' => 'sell price',
+    'shoes_size' => 'shoes size',
+    'size' => 'size',
+    'min_age' => 'min age',
+    'max_age' => 'max age',
+    'min_weight' => 'min weight',
+    'max_weight' => 'max weight',
+    'min_height' => 'min height',
+    'max_height' => 'max height',
+    'weight' => 'weight ',
+    'height' => 'height ',
+    'age' => 'age ',
 
 
 ];

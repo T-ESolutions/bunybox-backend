@@ -2,7 +2,7 @@
 @php
     $route = 'users';
 @endphp
-@section('title',__('lang.admins'))
+@section('title',__('lang.users'))
 @section('header')
     <!--begin::Heading-->
     <h1 class="text-dark fw-bolder my-0 fs-2">{{trans('lang.'.$route)}} </h1>

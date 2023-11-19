@@ -19,14 +19,15 @@ use Yajra\DataTables\Facades\DataTables;
 
 class OfferController extends Controller
 {
-    public function permission(){
+    public function permission()
+    {
         return auth()->guard('admin')->user()->can('offers');
     }
 
     //for products
     public function index()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $results = Box::latest()->paginate(config('default_pagination'));
         return view('Admin.offers.index', compact('results'));
@@ -34,15 +35,14 @@ class OfferController extends Controller
 
     public function getData()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $auth = Auth::guard('admin')->user();
-        $model = Box::query()->orderBy('id','desc');
-        $model->where('is_offer',1);
+        $model = Box::query()->orderBy('id', 'desc');
+        $model->where('is_offer', 1);
         return DataTables::eloquent($model)
             ->addIndexColumn()
             ->addColumn('active', 'Admin.boxes.active_btn')
-
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
                 $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -53,14 +53,14 @@ class OfferController extends Controller
             ->editColumn('image', function ($row) {
                 return '<a class="symbol symbol-50px"><span class="symbol-label" style="background-image:url(' . $row->image . ');"></span></a>';
             })
-            ->editColumn('main_category_id', function ($row) {
-                if ($row->mainCategory) {
-                    $category  = $row->mainCategory->title_ar;
-                    return "<b class='badge badge-success'>$category</b>";
-                } else {
-                    return "-";
-                }
-            })
+//            ->editColumn('main_category_id', function ($row) {
+//                if ($row->mainCategory) {
+//                    $category  = $row->mainCategory->title_ar;
+//                    return "<b class='badge badge-success'>$category</b>";
+//                } else {
+//                    return "-";
+//                }
+//            })
 //            ->addColumn('select',function ($row){
 //                return '<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
 //                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="'.$row->id.'" />
@@ -69,7 +69,7 @@ class OfferController extends Controller
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
 //                if ($auth->can('sliders.update')) {
-                $buttons .= '<a href="' . route('offers.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="'.trans('lang.edit').'">
+                $buttons .= '<a href="' . route('offers.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
                             <i class="fa fa-edit"></i>
                         </a>';
 //                }
@@ -80,7 +80,7 @@ class OfferController extends Controller
 //                }
                 return $buttons;
             })
-            ->rawColumns(['actions','active','image','main_category_id','checkbox'])
+            ->rawColumns(['actions', 'active', 'image', 'checkbox'])
             ->make();
 
     }
@@ -92,7 +92,7 @@ class OfferController extends Controller
 
     public function create()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
 //        $main_categories = MainCategory::get();
 //        $categories = Category::get();
@@ -102,7 +102,7 @@ class OfferController extends Controller
 
     public function store(Request $request)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $request->validate([
 //            'main_category_id' => 'required|exists:main_categories,id',
@@ -134,7 +134,7 @@ class OfferController extends Controller
         $row->offer_end_time = $request->offer_end_time;
         $row->image = $request->image;
         $row->save();
-        foreach ($request->product_id as $product_id){
+        foreach ($request->product_id as $product_id) {
             BoxProduct::create([
                 'product_id' => $product_id,
                 'box_id' => $row->id,
@@ -146,18 +146,18 @@ class OfferController extends Controller
 
     public function edit($id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $products = Product::orderBy('category_id')->get();
         $boxProducts = BoxProduct::whereBoxId($id)->pluck('product_id')->toArray();
 
         $row = Box::findOrFail($id);
-        return view('Admin.offers.edit', compact('row','products','boxProducts'));
+        return view('Admin.offers.edit', compact('row', 'products', 'boxProducts'));
     }
 
     public function update(Request $request, $id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $row = Box::findOrFail($id);
 
@@ -168,8 +168,8 @@ class OfferController extends Controller
             'desc_ar' => 'required|string',
             'desc_en' => 'required|string',
             'offer_price' => 'required|numeric',
-            'offer_end_time' => 'required|',
-            'image' => 'sometimes',
+            'offer_end_time' => 'required',
+            'image' => 'nullable|image',
             'product_id' => 'required|array',
         ]);
 
@@ -185,11 +185,13 @@ class OfferController extends Controller
         $row->is_offer = 1;
         $row->offer_price = $request->offer_price;
         $row->offer_end_time = $request->offer_end_time;
-        $row->image = $request->image;
+        if ($request->image) {
+            $row->image = $request->image;
+        }
         $row->save();
 //dd($request->product_id);
         BoxProduct::whereBoxId($id)->delete();
-        foreach ($request->product_id as $product_id){
+        foreach ($request->product_id as $product_id) {
             BoxProduct::create([
                 'product_id' => $product_id,
                 'box_id' => $row->id,
@@ -218,7 +220,7 @@ class OfferController extends Controller
     public function changeActive(Request $request)
     {
         $box = Box::where('id', $request->id)->first();
-        if($box->active == 0)
+        if ($box->active == 0)
             Box::where('id', $request->id)->update(['active' => 1]);
         else
             Box::where('id', $request->id)->update(['active' => 0]);
