@@ -320,7 +320,7 @@ request()->segment(1) == 'settings' )
             @if(auth()->guard('admin')->user()->hasPermissionTo('settings'))
             <div class="menu-item">
                 <a class="menu-link  @if(request()->routeIs('settings.*')) active @endif "
-                   href="{{route('settings.edit')}}">
+                   href="{{route('settings.index')}}">
                    <span class="menu-icon">
 																<!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
 																<span class="svg-icon svg-icon-2">

@@ -53,8 +53,13 @@
                         <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
                         <!--end::Input-->
 
-                        <p  class="link-primary fs-6 ">{{trans('lang.Remember me')}} <input type="checkbox"  style="margin-top: 6px" name="remember_me">  </p>
-
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="form-check form-check-custom form-check-solid">
+                            <input class="form-check-input" type="checkbox" value="1" name="remember_me"/>
+                            <span
+                                class="form-check-label fw-bolder fs-sm-6 fs-8 mx-2">{{trans('lang.Remember me')}}</span>
+                        </label>
                     </div>
                     <!--end::Input group-->
                     <!--begin::Actions-->

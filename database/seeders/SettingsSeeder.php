@@ -15,17 +15,14 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         $data = [
-            'site_name_ar' => 'ليما',
-            'site_name_en' => 'lima',
+            'site_name_ar' => 'بني بوكس',
+            'site_name_en' => 'Bunny Box',
             'phone' => '8484858845855',
             'email' => 'info@lima.com',
-            'logo' => 'uploads/setting/web_logo.png',
-            'login_pg' => 'uploads/setting/login_pg.png',
-            'logo_login' => 'uploads/setting/login_page_logo.png',
             'location' => "null",
             'address_ar' => 'المنوفية',
             'address_en' => 'al mnofia',
-            'app_gif' => "null",
+//            'app_gif' => "null",
             'android_version' => 1,
             'ios_version' => 1,
             'facebook' => 'https://www.facebook.com/',
@@ -42,6 +39,9 @@ class SettingsSeeder extends Seeder
 
         Setting::setMany($data);
 
+        Setting::create(['key'=>'fav_icon','value'=>'image','image'=>'fav_icon.png']);
+        Setting::create(['key'=>'logo','value'=>'image','image'=>'web_logo.png']);
+        Setting::create(['key'=>'logo_login','value'=>'image','image'=>'login_page_logo.png']);
         Setting::create(['key'=>'slider_image','value'=>'image','image'=>'slider_image.png']);
         Setting::create(['key'=>'gift_money_image','value'=>'image','image'=>'gift_money_image.png']);
     }

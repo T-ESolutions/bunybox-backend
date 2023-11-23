@@ -3,6 +3,27 @@
 return [
     'this_account_has_order_not_completed' => 'هذا الحساب لديه طلب لم يكتمل بعد , يرجى الانتهاء من طلباتك أولا',
 
+    'site_name_ar' => 'اسم الموقع باللغه العربية',
+    'site_name_en' => 'اسم الموقع باللغه الانجليزية',
+    'address_ar' => 'العنوان باللغه العربية',
+    'address_en' => 'العنوان باللغه الانجليزية',
+    'android_version' => 'اصدار الاندرويد',
+    'ios_version' => 'اصدار ال IOS',
+    'in_riyadh_shipping_cost' => 'تكلفه التوصيل داخل الرياض',
+    'out_riyadh_shipping_cost' => 'تكلفه التوصيل خارج الرياض',
+    'money_gifts' => 'نسبة عدد الهدايا الاموال',
+    'product_gifts' => 'نسبة عدد الهدايا المنتجات',
+
+    'instagram' => 'انستجرام',
+    'youtube' => 'يوتيوب',
+    'facebook' => 'فيسبوك',
+    'web_icon' => 'ايقونه الموقع',
+
+    'logo_login' => 'صوره شعار صفحة تسجيل الدخول',
+
+    'slider_image' => 'صوره السليدر',
+    'gift_money_image' => 'صوره الهدية الاموال',
+
     'account_deleted_s' => 'تم حذف حسابك بنجاح',
     'ar' => 'عربي',
     'en' => 'انجليزي',
@@ -603,7 +624,7 @@ return [
     'activelocation' => ' تفعيل العنوان  في  العقار ',
     'location' => 'الموقع',
     'Private' => '( خاص بالادارة)',
-    'key' => 'المفتاح',
+    'key' => 'العنصر',
     'ReceiptType' => 'انواع السندات',
     'south' => 'جنوب',
     'west' => 'غرب',
@@ -944,7 +965,7 @@ return [
     'clients' => 'العملاء',
     'Host' => 'المضيف',
     'Basic Data' => 'البيانات الأساسية',
-    'Location' => 'الموقع',
+    'Location' => 'الموقع على الخريطة',
     'Media' => 'المديا',
     'Information' => 'المعلومات ',
     'Custom Fields' => 'الحقول المخصصة',

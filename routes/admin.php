@@ -49,8 +49,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard.index');
 
     Route::group(['prefix' => 'settings', 'as' => 'settings'], function () {
-        Route::get('/edit', [SettingController::class, 'index'])->name('.edit');
-        Route::post('/update', [SettingController::class, 'update'])->name('.update');
+        Route::get('/', [SettingController::class, 'index'])->name('.index');
+        Route::get('/datatable', [SettingController::class, 'datatable'])->name('.datatable');
+        Route::get('/edit/{id}', [SettingController::class, 'edit'])->name('.edit');
+        Route::post('/update/{id}', [SettingController::class, 'update'])->name('.update');
     });
 
     Route::group(['prefix' => 'admins', 'as' => 'admins'], function () {

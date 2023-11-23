@@ -14,7 +14,7 @@ License: For each use you must have a valid license purchased only from above li
 <!--begin::Head-->
 <head>
     <base href="../">
-    <title> Bunny Box  || @yield('title')
+    <title>  @yield('title') || Bunny Box
     </title>
     <meta charset="utf-8"/>
     <meta name="description"
@@ -149,19 +149,20 @@ License: For each use you must have a valid license purchased only from above li
                          data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-offset="0px">
                         <!--begin::Nav-->
                         <ul class="nav flex-column">
-                            @if(auth()->guard('admin')->user()->hasPermissionTo('Dashboard'))
+                        @if(auth()->guard('admin')->user()->hasPermissionTo('Dashboard'))
                             <!--begin::Nav item-->
-                            <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                data-bs-placement="right" data-bs-dismiss="click" title="{{trans('lang.Dashboard')}}">
-                                <!--begin::Nav link-->
-                                {{--                                @if(request()->segment(1) != 'ready' && request()->segment(1) != 'cars') active @endif--}}
-                                <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light   @if(request()->segment(1) == '' ) active @endif "
-                                   href="{{url('/')}}">
-                                    <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
-                                    <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Home\Home.svg--><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
+                                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                    data-bs-placement="right" data-bs-dismiss="click"
+                                    title="{{trans('lang.Dashboard')}}">
+                                    <!--begin::Nav link-->
+                                    {{--                                @if(request()->segment(1) != 'ready' && request()->segment(1) != 'cars') active @endif--}}
+                                    <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light   @if(request()->segment(1) == '' ) active @endif "
+                                       href="{{url('/')}}">
+                                        <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
+                                        <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Home\Home.svg--><svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                                viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24"/>
                                                     <path
@@ -169,15 +170,15 @@ License: For each use you must have a valid license purchased only from above li
                                                         fill="#000000"/>
                                                 </g>
                                             </svg>
-                                        <!--end::Svg Icon-->
+                                            <!--end::Svg Icon-->
                                     </span>
-                                    <!--end::Svg Icon-->
-                                </a>
-                                <!--end::Nav link-->
-                            </li>
-                            @endif
+                                        <!--end::Svg Icon-->
+                                    </a>
+                                    <!--end::Nav link-->
+                                </li>
+                        @endif
 
-                            <!--end::Nav item-->
+                        <!--end::Nav item-->
                             <!--begin::Nav item-->
                             <li class="nav-item mb-2 togge" data-bs-toggle="tooltip" data-bs-trigger="hover"
                                 data-bs-placement="right" data-bs-dismiss="click" title="{{trans('lang.users')}}">

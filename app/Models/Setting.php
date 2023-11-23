@@ -43,7 +43,7 @@ class Setting extends Model
     public function setImageAttribute($image)
     {
         if (is_file($image)) {
-            $img_name = 'category_' . time() . random_int(0000, 9999) . '.' . $image->getClientOriginalExtension();
+            $img_name = 'setting_' . time() . random_int(0000, 9999) . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('/uploads/setting/'), $img_name);
             $this->attributes['image'] = $img_name;
         }else{

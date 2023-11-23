@@ -3,6 +3,7 @@
 @php
     $route = 'settings';
 @endphp
+@section('title',trans('lang.settings'))
 
 @section('style')
     <style>
@@ -168,7 +169,7 @@
                             <div class="card-header">
                                 <!--begin::Card title-->
                                 <div class="card-title">
-                                    <h2>ايقونه الموقع</h2>
+                                    <h2>{{trans('lang.web_icon')}}</h2>
                                 </div>
                                 <!--end::Card title-->
                             </div>
