@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'remove_image' => 'حذف الصورة',
+    'cancel_image' => 'الغاء الصورة',
+    'choose_image' => 'إختر الصورة',
+    'slider_image_ar' => 'صوره السلايدر باللغة العربية',
+    'slider_image_en' => 'صوره السلايدر باللغة الانجليزية',
     'this_account_has_order_not_completed' => 'هذا الحساب لديه طلب لم يكتمل بعد , يرجى الانتهاء من طلباتك أولا',
 
     'site_name_ar' => 'اسم الموقع باللغه العربية',

@@ -75,8 +75,7 @@
                                         <div class="col-md-12">
 
                                             <!--begin::Thumbnail settings-->
-                                            <!--begin::Card body-->
-                                            <div class="card-body text-center pt-0">
+                                            <div class="text-center pt-0">
                                                 <!--begin::Image input-->
                                                 <div class="image-input image-input-empty image-input-outline mb-3"
                                                      data-kt-image-input="true"
@@ -88,7 +87,7 @@
                                                     <label
                                                         class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                         data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                        title="إختر الصورة">
+                                                        title="{{trans('lang.choose_image')}}">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
                                                         <input required type="file" name="image"
@@ -101,7 +100,7 @@
                                                     <span
                                                         class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                         data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                        title="إلغاء الصورة">
+                                                        title="{{trans('lang.cancel_image')}}">
 														<i class="bi bi-x fs-2"></i>
 													</span>
                                                     <!--end::Cancel-->
@@ -109,7 +108,7 @@
                                                     <span
                                                         class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                         data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                        title="حذف الصورة">
+                                                        title="{{trans('lang.remove_image')}}">
 														<i class="bi bi-x fs-2"></i>
 													</span>
                                                     <!--end::Remove-->
@@ -119,7 +118,6 @@
                                                 <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg</div>
                                                 <!--end::Description-->
                                             </div>
-                                            <!--end::Card body-->
                                             <!--end::Thumbnail settings-->
 
                                             <!--begin::Input group-->
@@ -130,9 +128,11 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="main_category_id" data-control="select2" data-hide-search="false">
+                                                <select class="form-control mb-2" name="main_category_id"
+                                                        data-control="select2" data-hide-search="false">
                                                     @foreach($main_categories as $main_category)
-                                                        <option value="{{$main_category->id}}" >{{$main_category->title_ar}}</option>
+                                                        <option
+                                                            value="{{$main_category->id}}">{{$main_category->title_ar}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -182,7 +182,7 @@
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
                                                 <label class="required form-label">{{__('lang.price')}}
-                                                     </label>
+                                                </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <input type="number" required name="price"
@@ -267,8 +267,6 @@
                                             <!--end::Description-->
                                             </div>
                                             <!--end::Input group-->
-
-                                            <hr>
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
@@ -277,9 +275,11 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="category_id[]" data-control="select2" data-hide-search="false" multiple>
+                                                <select class="form-control mb-2" name="category_id[]"
+                                                        data-control="select2" data-hide-search="false" multiple>
                                                     @foreach($categories as $category)
-                                                        <option value="{{$category->id}}" >{{$category->title_ar}}</option>
+                                                        <option
+                                                            value="{{$category->id}}">{{$category->title_ar}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -288,8 +288,107 @@
                                             <!--end::Description-->
                                             </div>
                                             <!--end::Input group-->
-                                            <hr>
 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!--begin::Thumbnail settings-->
+                                            <div class="text-center pt-0">
+                                                <!--begin::Image input-->
+                                                <div class="image-input image-input-empty image-input-outline mb-3"
+                                                     data-kt-image-input="true"
+                                                     style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                                                    <!--begin::Preview existing avatar-->
+                                                    <div class="image-input-wrapper w-150px h-150px"></div>
+                                                    <!--end::Preview existing avatar-->
+                                                    <!--begin::Label-->
+                                                    <label
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                        title="{{trans('lang.choose_image')}}">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="slider_image_ar"
+                                                               accept=".png, .jpg, .jpeg"/>
+                                                        <input type="hidden" name="avatar_remove"/>
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                        title="{{trans('lang.cancel_image')}}">
+														<i class="bi bi-x fs-2"></i>
+													</span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                        title="{{trans('lang.remove_image')}}">
+														<i class="bi bi-x fs-2"></i>
+													</span>
+                                                    <!--end::Remove-->
+                                                </div>
+                                                <!--end::Image input-->
+                                                <!--begin::Description-->
+                                                <div class="text-dark fs-7 form-label" style="font-weight: bolder;">
+                                                    {{trans('lang.slider_image_ar')}}
+                                                </div>
+                                                <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Thumbnail settings-->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!--begin::Thumbnail settings-->
+                                            <div class="text-center pt-0">
+                                                <!--begin::Image input-->
+                                                <div class="image-input image-input-empty image-input-outline mb-3"
+                                                     data-kt-image-input="true"
+                                                     style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                                                    <!--begin::Preview existing avatar-->
+                                                    <div class="image-input-wrapper w-150px h-150px"></div>
+                                                    <!--end::Preview existing avatar-->
+                                                    <!--begin::Label-->
+                                                    <label
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                        title="{{trans('lang.choose_image')}}">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="slider_image_en"
+                                                               accept=".png, .jpg, .jpeg"/>
+                                                        <input type="hidden" name="avatar_remove"/>
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                        title="{{trans('lang.cancel_image')}}">
+														<i class="bi bi-x fs-2"></i>
+													</span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                        title="{{trans('lang.remove_image')}}">
+														<i class="bi bi-x fs-2"></i>
+													</span>
+                                                    <!--end::Remove-->
+                                                </div>
+                                                <!--end::Image input-->
+                                                <!--begin::Description-->
+                                                <div class="text-dark fs-7 form-label" style="font-weight: bolder;">
+                                                    {{trans('lang.slider_image_en')}}
+                                                </div>
+                                                <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg</div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Thumbnail settings-->
                                         </div>
 
                                     </div>

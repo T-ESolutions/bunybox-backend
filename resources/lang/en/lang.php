@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'remove_image' => 'remove image',
+    'cancel_image' => 'cancel image',
+    'choose_image' => 'choose image',
+
+    'slider_image_ar' => 'Slider image (Arabic) ',
+    'slider_image_en' => 'Slider image (English)',
+
     'this_account_has_order_not_completed' => 'this account has order not completed yet , please finish your orders first',
     'account_deleted_s' => 'your account deleted successfully',
 

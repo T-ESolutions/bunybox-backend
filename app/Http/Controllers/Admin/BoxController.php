@@ -105,10 +105,12 @@ class BoxController extends Controller
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
             'desc_en' => 'required|string',
+            'slider_image_ar' => 'nullable|image',
+            'slider_image_en' => 'nullable|image',
             'price' => 'required|numeric',
             'min_price' => 'required|numeric',
             'max_price' => 'required|numeric',
-            'image' => 'required|',
+            'image' => 'required|image',
             'category_id' => 'required|Array',
         ]);
 
@@ -125,11 +127,15 @@ class BoxController extends Controller
         $row->offer_price = 0;
         $row->offer_end_time = null;
         $row->image = $request->image;
+        $row->slider_image_ar = $request->slider_image_ar;
+        $row->slider_image_en = $request->slider_image_en;
         $row->save();
+
+
         foreach ($request->category_id as $category_id) {
             $boxCategory = new BoxCategory();
-            $row->category_id = $category_id;
-            $row->box_id = $row->id;
+            $boxCategory->category_id = $category_id;
+            $boxCategory->box_id = $row->id;
             $boxCategory->save();
         }
 
@@ -165,6 +171,8 @@ class BoxController extends Controller
             'max_price' => 'required|numeric',
             'image' => 'nullable|image',
             'category_id' => 'required|Array',
+            'slider_image_ar' => 'nullable|image',
+            'slider_image_en' => 'nullable|image',
         ]);
 
         $row->main_category_id = $request->main_category_id;
@@ -180,6 +188,14 @@ class BoxController extends Controller
         $row->offer_end_time = null;
         if ($request->image != null) {
             $row->image = $request->image;
+        }
+        if ($request->slider_image_ar != null) {
+
+            $row->slider_image_ar = $request->slider_image_ar;
+        }
+        if ($request->slider_image_en != null) {
+
+            $row->slider_image_en = $request->slider_image_en;
         }
         $row->save();
 
