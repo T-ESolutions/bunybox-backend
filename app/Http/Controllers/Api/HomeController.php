@@ -81,9 +81,10 @@ class HomeController extends Controller
 
             array_push($slider_images, $box->slider_image);
 
-
         }
-
+        $boxes = $boxes->filter(function ($box) {
+            return count($box->products) > 0;
+        });
 
         $result['boxes'] = BoxFinalResource::customCollection($boxes, $data);
 
