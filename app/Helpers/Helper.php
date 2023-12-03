@@ -567,6 +567,8 @@ function generateArray($products, $min, $max, $limit = 4)
     $new_product_Arr = arrayUniqueByKey($new_product_Arr, "id");
 
 
+    dd($new_product_Arr);
+
     foreach ($new_product_Arr as $pro) {
         if ((($total + $pro['sel_price']) >= $min) &&
             (($total + $pro['sel_price']) <= $max) &&
