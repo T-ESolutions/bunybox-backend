@@ -61,6 +61,7 @@ class HomeController extends Controller
             ->orderBy('id', 'asc')->get();
 
 
+        dd($boxes);
 
         foreach ($boxes as $key => $box) {
             $product_array = [];
@@ -83,7 +84,6 @@ class HomeController extends Controller
 
         }
 
-        dd($boxes);
 
 
         $result['boxes'] = BoxFinalResource::customCollection($boxes, $data);
