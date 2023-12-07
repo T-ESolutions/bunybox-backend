@@ -343,7 +343,7 @@ return [
     'description' => ' الوصف  ',
     'supplier' => ' المورد',
     'user' => ' المستخدم',
-    'total_price' => ' اجمالي التكلفه',
+    'total_price' => ' الأجمالي ',
     'type_order' => ' الحالة',
     'Pending' => ' فى الانتظار',
     'Accepted' => ' تم القبول',
