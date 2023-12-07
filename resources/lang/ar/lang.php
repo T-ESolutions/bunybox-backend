@@ -1071,8 +1071,8 @@ return [
     'max_weight' => 'اقصى وزن',
     'min_height' => 'اقل طول',
     'max_height' => 'اقصى طول',
-    'product' => 'منتج',
-    'money' => 'فلوس',
+    'product' => 'منتج هدية',
+    'money' => 'مبلغ هدية',
     'Offer' => 'عرض',
     'ordered' => 'تم الطلب',
     'shipped' => 'تم الشحن',
@@ -1081,4 +1081,5 @@ return [
     'INVOICE NO' => 'رقم الطلب',
     'invoice' => 'فاتورة شراء',
     'gift_type' => 'نوع الهدية',
+    'gift' => 'الهدية',
 ];

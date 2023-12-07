@@ -84,12 +84,14 @@
                                             @foreach($order->items as $item)
                                                 <tr>
                                                     <td class="d-flex align-items-center pt-11 bold">
-                                                        <img alt="product" style="width: 70px;height: 70px" src="{{url($item->product->image)}}">
+                                                        <img alt="product" style="width: 70px;height: 70px"
+                                                             src="{{url($item->product->image)}}">
 
                                                     </td>
                                                     <td class="pt-11 bold">
                                                         {{$item->product->title}}
-                                                    </td>  <td class="pt-11 bold">
+                                                    </td>
+                                                    <td class="pt-11 bold">
                                                         {{$item->category->title}}
                                                     </td>
                                                 </tr>
@@ -99,24 +101,29 @@
                                         </table>
                                     </div>
                                     <hr>
+                                @if($order->gift_data_json)
                                     <!--end::Table-->
-                                    <div class="align-middle  fs-6 fw-bolder text-muted text-uppercase">
-                                        <h3 class="min-w-175px pb-9 text-muted">GIFT</h3>
+                                        <div class="align-middle  fs-6 fw-bolder text-muted text-uppercase">
+                                            <h3 class="min-w-175px pb-9 text-muted">{{trans('lang.gift')}}</h3>
                                             <div class="row">
                                                 <div class="col-md-4">{{__('lang.image')}} </div>
                                                 <div class="col-md-4">{{__('lang.title')}} </div>
                                                 <div class="col-md-4">{{__('lang.gift_type')}} </div>
                                             </div>
-                                        <hr>
-
-                                        <div class="row">
-                                                <div class="col-md-4">  <img alt="Logo" style="width: 70px;height: 70px" src="{{$order->gift_data_json->image}}"> </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-4"><img alt="Logo" style="width: 70px;height: 70px"
+                                                                           src="{{$order->gift_data_json->image}}">
+                                                </div>
                                                 <div class="col-md-4">{{$order->gift_data_json->title}} </div>
-                                                <div class="col-md-4">{{trans('lang.'.$order->gift_data_json->type)}} </div>
+                                                <div
+                                                    class="col-md-4">{{trans('lang.'.$order->gift_data_json->type)}} </div>
                                             </div>
 
-                                    </div>
-                                    <!--begin::Section-->
+
+                                        </div>
+                                @endif
+                                <!--begin::Section-->
 
                                     <!--end::Section-->
                                 </div>
@@ -128,11 +135,13 @@
                                 <div class="text-end pt-10">
                                     <!--begin::Total Amount-->
                                     <div class="fs-3 fw-bolder text-muted mb-3">{{trans('lang.total_price')}}</div>
-                                    <div class="fs-xl-2x fs-2 fw-boldest">{{$order->total}} {{trans('lang.currency')}}</div>
+                                    <div
+                                        class="fs-xl-2x fs-2 fw-boldest">{{$order->total}} {{trans('lang.currency')}}</div>
                                     <div class="text-muted fw-bold">{{trans('lang.price')}}</div>
                                     <div class="fs-xl-2x fs-2 ">{{$order->price}} {{trans('lang.currency')}}</div>
                                     <div class="text-muted fw-bold">{{trans('lang.shipping')}}</div>
-                                    <div class="fs-xl-2x fs-2 ">{{$order->shipping_cost}} {{trans('lang.currency')}}</div>
+                                    <div
+                                        class="fs-xl-2x fs-2 ">{{$order->shipping_cost}} {{trans('lang.currency')}}</div>
                                     <!--end::Total Amount-->
                                     <div class="border-bottom w-100 my-7 my-lg-16"></div>
                                     <!--begin::Invoice To-->
@@ -147,7 +156,8 @@
                                     <!--end::Invoice No-->
                                     <!--begin::Invoice Date-->
                                     <div class="text-gray-600 fs-6 fw-bold mb-3">{{trans('lang.order_date')}}</div>
-                                    <div class="fs-6 text-gray-800 fw-bold">{{\Carbon\Carbon::parse($order->created_at)->translatedFormat("d M Y")}}</div>
+                                    <div
+                                        class="fs-6 text-gray-800 fw-bold">{{\Carbon\Carbon::parse($order->created_at)->translatedFormat("d M Y")}}</div>
                                     <!--end::Invoice Date-->
                                 </div>
                                 <!--end::Content-->
@@ -160,10 +170,10 @@
                             <!-- begin::Actions-->
                             <div class="my-1 me-5">
                                 <!-- begin::Pint-->
-{{--                                <button type="button" class="btn btn-success my-1 me-12" onclick="window.print();">Print--}}
-{{--                                    Invoice--}}
-{{--                                </button>--}}
-                                <!-- end::Pint-->
+                            {{--                                <button type="button" class="btn btn-success my-1 me-12" onclick="window.print();">Print--}}
+                            {{--                                    Invoice--}}
+                            {{--                                </button>--}}
+                            <!-- end::Pint-->
                                 <!-- begin::Download-->
 
                                 <!-- end::Download-->

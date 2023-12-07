@@ -1082,8 +1082,8 @@ return [
     'weight' => 'weight ',
     'height' => 'height ',
     'age' => 'age ',
-    'product' => 'product',
-    'money' => 'money',
+    'product' => 'gift product',
+    'money' => 'gift money',
     'Offer' => 'Offer',
     'ordered' => 'ordered',
     'shipped' => 'shipped',
@@ -1092,6 +1092,7 @@ return [
     'INVOICE NO' => 'INVOICE NO',
     'invoice' => 'INVOICE',
     'gift_type' => 'gift type',
+    'gift' => 'gift',
 
 
 ];
