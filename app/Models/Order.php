@@ -28,6 +28,7 @@ class Order extends Model
         "transaction_id",
     ];
 
+    protected $appends =['gift_data_json'];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -53,6 +54,14 @@ class Order extends Model
     {
         if ($value != null) {
             return json_decode($value);
+        }
+        return "";
+
+    }
+    public function getGiftDataJsonAttribute()
+    {
+        if ($this->attributes['gift_data'] != null) {
+            return json_decode($this->attributes['gift_data']);
         }
         return "";
 

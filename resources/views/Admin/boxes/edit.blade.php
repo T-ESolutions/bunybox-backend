@@ -86,7 +86,7 @@
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="إختر الصورة">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg" />
+                                                        <input  type="file" name="image" accept=".png, .jpg, .jpeg" />
                                                         <input type="hidden"  />
                                                         <!--end::Inputs-->
                                                     </label>
@@ -120,7 +120,7 @@
                                                 <!--begin::Input-->
                                                 <select class="form-control mb-2" name="main_category_id" data-control="select2" data-hide-search="false">
                                                     @foreach($main_categories as $main_category)
-                                                        <option value="{{$main_category->id}}" {{$main_category->id == $row->main_category_id ? 'selected' : ''}}>{{$main_category->title_ar}}</option>
+                                                        <option value="{{$main_category->id}}" {{$main_category->id == $row->main_category_id ? 'selected' : ''}}>{{$main_category->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -173,7 +173,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" required name="price"
+                                                <input type="number" min="1" required name="price"
                                                        class="form-control mb-2" value="{{$row->price}}"
                                                        placeholder="{{__('lang.price')}} "
                                                 />
@@ -191,7 +191,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" required name="min_price"
+                                                <input type="number" min="1" required name="min_price"
                                                        class="form-control mb-2" value="{{$row->min_price}}"
                                                        placeholder="{{__('lang.min_price')}} "
                                                 />
@@ -209,7 +209,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" required name="max_price"
+                                                <input type="number" min="1" required name="max_price"
                                                        class="form-control mb-2" value="{{$row->max_price}}"
                                                        placeholder="{{__('lang.max_price')}} "
                                                 />
@@ -264,9 +264,9 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="category_id[]" data-control="select2" data-hide-search="false" multiple>
+                                                <select required class="form-control mb-2" name="category_id[]" data-control="select2" data-hide-search="false" multiple>
                                                     @foreach($categories as $category)
-                                                        <option value="{{$category->id}}" {{in_array($category->id,$boxCategories) ? 'selected' : ''}}>{{$category->title_ar}}</option>
+                                                        <option value="{{$category->id}}" {{in_array($category->id,$boxCategories) ? 'selected' : ''}}>{{$category->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->

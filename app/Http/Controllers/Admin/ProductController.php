@@ -51,29 +51,18 @@ class ProductController extends Controller
             })
             ->editColumn('category_id', function ($row) {
                 if ($row->category) {
-                    $category = $row->category->title_ar;
+                    $category = $row->category->title;
                     return "<b class='badge badge-success'>$category</b>";
                 } else {
                     return "-";
                 }
             })
-//            ->addColumn('select',function ($row){
-//                return '<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-//                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="'.$row->id.'" />
-//                                    </div>';
-//            })
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
-//                if ($auth->can('sliders.update')) {
                 $buttons .= '<a href="' . route('products.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
                             <i class="fa fa-edit"></i>
                         </a>';
-//                }
-//                if ($auth->can('sliders.delete')) {
-//                $buttons .= '<a class="btn btn-danger btn-sm delete btn-circle m-1" data-id="' . $row->id . '"  title="حذف">
-//                            <i class="fa fa-trash"></i>
-//                        </a>';
-//                }
+
                 return $buttons;
             })
             ->rawColumns(['actions', 'active', 'image', 'category_id', 'checkbox'])
@@ -90,7 +79,7 @@ class ProductController extends Controller
     {
         if (!$this->permission()) return "Not Authorized";
 
-        $categories = Category::get();
+        $categories = Category::all();
         return view('Admin.products.create', compact('categories'));
     }
 
@@ -99,7 +88,7 @@ class ProductController extends Controller
         if (!$this->permission()) return "Not Authorized";
 
         $request->validate([
-            'category_id' => 'required|exists:products,id',
+            'category_id' => 'required|exists:categories,id',
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
@@ -108,14 +97,14 @@ class ProductController extends Controller
             'buy_price' => 'required|numeric',
             'sel_price' => 'required|numeric',
             'shoes_size' => 'nullable|numeric',
-            'size' => 'nullable|numeric',
+            'size' => 'nullable|in:S,L,XL,FS',
             'min_age' => 'nullable|numeric',
             'max_age' => 'nullable|numeric',
             'min_weight' => 'nullable|numeric',
             'max_weight' => 'nullable|numeric',
             'min_height' => 'nullable|numeric',
             'max_height' => 'nullable|numeric',
-            'image' => 'required|',
+            'image' => 'required|image',
         ]);
 
         $row = new Product();
@@ -144,7 +133,7 @@ class ProductController extends Controller
     {
         if (!$this->permission()) return "Not Authorized";
 
-        $categories = Category::get();
+        $categories = Category::all();
         $row = Product::findOrFail($id);
         return view('Admin.products.edit', compact('row', 'categories'));
     }
@@ -156,7 +145,7 @@ class ProductController extends Controller
         $row = Product::findOrFail($id);
 
         $request->validate([
-            'category_id' => 'required|exists:products,id',
+            'category_id' => 'required|exists:categories,id',
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
@@ -165,14 +154,14 @@ class ProductController extends Controller
             'buy_price' => 'required|numeric',
             'sel_price' => 'required|numeric',
             'shoes_size' => 'nullable|numeric',
-            'size' => 'nullable|numeric',
+            'size' => 'nullable|in:S,L,XL,FS',
             'min_age' => 'nullable|numeric',
             'max_age' => 'nullable|numeric',
             'min_weight' => 'nullable|numeric',
             'max_weight' => 'nullable|numeric',
             'min_height' => 'nullable|numeric',
             'max_height' => 'nullable|numeric',
-            'image' => 'required|',
+            'image' => 'nullable|image',
         ]);
 
         $row->category_id = $request->category_id;

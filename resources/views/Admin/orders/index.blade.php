@@ -51,6 +51,7 @@
                             <th class=" min-w-1px">{{__('lang.status')}}</th>
                             <th class=" min-w-1px">{{__('lang.payment_status')}}</th>
                             <th class=" min-w-1px">{{__('lang.payment_method')}}</th>
+                            <th class=" min-w-1px">{{__('lang.main_category')}}</th>
                             <th class=" min-w-1px">{{__('lang.users')}}</th>
                             <th class=" min-w-1px">{{__('lang.boxes')}}</th>
                             <th class=" min-w-1px">{{__('lang.price')}}</th>
@@ -83,7 +84,7 @@
     <!--begin::Modal - change status-->
     <div class="modal fade" id="kt_modal_create_app" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-900px">
+        <div class="modal-dialog modal-dialog-centered">
             <!--begin::Modal content-->
             <div class="modal-content">
                 <!--begin::Status-->
@@ -130,19 +131,18 @@
                         <div class="card-body pt-0">
                             <!--begin::Select2-->
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <select name="status" required class="form-select mb-2" data-control="select2"
-                                            data-hide-search="true" data-placeholder="{{__('lang.choose_status')}}"
+                                <div class="col-lg-12">
+                                    <select name="status" required class="form-select mb-2"   data-placeholder="{{__('lang.choose_status')}}"
                                             id="kt_ecommerce_add_product_status_select">
                                         <option></option>
-                                        <option value="ordered">
-                                            ordered
+                                        <option id="ordered" value="ordered">
+                                            {{trans('lang.ordered')}}
                                         </option>
-                                        <option value="shipped">
-                                            shipped
+                                        <option id="shipped" value="shipped">
+                                            {{trans('lang.shipped')}}
                                         </option>
-                                        <option value="delivered">
-                                            delivered
+                                        <option id="delivered" value="delivered">
+                                            {{trans('lang.delivered')}}
                                         </option>
                                     </select>
                                 </div>
@@ -251,6 +251,7 @@
                     {"data": "status", "searchable": false, "orderable": false},
                     {"data": "payment_status", "searchable": false, "orderable": false},
                     {"data": "payment_method", "searchable": false, "orderable": false},
+                    {"data": "mainCategory", "searchable": false, "orderable": false},
                     {"data": "user_name", "searchable": false, "orderable": false},
                     {"data": "box", "searchable": false, "orderable": false},
                     {"data": "price", "searchable": false, "orderable": false},
@@ -276,13 +277,19 @@
             var row_id = $(this).data('id');
             var status_val = $(this).data('status');
             $(".card #row_id").val(row_id);
+            //
 
-            if(status_val == 'delivered'){
-                $(".card #statusText").html("delivered");
-            }else if(status_val == 'shipped'){
-                $(".card #statusText").html("shipped");
-            }else if(status_val == 'ordered'){
-                $(".card #statusText").html("ordered");
+
+
+            if (status_val == 'delivered') {
+                $(".card #statusText").html("{{trans('lang.delivered')}}");
+                document.getElementById("delivered").selected =true;
+            } else if (status_val == 'shipped') {
+                $(".card #statusText").html("{{trans('lang.shipped')}}");
+                document.getElementById("shipped").selected =true;
+            } else if (status_val == 'ordered') {
+                $(".card #statusText").html("{{trans('lang.ordered')}}");
+                document.getElementById("ordered").selected =true;
             }
         });
 

@@ -316,7 +316,8 @@ return [
     'ClientandprojectList' => ' Clients and projects',
     'setmainclients'=>'Clients',
 
-    'mainclient_name'=>'Client Name '
+    'mainclient_name'=>'Client Name ',
+    'select'=>'please select ',
 
 
 

@@ -21,13 +21,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class GiftController extends Controller
 {
-    public function permission(){
+    public function permission()
+    {
         return auth()->guard('admin')->user()->can('gifts');
     }
 
     public function index()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $results = Gift::latest()->paginate(config('default_pagination'));
         return view('Admin.gifts.index', compact('results'));
@@ -35,14 +36,13 @@ class GiftController extends Controller
 
     public function getData()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $auth = Auth::guard('admin')->user();
         $model = Gift::query();
         return DataTables::eloquent($model)
             ->addIndexColumn()
             ->addColumn('active', 'Admin.gifts.active_btn')
-
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
                 $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -55,15 +55,15 @@ class GiftController extends Controller
             })
             ->editColumn('type', function ($row) {
                 if ($row->type == 'product')
-                    return '<b class="badge badge-success">' . $row->type . '</b>';
+                    return '<b class="badge badge-success">' . trans('lang.' . $row->type) . '</b>';
                 else
-                    return '<b class="badge badge-info">' . $row->type . '</b>';
+                    return '<b class="badge badge-info">' . trans('lang.' . $row->type) . '</b>';
             })
             ->addColumn('boxes', function ($row) {
                 $res = '';
                 if ($row->boxes) {
                     foreach ($row->boxes as $box) {
-                        $res.= '<b class="badge badge-success">' . $box->title_ar . '</b><br>';
+                        $res .= '<b class="badge badge-success">' . $box->title . '</b><br>';
                     }
                     return $res;
                 } else {
@@ -75,34 +75,22 @@ class GiftController extends Controller
                 if ($row->mainCats) {
                     foreach ($row->mainCats as $mainCat) {
                         $main_category_ar = $mainCat->main_category_ar;
-                        $res2.= '<b class="badge badge-info">' . $main_category_ar . '</b><br>';
+                        $res2 .= '<b class="badge badge-info">' . $main_category_ar . '</b><br>';
                     }
                     return $res2;
                 } else {
                     return '-';
                 }
             })
-//            ->addColumn('select',function ($row){
-//                return '<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-//                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="'.$row->id.'" />
-//                                    </div>';
-//            })
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
-//                if ($auth->can('sliders.update')) {
                 $buttons .= '<a href="' . route('gifts.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
                             <i class="fa fa-edit"></i>
                         </a>';
-//                }
-//                if ($auth->can('sliders.delete')) {
-//                $buttons .= '<a class="btn btn-danger btn-sm delete btn-circle m-1" data-id="' . $row->id . '"  title="حذف">
-//                            <i class="fa fa-trash"></i>
-//                        </a>';
-//                }
                 return $buttons;
             })
             ->
-            rawColumns(['actions','active', 'checkbox', 'image', 'type','boxes','main_cats'])
+            rawColumns(['actions', 'active', 'checkbox', 'image', 'type', 'boxes', 'main_cats'])
             ->make();
 
     }
@@ -114,17 +102,17 @@ class GiftController extends Controller
 
     public function create()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
-        $main_categories = MainCategory::get();
-        $boxs = Box::get();
+        $main_categories = MainCategory::all();
+        $boxs = Box::all();
 
         return view('Admin.gifts.create', compact('boxs', 'main_categories'));
     }
 
     public function store(Request $request)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $request->validate([
             'main_category_id' => 'required_if:type,product|array',
@@ -134,7 +122,7 @@ class GiftController extends Controller
             'money_amount' => 'required_if:type,money',
             'num_of_gifts' => 'required_if:type,money',
             'type' => 'required|in:product,money',
-            'image' => 'required|',
+            'image' => 'required|image',
         ]);
 
         $row = new Gift();
@@ -150,7 +138,7 @@ class GiftController extends Controller
         //$request->type == 'money'
         if ($request->type == 'money') {
             $divided = $request->money_amount / $request->num_of_gifts;
-            for ($i=0 ; $i < $request->num_of_gifts ; $i++) {
+            for ($i = 0; $i < $request->num_of_gifts; $i++) {
                 GiftMoneyDetail::create([
                     'gift_id' => $row->id,
                     'amount' => $divided,
@@ -181,31 +169,32 @@ class GiftController extends Controller
 
     public function edit($id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
-        $main_categories = MainCategory::get();
-        $boxs = Box::get();
+        $main_categories = MainCategory::all();
+        $boxs = Box::all();
         $gift_main_categories = GiftMainCategory::whereGiftId($id)->pluck('main_category_id')->toArray();
         $gift_boxes = GiftBox::whereGiftId($id)->pluck('box_id')->toArray();
         $row = Gift::findOrFail($id);
         return view('Admin.gifts.edit',
-            compact('row', 'boxs', 'main_categories', 'gift_main_categories','gift_boxes'));
+            compact('row', 'boxs', 'main_categories', 'gift_main_categories', 'gift_boxes'));
     }
 
     public function update(Request $request, $id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
+
 
         $row = Gift::findOrFail($id);
 
         $request->validate([
-            'main_category_id' => 'required|array',
-            'box_id' => 'sometimes|array',
+            'main_category_id' => 'required_if:type,product|array',
+            'box_id' => 'required_if:type,product|array',
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
 //            'money_amount' => 'required|numeric',
-//            'type' => 'required|in:product,money',
-            'image' => 'sometimes|',
+            'type' => 'required|in:product,money',
+            'image' => 'nullable|image',
         ]);
 
         $row->title_ar = $request->title_ar;
@@ -218,12 +207,22 @@ class GiftController extends Controller
         $row->save();
 
         GiftMainCategory::whereGiftId($id)->delete();
-        foreach ($request->main_category_id as $main_category_id) {
-            $giftMainCategory = new GiftMainCategory();
-            $giftMainCategory->main_category_id = $main_category_id;
-            $giftMainCategory->gift_id = $row->id;
-            $giftMainCategory->save();
+        GiftBox::whereGiftId($id)->delete();
+        if ($row->type == 'product') {
+            foreach ($request->box_id as $box_id) {
+                $giftBox = new GiftBox();
+                $giftBox->box_id = $box_id;
+                $giftBox->gift_id = $row->id;
+                $giftBox->save();
+            }
+            foreach ($request->main_category_id as $main_category_id) {
+                $giftMainCategory = new GiftMainCategory();
+                $giftMainCategory->main_category_id = $main_category_id;
+                $giftMainCategory->gift_id = $row->id;
+                $giftMainCategory->save();
+            }
         }
+
         return redirect()->back()->with('message', trans('lang.updated_s'));
     }
 
@@ -248,7 +247,7 @@ class GiftController extends Controller
     public function changeActive(Request $request)
     {
         $box = Gift::where('id', $request->id)->first();
-        if($box->active == 0)
+        if ($box->active == 0)
             Gift::where('id', $request->id)->update(['active' => 1]);
         else
             Gift::where('id', $request->id)->update(['active' => 0]);

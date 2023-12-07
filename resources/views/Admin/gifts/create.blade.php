@@ -86,7 +86,7 @@
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
                                                     <label
-                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        class="required btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                         data-kt-image-input-action="change" data-bs-toggle="tooltip"
                                                         title="إختر الصورة">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
@@ -167,8 +167,8 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
                                                 <select class="form-control mb-2" name="type" id="Gift-Type">
-                                                    <option value="money" >money</option>
-                                                    <option value="product" >product</option>
+                                                    <option value="money" >{{trans('lang.money')}}</option>
+                                                    <option value="product" >{{trans('lang.product')}}</option>
                                                 </select>
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
@@ -223,7 +223,7 @@
                                                 <!--begin::Input-->
                                                 <select class="form-control mb-2" name="main_category_id[]" data-control="select2" data-hide-search="false" multiple>
                                                     @foreach($main_categories as $main_category)
-                                                        <option value="{{$main_category->id}}" >{{$main_category->title_ar}}</option>
+                                                        <option value="{{$main_category->id}}" >{{$main_category->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -243,7 +243,7 @@
                                                 <!--begin::Input-->
                                                 <select class="form-control mb-2" name="box_id[]" data-control="select2" data-hide-search="false" multiple>
                                                     @foreach($boxs as $box)
-                                                        <option value="{{$box->id}}" >{{$box->title_ar}}</option>
+                                                        <option value="{{$box->id}}" >{{$box->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->

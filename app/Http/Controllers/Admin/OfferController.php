@@ -8,6 +8,7 @@ use App\Models\BoxProduct;
 use App\Models\Category;
 use App\Models\MainCategory;
 use App\Models\Product;
+use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
@@ -52,32 +53,14 @@ class OfferController extends Controller
             })
             ->editColumn('image', function ($row) {
                 return '<a class="symbol symbol-50px"><span class="symbol-label" style="background-image:url(' . $row->image . ');"></span></a>';
+            })->editColumn('offer_end_time', function ($row) {
+                return Carbon::parse($row->offer_end_time)->translatedFormat("d M y - h:i a");
             })
-//            ->editColumn('main_category_id', function ($row) {
-//                if ($row->mainCategory) {
-//                    $category  = $row->mainCategory->title_ar;
-//                    return "<b class='badge badge-success'>$category</b>";
-//                } else {
-//                    return "-";
-//                }
-//            })
-//            ->addColumn('select',function ($row){
-//                return '<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-//                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="'.$row->id.'" />
-//                                    </div>';
-//            })
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
-//                if ($auth->can('sliders.update')) {
                 $buttons .= '<a href="' . route('offers.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
                             <i class="fa fa-edit"></i>
                         </a>';
-//                }
-//                if ($auth->can('sliders.delete')) {
-//                $buttons .= '<a class="btn btn-danger btn-sm delete btn-circle m-1" data-id="' . $row->id . '"  title="حذف">
-//                            <i class="fa fa-trash"></i>
-//                        </a>';
-//                }
                 return $buttons;
             })
             ->rawColumns(['actions', 'active', 'image', 'checkbox'])
@@ -115,7 +98,7 @@ class OfferController extends Controller
 //            'max_price' => 'required|numeric',
             'offer_price' => 'required|numeric',
             'offer_end_time' => 'required|',
-            'image' => 'required|',
+            'image' => 'required|image',
             'product_id' => 'required|array',
         ]);
 
@@ -189,7 +172,6 @@ class OfferController extends Controller
             $row->image = $request->image;
         }
         $row->save();
-//dd($request->product_id);
         BoxProduct::whereBoxId($id)->delete();
         foreach ($request->product_id as $product_id) {
             BoxProduct::create([

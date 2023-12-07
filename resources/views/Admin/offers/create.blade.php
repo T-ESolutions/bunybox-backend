@@ -230,7 +230,6 @@
                                             </div>
                                             <!--end::Input group-->
 
-                                            <hr>
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
@@ -243,7 +242,7 @@
                                                     @foreach($products as $product)
                                                         <option value="{{$product->id}}" >
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            {{$product->title_ar}} [ {{$product->category->title_ar}} ]
+                                                            {{$product->title}} [ {{$product->category->title}} ]
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -253,7 +252,7 @@
                                             <!--end::Description-->
                                             </div>
                                             <!--end::Input group-->
-                                            <hr>
+
 
                                         </div>
 

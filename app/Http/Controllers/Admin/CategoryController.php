@@ -14,13 +14,15 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
-    public function permission(){
+ 
+    public function permission()
+    {
         return auth()->guard('admin')->user()->can('categories');
     }
 
     public function index()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $results = Category::latest()->paginate(config('default_pagination'));
         return view('Admin.categories.index', compact('results'));
@@ -28,7 +30,7 @@ class CategoryController extends Controller
 
     public function getData()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $auth = Auth::guard('admin')->user();
 
@@ -37,7 +39,6 @@ class CategoryController extends Controller
         return DataTables::eloquent($model)
             ->addIndexColumn()
             ->addColumn('active', 'Admin.categories.active_btn')
-
             ->addColumn('checkbox', function ($row) {
                 $checkbox = '';
                 $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
@@ -48,34 +49,14 @@ class CategoryController extends Controller
             ->editColumn('image', function ($row) {
                 return '<a class="symbol symbol-50px"><span class="symbol-label" style="background-image:url(' . $row->image . ');"></span></a>';
             })
-            ->editColumn('category_id', function ($row) {
-                if ($row->category) {
-                    $category  = $row->category->title_ar;
-                    return "<b class='badge badge-success'>$category</b>";
-                } else {
-                    return "-";
-                }
-            })
-//            ->addColumn('select',function ($row){
-//                return '<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-//                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="'.$row->id.'" />
-//                                    </div>';
-//            })
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
-//                if ($auth->can('sliders.update')) {
-                $buttons .= '<a href="' . route('categories.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="'.trans('lang.edit').'">
+                $buttons .= '<a href="' . route('categories.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
                             <i class="fa fa-edit"></i>
                         </a>';
-//                }
-//                if ($auth->can('sliders.delete')) {
-//                $buttons .= '<a class="btn btn-danger btn-sm delete btn-circle m-1" data-id="' . $row->id . '"  title="حذف">
-//                            <i class="fa fa-trash"></i>
-//                        </a>';
-//                }
                 return $buttons;
             })
-            ->rawColumns(['actions','active', 'image','checkbox'])
+            ->rawColumns(['actions', 'active', 'image', 'checkbox'])
             ->make();
 
     }
@@ -87,14 +68,14 @@ class CategoryController extends Controller
 
     public function create()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         return view('Admin.categories.create');
     }
 
     public function store(Request $request)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $request->validate([
             'title_ar' => 'required|string',
@@ -117,7 +98,7 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $row = Category::findOrFail($id);
         return view('Admin.categories.edit', compact('row'));
@@ -125,7 +106,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $row = Category::findOrFail($id);
 
@@ -165,7 +146,7 @@ class CategoryController extends Controller
     public function changeActive(Request $request)
     {
         $box = Category::where('id', $request->id)->first();
-        if($box->active == 0)
+        if ($box->active == 0)
             Category::where('id', $request->id)->update(['active' => 1]);
         else
             Category::where('id', $request->id)->update(['active' => 0]);

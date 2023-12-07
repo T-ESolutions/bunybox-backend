@@ -78,33 +78,44 @@
                                             <!--begin::Card body-->
                                             <div class="card-body text-center pt-0">
                                                 <!--begin::Image input-->
-                                                <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="">
+                                                <div class="image-input image-input-empty image-input-outline mb-3"
+                                                     data-kt-image-input="true" style="">
                                                     <!--begin::Preview existing avatar-->
-                                                    <div class="image-input-wrapper w-150px h-150px" style="background-image: url({{$row->image}})"></div>
+                                                    <div class="image-input-wrapper w-150px h-150px"
+                                                         style="background-image: url({{$row->image}})"></div>
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
-                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="إختر الصورة">
+                                                    <label
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                        title="إختر الصورة">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg" />
-                                                        <input type="hidden"  />
+                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg"/>
+                                                        <input type="hidden"/>
                                                         <!--end::Inputs-->
                                                     </label>
                                                     <!--end::Label-->
                                                     <!--begin::Cancel-->
-                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="إلغاء الصورة">
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                        title="إلغاء الصورة">
 														<i class="bi bi-x fs-2"></i>
 													</span>
                                                     <!--end::Cancel-->
                                                     <!--begin::Remove-->
-                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="حذف الصورة">
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                        title="حذف الصورة">
 														<i class="bi bi-x fs-2"></i>
 													</span>
                                                     <!--end::Remove-->
                                                 </div>
                                                 <!--end::Image input-->
                                                 <!--begin::Description-->
-                                                <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg </div>
+                                                <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg</div>
                                                 <!--end::Description-->
                                             </div>
                                             <!--end::Card body-->
@@ -154,9 +165,12 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="type" disabled>
-                                                    <option value="money" {{$row->type == 'money' ? "selected" : ""}}>money</option>
-                                                    <option value="product" {{$row->type == 'product' ? "selected" : ""}}>product</option>
+                                                <input type="hidden" name="type" value="{{$row->type}}">
+                                                <select class="form-control mb-2" disabled>
+                                                    <option
+                                                        value="money" {{$row->type == 'money' ? "selected" : ""}}>{{trans('lang.money')}}</option>
+                                                    <option
+                                                        value="product" {{$row->type == 'product' ? "selected" : ""}}>{{trans('lang.product')}}</option>
                                                 </select>
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
@@ -166,7 +180,8 @@
                                             <!--end::Input group-->
 
                                             <!--begin::Input group-->
-                                            <div class="mb-5 fv-row">
+                                            <div class="mb-5 fv-row"
+                                                 @if($row->type =='product') style="display: none" @endif>
                                                 <!--begin::Label-->
                                                 <label class="required form-label">{{__('lang.price')}}
                                                 </label>
@@ -185,16 +200,19 @@
                                             <!--end::Input group-->
 
                                             <!--begin::Input group-->
-                                            <div class="mb-5 fv-row" @if($row->type =='money') style="display: none" @endif>
+                                            <div class="mb-5 fv-row"
+                                                 @if($row->type =='money') style="display: none" @endif>
                                                 <!--begin::Label-->
                                                 <label class="required form-label">
                                                     {{__('lang.main_categories')}}
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="main_category_id[]" data-control="select2" data-hide-search="false" multiple>
+                                                <select class="form-control mb-2" name="main_category_id[]"
+                                                        data-control="select2" data-hide-search="false" multiple>
                                                     @foreach($main_categories as $main_category)
-                                                        <option value="{{$main_category->id}}" {{in_array($main_category->id,$gift_main_categories) ? 'selected' : ''}}>{{$main_category->title_ar}}</option>
+                                                        <option
+                                                            value="{{$main_category->id}}" {{in_array($main_category->id,$gift_main_categories) ? 'selected' : ''}}>{{$main_category->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -204,14 +222,15 @@
                                             </div>
                                             <!--end::Input group-->
 
-{{--                                        @if($row->type =='money')--}}
-                                            <div class="mb-5 fv-row  "  @if($row->type !='money') style="display: none" @endif id="Gift-Num-Of-Gifts" >
+                                            {{--                                        @if($row->type =='money')--}}
+                                            <div class="mb-5 fv-row  " @if($row->type !='money') style="display: none"
+                                                 @endif id="Gift-Num-Of-Gifts">
                                                 <!--begin::Label-->
                                                 <label class="required form-label">{{__('lang.num_of_gifts')}}
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" name="num_of_gifts"
+                                                <input type="number" disabled name="num_of_gifts"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.num_of_gifts')}} "
                                                        value="{{\App\Models\GiftMoneyDetail::where('gift_id',$row->id)->count()}}"
@@ -222,16 +241,19 @@
                                             <!--end::Description-->
                                             </div>
                                             <!--begin::Input group-->
-                                            <div class="mb-5 fv-row" id="Gift-Box"  @if($row->type =='money') style="display: none" @endif>
+                                            <div class="mb-5 fv-row" id="Gift-Box"
+                                                 @if($row->type =='money') style="display: none" @endif>
                                                 <!--begin::Label-->
                                                 <label class="required form-label">
                                                     {{__('lang.boxes')}}
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" disabled name="box_id[]" data-control="select2" data-hide-search="false" multiple>
+                                                <select class="form-control mb-2" name="box_id[]" data-control="select2"
+                                                        data-hide-search="false" multiple>
                                                     @foreach($boxs as $box)
-                                                        <option value="{{$box->id}}" {{in_array($box->id,$gift_boxes) ? "selected" : ""}}>{{$box->title_ar}}</option>
+                                                        <option
+                                                            value="{{$box->id}}" {{in_array($box->id,$gift_boxes) ? "selected" : ""}}>{{$box->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->

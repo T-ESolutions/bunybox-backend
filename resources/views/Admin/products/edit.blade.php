@@ -78,33 +78,44 @@
                                             <!--begin::Card body-->
                                             <div class="card-body text-center pt-0">
                                                 <!--begin::Image input-->
-                                                <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="">
+                                                <div class="image-input image-input-empty image-input-outline mb-3"
+                                                     data-kt-image-input="true" style="">
                                                     <!--begin::Preview existing avatar-->
-                                                    <div class="image-input-wrapper w-150px h-150px" style="background-image: url({{$row->image}})"></div>
+                                                    <div class="image-input-wrapper w-150px h-150px"
+                                                         style="background-image: url({{$row->image}})"></div>
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
-                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="إختر الصورة">
+                                                    <label
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                        title="إختر الصورة">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg" />
-                                                        <input type="hidden"  />
+                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg"/>
+                                                        <input type="hidden"/>
                                                         <!--end::Inputs-->
                                                     </label>
                                                     <!--end::Label-->
                                                     <!--begin::Cancel-->
-                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="إلغاء الصورة">
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                        title="إلغاء الصورة">
 														<i class="bi bi-x fs-2"></i>
 													</span>
                                                     <!--end::Cancel-->
                                                     <!--begin::Remove-->
-                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="حذف الصورة">
+                                                    <span
+                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                        title="حذف الصورة">
 														<i class="bi bi-x fs-2"></i>
 													</span>
                                                     <!--end::Remove-->
                                                 </div>
                                                 <!--end::Image input-->
                                                 <!--begin::Description-->
-                                                <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg </div>
+                                                <div class="text-danger fs-7"> *.png - *.jpg - *.jpeg</div>
                                                 <!--end::Description-->
                                             </div>
                                             <!--end::Card body-->
@@ -118,9 +129,13 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="category_id" data-control="select2" data-hide-search="false">
+                                                <select class="form-control mb-2" name="category_id"
+                                                        data-control="select2" data-hide-search="false">
+                                                    <option value="">{{trans('lang.select')}}</option>
                                                     @foreach($categories as $category)
-                                                        <option value="{{$category->id}}" {{$category->id == $row->category_id ? 'selected' : ''}}>{{$category->title_ar}}</option>
+                                                        <option
+                                                            value="{{$category->id}}" {{$category->id == $row->category_id ? 'selected' : ''}}>
+                                                            {{$category->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -172,7 +187,7 @@
                                                 <label class="required form-label">{{__('lang.quantity')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="quantity"
+                                                <input type="number" min="0" step="1" required name="quantity"
                                                        class="form-control mb-2" value="{{$row->quantity}}"
                                                        placeholder="{{__('lang.quantity')}}"
                                                 />
@@ -189,7 +204,7 @@
                                                 <label class="required form-label">{{__('lang.buy_price')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="buy_price"
+                                                <input type="number" min="0" required name="buy_price"
                                                        class="form-control mb-2" value="{{$row->buy_price}}"
                                                        placeholder="{{__('lang.buy_price')}}"
                                                 />
@@ -206,7 +221,7 @@
                                                 <label class="required form-label">{{__('lang.sel_price')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="sel_price"
+                                                <input type="number" min="0" required name="sel_price"
                                                        class="form-control mb-2" value="{{$row->sel_price}}"
                                                        placeholder="{{__('lang.sel_price')}}"
                                                 />
@@ -220,10 +235,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.shoes_size')}}</label>
+                                                <label class=" form-label">{{__('lang.shoes_size')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="shoes_size"
+                                                <input type="number" min="0" step="1" name="shoes_size"
                                                        class="form-control mb-2" value="{{$row->shoes_size}}"
                                                        placeholder="{{__('lang.shoes_size')}}"
                                                 />
@@ -237,13 +252,27 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.size')}}</label>
+                                                <label class="form-label">{{__('lang.size')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="size"
-                                                       class="form-control mb-2" value="{{$row->size}}"
-                                                       placeholder="{{__('lang.size')}}"
-                                                />
+
+                                                <!--begin::Input-->
+                                                <select required class="form-control mb-2" name="size"
+                                                        data-control="select2" data-hide-search="false">
+                                                    <option @if($row->size == null) selected
+                                                            @endif value="">{{trans('lang.select')}}</option>
+                                                    <option @if($row->size == "S") selected @endif value="S">Small
+                                                    </option>
+                                                    <option @if($row->size == "L") selected @endif value="L">Large
+                                                    </option>
+                                                    <option @if($row->size == "XL") selected @endif value="XL">X-Large
+                                                    </option>
+                                                    <option @if($row->size == "FS") selected @endif value="FS">Free
+                                                        Size
+                                                    </option>
+
+                                                </select>
+                                                <!--end::Input-->
                                                 <!--end::Input-->
                                                 <!--begin::Description-->
                                             {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
@@ -254,10 +283,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.min_age')}}</label>
+                                                <label class=" form-label">{{__('lang.min_age')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="min_age"
+                                                <input type="number" min="0" step="1" name="min_age"
                                                        class="form-control mb-2" value="{{$row->min_age}}"
                                                        placeholder="{{__('lang.min_age')}}"
                                                 />
@@ -271,10 +300,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.max_age')}}</label>
+                                                <label class=" form-label">{{__('lang.max_age')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="max_age"
+                                                <input type="number" min="0" step="1" name="max_age"
                                                        class="form-control mb-2" value="{{$row->max_age}}"
                                                        placeholder="{{__('lang.max_age')}}"
                                                 />
@@ -288,10 +317,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.min_weight')}}</label>
+                                                <label class=" form-label">{{__('lang.min_weight')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="min_weight"
+                                                <input type="number" min="0" step="1" name="min_weight"
                                                        class="form-control mb-2" value="{{$row->min_weight}}"
                                                        placeholder="{{__('lang.min_weight')}}"
                                                 />
@@ -305,10 +334,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.max_weight')}}</label>
+                                                <label class=" form-label">{{__('lang.max_weight')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="max_weight"
+                                                <input type="number" min="0" step="1" name="max_weight"
                                                        class="form-control mb-2" value="{{$row->max_weight}}"
                                                        placeholder="{{__('lang.max_weight')}}"
                                                 />
@@ -322,10 +351,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.min_height')}}</label>
+                                                <label class=" form-label">{{__('lang.min_height')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="min_height"
+                                                <input type="number" min="0" step="1" name="min_height"
                                                        class="form-control mb-2" value="{{$row->min_height}}"
                                                        placeholder="{{__('lang.min_height')}}"
                                                 />
@@ -339,10 +368,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.max_height')}}</label>
+                                                <label class=" form-label">{{__('lang.max_height')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="max_height"
+                                                <input type="number" min="0" step="1" name="max_height"
                                                        class="form-control mb-2" value="{{$row->max_height}}"
                                                        placeholder="{{__('lang.max_height')}}"
                                                 />

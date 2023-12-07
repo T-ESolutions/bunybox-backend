@@ -85,12 +85,12 @@
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
                                                     <label
-                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        class="required btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                         data-kt-image-input-action="change" data-bs-toggle="tooltip"
                                                         title="{{trans('lang.choose_image')}}">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input required type="file" name="image"
+                                                        <input  required type="file" name="image"
                                                                accept=".png, .jpg, .jpeg"/>
                                                         <input type="hidden" name="avatar_remove"/>
                                                         <!--end::Inputs-->
@@ -128,11 +128,11 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="main_category_id"
-                                                        data-control="select2" data-hide-search="false">
+                                                <select  class="form-control mb-2" name="main_category_id"
+                                                       required data-control="select2" data-hide-search="false">
                                                     @foreach($main_categories as $main_category)
                                                         <option
-                                                            value="{{$main_category->id}}">{{$main_category->title_ar}}</option>
+                                                            value="{{$main_category->id}}">{{$main_category->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -185,7 +185,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" required name="price"
+                                                <input type="number" min="1" required name="price"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.price')}} "
                                                 />
@@ -203,7 +203,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" required name="min_price"
+                                                <input type="number" min="1" required name="min_price"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.min_price')}} "
                                                 />
@@ -221,7 +221,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="number" required name="max_price"
+                                                <input type="number" min="1" required name="max_price"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.max_price')}} "
                                                 />
@@ -275,11 +275,11 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="category_id[]"
+                                                <select required class="form-control mb-2" name="category_id[]"
                                                         data-control="select2" data-hide-search="false" multiple>
                                                     @foreach($categories as $category)
                                                         <option
-                                                            value="{{$category->id}}">{{$category->title_ar}}</option>
+                                                            value="{{$category->id}}">{{$category->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -302,12 +302,12 @@
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
                                                     <label
-                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        class=" required btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                         data-kt-image-input-action="change" data-bs-toggle="tooltip"
                                                         title="{{trans('lang.choose_image')}}">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="slider_image_ar"
+                                                        <input required type="file" name="slider_image_ar"
                                                                accept=".png, .jpg, .jpeg"/>
                                                         <input type="hidden" name="avatar_remove"/>
                                                         <!--end::Inputs-->
@@ -352,12 +352,12 @@
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Label-->
                                                     <label
-                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                        class="required btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                         data-kt-image-input-action="change" data-bs-toggle="tooltip"
                                                         title="{{trans('lang.choose_image')}}">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="slider_image_en"
+                                                        <input required type="file" name="slider_image_en"
                                                                accept=".png, .jpg, .jpeg"/>
                                                         <input type="hidden" name="avatar_remove"/>
                                                         <!--end::Inputs-->

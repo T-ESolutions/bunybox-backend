@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Artisan::call('migrate');
+        date_default_timezone_set('Asia/Riyadh');
         $languages = ['ar', 'en'];
         $lang = request()->header('lang');
 
@@ -64,6 +65,8 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('globalSetting', $globalSetting);
             });
         }
+
+
 
     }
 }

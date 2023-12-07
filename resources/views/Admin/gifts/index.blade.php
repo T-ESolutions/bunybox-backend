@@ -160,7 +160,7 @@
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                     {data: 'image', name: 'image', "searchable": true, "orderable": true},
-                    {data: 'title_ar', name: 'title_ar', "searchable": true, "orderable": true},
+                    {data: 'title', name: 'title_ar', "searchable": true, "orderable": true},
                     {data: 'active', name: 'active', "searchable": true, "orderable": true},
                     {data: 'type', name: 'main_category_id', "searchable": false, "orderable": true},
                     {data: 'money_amount', name: 'money_amount', "searchable": true, "orderable": false},

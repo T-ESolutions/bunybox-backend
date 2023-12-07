@@ -51,29 +51,17 @@ class BoxController extends Controller
             })
             ->editColumn('main_category_id', function ($row) {
                 if ($row->mainCategory) {
-                    $category = $row->mainCategory->title_ar;
+                    $category = $row->mainCategory->title;
                     return "<b class='badge badge-success'>$category</b>";
                 } else {
                     return "-";
                 }
             })
-//            ->addColumn('select',function ($row){
-//                return '<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-//                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="'.$row->id.'" />
-//                                    </div>';
-//            })
             ->addColumn('actions', function ($row) {
                 $buttons = '';
-//                if ($auth->can('sliders.update')) {
                 $buttons .= '<a href="' . route('boxes.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
                             <i class="fa fa-edit"></i>
                         </a>';
-//                }
-//                if ($auth->can('sliders.delete')) {
-//                $buttons .= '<a class="btn btn-danger btn-sm delete btn-circle m-1" data-id="' . $row->id . '"  title="حذف">
-//                            <i class="fa fa-trash"></i>
-//                        </a>';
-//                }
                 return $buttons;
             })
             ->rawColumns(['actions', 'active', 'checkbox', 'image', 'main_category_id'])
@@ -105,13 +93,14 @@ class BoxController extends Controller
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
             'desc_en' => 'required|string',
-            'slider_image_ar' => 'nullable|image',
-            'slider_image_en' => 'nullable|image',
+            'slider_image_ar' => 'required|image',
+            'slider_image_en' => 'required|image',
             'price' => 'required|numeric',
             'min_price' => 'required|numeric',
             'max_price' => 'required|numeric',
             'image' => 'required|image',
             'category_id' => 'required|Array',
+            'category_id.*' => 'required|exists:categories,id',
         ]);
 
         $row = new Box();

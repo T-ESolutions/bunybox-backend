@@ -382,6 +382,7 @@ return [
     'editmainclient' => 'تعديل بيانات عميل',
     'addmainclient' => 'اضافه عميل',
     'mainclient_name' => 'اسم العميل',
-    'Edit'=>'تعديل'
+    'Edit'=>'تعديل',
+    'select'=>'برجاء اختيار',
 
 ];

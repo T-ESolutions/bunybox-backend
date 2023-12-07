@@ -158,7 +158,7 @@
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
                     {data: 'image', name: 'image', "searchable": true, "orderable": true},
-                    {data: 'title_ar', name: 'title_ar', "searchable": true, "orderable": true},
+                    {data: 'title', name: 'title_ar', "searchable": true, "orderable": true},
                     {data: 'active', name: 'active', "searchable": true, "orderable": true},
                     {data: 'main_category_id', name: 'main_category_id', "searchable": true, "orderable": true},
                     {data: 'price', name: 'price', "searchable": true, "orderable": false},

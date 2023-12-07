@@ -74,7 +74,7 @@ class Gift extends Model
 
     public function mainCats()
     {
-        return $this->hasMany(GiftMainCategory::class, 'gift_id',);
+        return $this->hasMany(GiftMainCategory::class, 'gift_id');
     }
 
     public function boxes()

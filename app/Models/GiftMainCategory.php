@@ -15,13 +15,13 @@ class GiftMainCategory extends Model
     ];
 
     protected $appends = [
-        "main_category_ar"
+        "main_category_ar",
     ];
 
     public function getMainCategoryArAttribute()
     {
         if($this->mainCategory())
-            return $this->mainCategory()->first()->title_ar;
+            return $this->mainCategory()->first()->title;
     }
 
     public function mainCategory()

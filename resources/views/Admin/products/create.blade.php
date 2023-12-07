@@ -130,9 +130,12 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-control mb-2" name="category_id" data-control="select2" data-hide-search="false">
+                                                <select required class="form-control mb-2" name="category_id"
+                                                        data-control="select2" data-hide-search="false">
+                                                    <option value="">{{trans('lang.select')}}</option>
                                                     @foreach($categories as $category)
-                                                        <option value="{{$category->id}}" >{{$category->title_ar}}</option>
+                                                        <option
+                                                            value="{{$category->id}}">{{$category->title}}</option>
                                                     @endforeach
                                                 </select>
                                                 <!--end::Input-->
@@ -184,7 +187,7 @@
                                                 <label class="required form-label">{{__('lang.quantity')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="quantity"
+                                                <input type="number" min="0" step="1" required name="quantity"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.quantity')}}"
                                                 />
@@ -201,7 +204,7 @@
                                                 <label class="required form-label">{{__('lang.buy_price')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="buy_price"
+                                                <input type="number" min="0" required name="buy_price"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.buy_price')}}"
                                                 />
@@ -218,7 +221,7 @@
                                                 <label class="required form-label">{{__('lang.sel_price')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" required name="sel_price"
+                                                <input type="number" min="0"  required name="sel_price"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.sel_price')}}"
                                                 />
@@ -232,10 +235,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.shoes_size')}}</label>
+                                                <label class="form-label">{{__('lang.shoes_size')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="shoes_size"
+                                                <input type="number" min="0" step="1" name="shoes_size"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.shoes_size')}}"
                                                 />
@@ -249,14 +252,22 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.size')}}</label>
+                                                <label class="form-label">{{__('lang.size')}}</label>
                                                 <!--end::Label-->
+
+
                                                 <!--begin::Input-->
-                                                <input type="text" name="size"
-                                                       class="form-control mb-2"
-                                                       placeholder="{{__('lang.size')}}"
-                                                />
+                                                <select required class="form-control mb-2" name="size"
+                                                        data-control="select2" data-hide-search="false">
+                                                    <option value="">{{trans('lang.select')}}</option>
+                                                    <option value="S">Small</option>
+                                                    <option value="L">Large</option>
+                                                    <option value="XL">X-Large</option>
+                                                    <option value="FS">Free Size</option>
+
+                                                </select>
                                                 <!--end::Input-->
+
                                                 <!--begin::Description-->
                                             {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                             <!--end::Description-->
@@ -266,10 +277,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.min_age')}}</label>
+                                                <label class="form-label">{{__('lang.min_age')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="min_age"
+                                                <input type="number" min="0" step="1" name="min_age"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.min_age')}}"
                                                 />
@@ -283,10 +294,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.max_age')}}</label>
+                                                <label class="form-label">{{__('lang.max_age')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="max_age"
+                                                <input type="number" min="0" step="1" name="max_age"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.max_age')}}"
                                                 />
@@ -300,10 +311,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.min_weight')}}</label>
+                                                <label class="form-label">{{__('lang.min_weight')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="min_weight"
+                                                <input type="number" min="0" step="1" name="min_weight"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.min_weight')}}"
                                                 />
@@ -317,10 +328,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.max_weight')}}</label>
+                                                <label class="form-label">{{__('lang.max_weight')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="max_weight"
+                                                <input type="number" min="0" step="1" name="max_weight"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.max_weight')}}"
                                                 />
@@ -334,10 +345,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.min_height')}}</label>
+                                                <label class="form-label">{{__('lang.min_height')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="min_height"
+                                                <input type="number" min="0" step="1" name="min_height"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.min_height')}}"
                                                 />
@@ -351,10 +362,10 @@
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required form-label">{{__('lang.max_height')}}</label>
+                                                <label class="form-label">{{__('lang.max_height')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input type="text" name="max_height"
+                                                <input type="number" min="0" step="1" name="max_height"
                                                        class="form-control mb-2"
                                                        placeholder="{{__('lang.max_height')}}"
                                                 />

@@ -20,13 +20,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
 {
-    public function permission(){
+    public function permission()
+    {
         return auth()->guard('admin')->user()->can('orders');
     }
 
     public function index()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         return view('Admin.orders.index');
     }
@@ -34,15 +35,15 @@ class OrderController extends Controller
     public function create()
     {
 
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
-        return view('Admin.orders.create',compact('status'));
+        return view('Admin.orders.create', compact('status'));
 
     }
 
     public function store(Request $request)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $validator = Validator::make($request->all(), [
             'title_ar' => 'required',
@@ -66,7 +67,7 @@ class OrderController extends Controller
 
     public function edit($id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $order = Order::findOrFail($id);
 
@@ -74,8 +75,9 @@ class OrderController extends Controller
             session()->flash('error', 'الحقل غير موجود');
             return redirect()->back();
         }
-        return view('Admin.orders.details',
-            compact('order'));
+        return view('Admin.orders.invoice', compact('order'));
+//        return view('Admin.orders.details',
+//            compact('order'));
     }
 
 
@@ -127,7 +129,7 @@ class OrderController extends Controller
 
     public function datatable()
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $auth = Auth::guard('admin')->user();
         $model = Order::query()->orderBy('id', 'desc');
@@ -140,22 +142,25 @@ class OrderController extends Controller
                                     <input class="form-check-input selector checkbox" type="checkbox" value="' . $row->id . '" />
                                 </div>';
                 return $checkbox;
+            })->addColumn('mainCategory', function ($row) {
+                $main_category_name = $row->mainCategory ? $row->mainCategory->title : "";
+                return '<b  class="badge badge-secondary">
+                ' . $main_category_name . '
+                        </b>';
             })
             ->addColumn('user_name', function ($row) {
                 $user_name = $row->user->name;
-                $main_category_name = $row->mainCategory ? $row->mainCategory->title_ar : "";
+                $main_category_name = $row->mainCategory ? $row->mainCategory->title : "";
                 return '<a href="' . route('users.edit', [$row->user_id]) . '" target="_blank" class="" title="العميل">
                             ' . $user_name . '
-                        </a><br>
-                        <b  class="badge badge-secondary">
-                            ' . $main_category_name . '
-                        </b>';
+                        </a>
+                       ';
             })
             ->addColumn('box', function ($row) {
-                $box = $row->box->title_ar;
+                $box = $row->box->title;
 
                 if ($row->is_offer == 1)
-                    $offer = '<br><b class="badge badge-warning">offer</b>';
+                    $offer = '<br><b class="badge badge-warning">' . trans("lang.Offer") . '</b>';
                 else
                     $offer = '';
 
@@ -171,44 +176,34 @@ class OrderController extends Controller
             })
             ->editColumn('status', function ($row) {
                 if ($row->status == 'ordered')
-                    return '<b class="badge badge-info">' . $row->status . '</b>';
+                    return '<b class="badge badge-info">' . trans('lang.' . $row->status) . '</b>';
                 elseif ($row->status == 'shipped')
-                    return '<b class="badge badge-warning">' . $row->status . '</b>';
+                    return '<b class="badge badge-warning">' . trans('lang.' . $row->status) . '</b>';
                 elseif ($row->status == 'delivered')
-                    return '<b class="badge badge-success">' . $row->status . '</b>';
+                    return '<b class="badge badge-success">' . trans('lang.' . $row->status) . '</b>';
                 else
                     return '-';
             })
             ->editColumn('payment_status', function ($row) {
                 if ($row->payment_status == 'unpaid')
-                    return '<b class="badge badge-dark">' . $row->payment_status . '</b>';
+                    return '<b class="badge badge-dark">' . trans('lang.' . $row->payment_status) . '</b>';
                 elseif ($row->payment_status == 'paid')
-                    return '<b class="badge badge-primary">' . $row->payment_status . '</b>';
+                    return '<b class="badge badge-primary">' . trans('lang.' . $row->payment_status) . '</b>';
                 else
                     return '-';
             })
-//            ->addColumn('select',function ($row){
-//                return '<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-//                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="'.$row->id.'" />
-//                                    </div>';
-//            })
             ->addColumn('actions', function ($row) {
                 $buttons = '';
-//                if ($auth->can('sliders.update')) {
+//
                 $buttons .= '<a href="' . route('orders.edit', [$row->id]) . '" class="btn btn-success btn-circle btn-sm m-1" title="' . __('lang.show_details') . '" target="_blank">
                             <i class="fa fa-eye"></i>
                         </a>';
                 $buttons .= '<a href="#" data-id="' . $row->id . '" data-status="' . $row->status . '" data-status="' . $row->status . '" title="' . __('lang.change_status') . '" class="btn btn-sm btn-primary changeStatus" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button"><i class="fa fa-edit"></i></a>';
-//                }
-//                if ($auth->can('sliders.delete')) {
-//                    $buttons .= '<a class="btn btn-danger btn-sm delete btn-circle m-1" data-id="'.$row->id.'"  title="حذف">
-//                            <i class="fa fa-trash"></i>
-//                        </a>';
-//                }
+//
                 return $buttons;
             })
             ->rawColumns(['actions', 'checkbox', 'box',
-                'user_name', 'status', 'payment_status',
+                'user_name', 'status', 'payment_status', 'mainCategory',
                 'created_at', 'order_id'])
             ->make();
 
@@ -216,7 +211,7 @@ class OrderController extends Controller
 
     public function orderDetails(Request $request, $order_id)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $auth = Auth::guard('admin')->user();
         $model = OrderItem::query()
@@ -275,7 +270,7 @@ class OrderController extends Controller
 
     public function changeOrderStatus(Request $request)
     {
-        if(!$this->permission()) return "Not Authorized";
+        if (!$this->permission()) return "Not Authorized";
 
         $validator = Validator::make($request->all(), [
             'row_id' => 'required|exists:orders,id',
