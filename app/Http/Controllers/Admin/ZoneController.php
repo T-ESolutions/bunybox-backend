@@ -45,24 +45,16 @@ class ZoneController extends Controller
                 } else {
                     return "<b class='badge badge-danger'>غير مفعل</b>";
                 }
+            }) ->editColumn('name', function ($row) {
+
+                    return trans('lang.'.$row->name);
+
             })
-//            ->addColumn('select',function ($row){
-//                return '<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-//                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="'.$row->id.'" />
-//                                    </div>';
-//            })
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
-//                if ($auth->can('sliders.update')) {
                 $buttons .= '<a href="' . route('zones.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="'.trans('lang.edit').'">
                             <i class="fa fa-edit"></i>
                         </a>';
-//                }
-//                if ($auth->can('sliders.delete')) {
-//                $buttons .= '<a class="btn btn-danger btn-sm delete btn-circle m-1" data-id="' . $row->id . '"  title="حذف">
-//                            <i class="fa fa-trash"></i>
-//                        </a>';
-//                }
                 return $buttons;
             })
             ->rawColumns(['actions', 'status', 'image'])

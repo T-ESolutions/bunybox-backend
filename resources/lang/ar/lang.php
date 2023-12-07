@@ -1082,4 +1082,8 @@ return [
     'invoice' => 'فاتورة شراء',
     'gift_type' => 'نوع الهدية',
     'gift' => 'الهدية',
+    'out_riyadh' => 'خارج الرياض',
+    'in_riyadh' => 'داخل الرياض',
+    'in riad area' => 'داخل الرياض',
+    'out riad area' => 'خارج الرياض',
 ];

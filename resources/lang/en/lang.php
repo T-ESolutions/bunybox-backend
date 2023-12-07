@@ -1093,6 +1093,10 @@ return [
     'invoice' => 'INVOICE',
     'gift_type' => 'gift type',
     'gift' => 'gift',
+    'out_riyadh' => 'out riyadh',
+    'in_riyadh' => 'in riyadh',
+    'in riad area' => 'in riyadh',
+    'out riad area' => 'out riyadh',
 
 
 ];

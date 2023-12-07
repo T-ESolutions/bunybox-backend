@@ -54,7 +54,7 @@
                                 <!--end::Logo-->
                                 <!--begin::Text-->
                                 <div class="text-sm-end fw-bold fs-4 text-muted mt-7">
-                                    <div>{{$order->address_data->location}}  {{$order->address_data->address}}</div>
+                                    <div>{{trans('lang.'.$order->address_data->location)}}  {{$order->address_data->address}}</div>
                                     <div>{{$order->address_data->phone}}</div>
 
                                 </div>
@@ -147,7 +147,7 @@
                                     <!--begin::Invoice To-->
                                     <div class="text-gray-600 fs-6 fw-bold mb-3">{{trans('lang.INVOICE TO')}}</div>
                                     <div class="fs-6 text-gray-800 fw-bold mb-8"> {{$order->address_data->address}}
-                                        <br>{{$order->address_data->location}}
+                                        <br>{{trans('lang.'.$order->address_data->location)}}
                                     </div>
                                     <!--end::Invoice To-->
                                     <!--begin::Invoice No-->
