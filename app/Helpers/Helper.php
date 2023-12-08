@@ -542,10 +542,9 @@ if (!function_exists('store')) {
 }
 
 
-function generateArray($products, $min, $max, $limit = 4)
+function generateArray($products, $min, $max, $limit = 4 ,$element=0)
 {
 
-    $element = 0;
     $total = 0;
     $newArr = [];
     $new_product_Arr = [];
@@ -567,9 +566,9 @@ function generateArray($products, $min, $max, $limit = 4)
     $new_product_Arr = arrayUniqueByKey($new_product_Arr, "id");
 
 
-    if (count($new_product_Arr) == 0){
-        return [];
-    }
+//    if (count($new_product_Arr) == 0) {
+//        return [];
+//    }
 
 
     foreach ($new_product_Arr as $pro) {
@@ -586,9 +585,10 @@ function generateArray($products, $min, $max, $limit = 4)
 
     if (count($secArr) == 0) {
         if ($element <= 1) {
-            generateArray($products, $min, $max, $limit - 1);
             $limit--;
             $element++;
+            generateArray($products, $min, $max, $limit,$element);
+
         }
     }
 
