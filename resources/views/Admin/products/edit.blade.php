@@ -257,7 +257,7 @@
                                                 <!--begin::Input-->
 
                                                 <!--begin::Input-->
-                                                <select required class="form-control mb-2" name="size"
+                                                <select  class="form-control mb-2" name="size"
                                                         data-control="select2" data-hide-search="false">
                                                     <option @if($row->size == null) selected
                                                             @endif value="">{{trans('lang.select')}}</option>
