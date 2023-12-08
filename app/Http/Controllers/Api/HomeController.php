@@ -84,9 +84,9 @@ class HomeController extends Controller
             }
 
         }
-        $boxes = $boxes->filter(function ($box) {
-            return count($box->products) > 0;
-        });
+//        $boxes = $boxes->filter(function ($box) {
+//            return count($box->products) > 0;
+//        });
 
         $result['boxes'] = BoxFinalResource::customCollection($boxes, $data);
 
