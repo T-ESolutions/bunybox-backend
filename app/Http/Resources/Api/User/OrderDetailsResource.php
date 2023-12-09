@@ -18,7 +18,9 @@ class OrderDetailsResource extends JsonResource
     {
         $categories_arr = [];
         foreach ($this->items as $item) {
-            array_push($categories_arr, $item->category->title);
+            if ($item->category) {
+                array_push($categories_arr, $item->category->title);
+            }
         }
 
         return
