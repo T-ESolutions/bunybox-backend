@@ -31,8 +31,7 @@ class OffersResource extends JsonResource
                 'description' => $this->desc,
                 'offer_end_time' => $this->offer_end_time,
                 'remain_time_in_seconds' => $diferent,
-//                'products' => ProductResource::collection($this->offer_products)
-                'products' => $this->offer_products
+                'products' => ProductResource::collection($this->offer_products)
             ];
 
 
