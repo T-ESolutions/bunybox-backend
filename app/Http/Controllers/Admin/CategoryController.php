@@ -14,7 +14,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
- 
+
     public function permission()
     {
         return auth()->guard('admin')->user()->can('categories');
@@ -115,7 +115,7 @@ class CategoryController extends Controller
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
             'desc_en' => 'required|string',
-            'image' => 'required|',
+            'image' => 'nullable|image',
         ]);
 
         $row->title_ar = $request->title_ar;
