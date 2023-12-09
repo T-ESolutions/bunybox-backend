@@ -13,9 +13,7 @@ class MainCategory extends Model
 
     protected static function booted()
     {
-        if (request()->segment(1) == "api") {
-
-
+        if (request()->segment(2) == "home") {
             static::addGlobalScope('active', function (Builder $builder) {
                 $builder->where('active', 1);
             });

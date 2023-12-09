@@ -13,8 +13,6 @@ class Gift extends Model
     protected static function booted()
     {
         if (request()->segment(1) == "api") {
-
-
             static::addGlobalScope('active', function (Builder $builder) {
                 $builder->where('active', 1);
             });
