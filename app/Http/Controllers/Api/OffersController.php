@@ -42,6 +42,7 @@ class OffersController extends Controller
     public function offers()
     {
         $offers = Box::whereHas('offer_products')->where('is_offer',1)->where('offer_end_time', '>',Carbon::now())->paginate(10);
+        dd($offers);
         $offers = OffersResource::collection($offers)->response()->getData();
         return msgdata(true, trans('lang.data_display_success'), $offers, success());
     }
