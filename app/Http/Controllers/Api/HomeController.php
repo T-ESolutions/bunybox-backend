@@ -60,9 +60,6 @@ class HomeController extends Controller
             ->where('main_category_id', $data['main_category_id'])
             ->orderBy('id', 'asc')->get();
 
-
-
-
         foreach ($boxes as $key => $box) {
             $product_array = [];
             $categories = $box->categoriesByData($data['main_category_id'], $data);
