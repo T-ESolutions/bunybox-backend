@@ -12,7 +12,7 @@ class Category extends Model
 
     protected static function booted()
     {
-        if (request()->segment(1) == "api" && request()->segment(3) == "offers") {
+        if (request()->segment(1) == "save-sizes-data") {
             static::addGlobalScope('active', function (Builder $builder) {
                 $builder->where('active', 1);
             });
@@ -83,7 +83,7 @@ class Category extends Model
 
     public function testProducts($product)
     {
-        return  $product;
+        return $product;
     }
 
 
