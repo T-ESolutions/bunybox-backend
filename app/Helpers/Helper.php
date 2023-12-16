@@ -551,7 +551,7 @@ function generateArray($products, $min, $max, $limit = 4, $element = 0)
     $catsArr = [];
     $secArr = [];
     $secondCatsArr = [];
- 
+
     foreach ($products as $product) {
         if ($total < $max && count($newArr) < $limit) {
             if ($total + $product['sel_price'] <= $max && !in_array($product['category_id'], $catsArr)) {
