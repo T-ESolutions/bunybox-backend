@@ -27,7 +27,7 @@ class BoxFinalResource extends JsonResource
             }
         }
 
-        if ($count >= 2) {
+        if ($count >= 1) {
             $sold_out = 0;
         } else {
             $sold_out = 1;
