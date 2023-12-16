@@ -75,10 +75,10 @@ class HomeController extends Controller
             $box->products = generateArray($product_array, $minPrice, $maxPrice);
 //            $box->products = $product_array;
 
-            if (count($box->products) != 0){
+//            if (count($box->products) != 0){
             array_push($slider_images, $box->slider_image);
-
-            }
+//
+//            }
 
         }
 //        $boxes = $boxes->filter(function ($box) {
