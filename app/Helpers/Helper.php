@@ -542,7 +542,7 @@ if (!function_exists('store')) {
 }
 
 
-function generateArray($products, $min, $max, $limit = 4 ,$element=0)
+function generateArray($products, $min, $max, $limit = 4, $element = 0)
 {
 
     $total = 0;
@@ -587,11 +587,12 @@ function generateArray($products, $min, $max, $limit = 4 ,$element=0)
         if ($element <= 1) {
             $limit--;
             $element++;
-            generateArray($products, $min, $max, $limit,$element);
+            generateArray($products, $min, $max, $limit, $element);
 
         }
     }
 
+    dd($newArr, $secArr);
 
     $data = array_merge($newArr, $secArr);
     $data = arrayUniqueByKey($data, "id");
