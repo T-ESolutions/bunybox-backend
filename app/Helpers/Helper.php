@@ -571,6 +571,8 @@ function generateArray($products, $min, $max, $limit = 4, $element = 0)
 //    }
 
 
+    dd($new_product_Arr);
+
     foreach ($new_product_Arr as $pro) {
         if ((($total + $pro['sel_price']) >= $min) &&
             (($total + $pro['sel_price']) <= $max) &&
@@ -592,7 +594,6 @@ function generateArray($products, $min, $max, $limit = 4, $element = 0)
         }
     }
 
-    dd($newArr, $secArr);
 
     $data = array_merge($newArr, $secArr);
     $data = arrayUniqueByKey($data, "id");
