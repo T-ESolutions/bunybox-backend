@@ -150,18 +150,18 @@ class Box extends Model
     {
 
         return $this->categories()->with('products')
-            ->whereHas('products') //new line
-//            ->whereHas('products', function ($q) use ($main_category_id, $filter_data) {
-//                $q->whereHas('mainCategories', function ($q2) use ($main_category_id) {
+            ->whereHas('products', function ($q) use ($main_category_id, $filter_data) {
+
+//                    ->whereHas('mainCategories', function ($q2) use ($main_category_id) {
 //                    $q2->where('main_categories.id', $main_category_id);
 //                })
-                    ->where(function ($q_age) use ($filter_data) {
-                        $q_age->where(function ($q_age2) use ($filter_data) {
-                            $q_age2->where('min_age', '<=', $filter_data['age'])->where('max_age', '>=', $filter_data['age']);
-                        })->orWhere(function ($q_age3) {
-                            $q_age3->whereNull('min_age')->whereNull('max_age');
-                        });
-                    })
+                $q->where(function ($q_age) use ($filter_data) {
+                    $q_age->where(function ($q_age2) use ($filter_data) {
+                        $q_age2->where('min_age', '<=', $filter_data['age'])->where('max_age', '>=', $filter_data['age']);
+                    })->orWhere(function ($q_age3) {
+                        $q_age3->whereNull('min_age')->whereNull('max_age');
+                    });
+                })
                     ->where(function ($q_weight) use ($filter_data) {
                         $q_weight->where(function ($q_weight2) use ($filter_data) {
                             $q_weight2->where('min_weight', '<=', $filter_data['weight'])->where('max_weight', '>=', $filter_data['weight']);
