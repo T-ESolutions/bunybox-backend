@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
 use App\Models\Setting;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -64,8 +66,16 @@ class AppServiceProvider extends ServiceProvider
             View::composer('*', function ($view) use ($globalSetting) {
                 $view->with('globalSetting', $globalSetting);
             });
-        }
 
+            //cron job for delete unpaid orders after 6 hours ...
+            $after_six_hours = Carbon::now()->subHour(6);
+            $expired_orders = Order::where('payment_status', 'unpaid')->where('created_at', '<', $after_six_hours)->get();
+            if (count($expired_orders) > 0) {
+                foreach ($expired_orders as $order) {
+                    $order->delete();
+                }
+            }
+        }
 
 
     }

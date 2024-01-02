@@ -6,10 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\OrderRequest;
 use App\Http\Requests\Api\User\StoreTransactionIdRequest;
 use App\Http\Resources\Api\User\AddressesResources;
+use App\Http\Resources\Api\User\GiftResource;
 use App\Http\Resources\Api\User\OrderDetailsResource;
 use App\Http\Resources\Api\User\OrderResource;
 use App\Models\Address;
 use App\Models\Box;
+use App\Models\Gift;
+use App\Models\GiftHistory;
+use App\Models\GiftMoneyDetail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -45,33 +49,176 @@ class OrderController extends Controller
         } else {
             $is_offer = 0;
         }
-        $order = Order::create([
-            "user_id" => Auth::guard('user')->id(),
-            "box_id" => $request->box_id,
-            "address_data" => $address,
-            "main_category_id" => $request->main_category_id,
-            "payment_method" => "visa",
-            "price" => $box->price,
-            "shipping_cost" => $shipping_cost,
-            "total" => $shipping_cost + $box->price,
-            'is_offer' => $is_offer,
 
-        ]);
+        $product_gift = $this->generateGift($request);
 
-        foreach ($request->products_id as $product_id) {
-            $product = Product::whereId($product_id)->first();
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $product_id,
-                'category_id' => $product->category_id,
-                'type' => "basic",
+        if ($product_gift) {
+
+            $response = new GiftResource($product_gift);
+
+            $order = Order::create([
+                "user_id" => Auth::guard('user')->id(),
+                "box_id" => $request->box_id,
+                "address_data" => $address,
+                "main_category_id" => $request->main_category_id,
+                "payment_method" => "visa",
+                "price" => $box->price,
+                "shipping_cost" => $shipping_cost,
+                "total" => $shipping_cost + $box->price,
+                'is_offer' => $is_offer,
+
+                'gift_type' => $response['type'] ? 'product' : 'money',
+                'gift_data' => json_encode($response),
+                'gift_money' => !$response['type'] ? $product_gift->amount : null,
+
             ]);
+
+            foreach ($request->products_id as $product_id) {
+                $product = Product::whereId($product_id)->first();
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $product_id,
+                    'category_id' => $product->category_id,
+                    'type' => "basic",
+                ]);
+            }
+
+
+            $data['gift'] = $response;
+            $order = Order::whereId($order->id)->first();
+            $data['order'] = new OrderDetailsResource($order);
+
+            return msgdata(true, trans('lang.Success_text'), $data, success());
+        } else {
+            return msg(true, trans('lang.no_gift_found'), failed());
+
         }
 
-        $order = Order::whereId($order->id)->first();
-        $data = new OrderDetailsResource($order);
-        return msgdata(true, trans('lang.Success_text'), $data, success());
+    }
 
+    public function generateGift($request)
+    {
+        //check gift type in queue ...
+        $money_gifts = settings('money_gifts');  // 2
+        $product_gifts = settings('product_gifts');  //4
+
+        $last_gift = GiftHistory::orderBy('id', 'desc')->first();
+        if ($last_gift) {
+            if ($last_gift->type == 'money') {
+                $take_number = $money_gifts;
+            } else {
+                $take_number = $product_gifts;
+
+            }
+            $last_gifts = GiftHistory::orderBy('id', 'desc')->get()->take($take_number);
+
+            if ($take_number <= $last_gifts->where('type', $last_gift->type)->count()) {
+                //enter here if reached max
+                if ($last_gift->type == 'money') {
+                    $product_gift = Gift::whereHas('boxes', function ($q) use ($request) {
+                        $q->where('boxes.id', $request->box_id);
+                    })
+                        ->whereHas('mainCategories', function ($q) use ($request) {
+                            $q->where('main_categories.id', $request->main_category_id);
+                        })
+                        ->where('type', 'product')->inRandomOrder()->first();
+
+                    if (!$product_gift) {
+                        $gift = Gift::where('type', 'money')->where('money_remain', '>', 0)->inRandomOrder()->first();
+                        if ($gift) {
+                            $product_gift = $this->gift_money($gift);
+                        }
+                    } else {
+                        GiftHistory::create(['user_id' => Auth::guard('user')->id(), 'type' => 'product']);
+                    }
+                } else {
+                    $gift = Gift::where('type', 'money')->where('money_remain', '>', 0)->inRandomOrder()->first();
+
+                    if ($gift) {
+                        $product_gift = $this->gift_money($gift);
+                    } else {
+                        $product_gift = Gift::whereHas('boxes', function ($q) use ($request) {
+                            $q->where('boxes.id', $request->box_id);
+                        })
+                            ->whereHas('mainCategories', function ($q) use ($request) {
+                                $q->where('main_categories.id', $request->main_category_id);
+                            })
+                            ->where('type', 'product')->inRandomOrder()->first();
+                        if ($product_gift) {
+                            GiftHistory::create(['user_id' => Auth::guard('user')->id(), 'type' => 'product']);
+                        }
+
+                    }
+                }
+            } else {
+
+                if ($last_gift->type == 'product') {
+                    $product_gift = Gift::whereHas('boxes', function ($q) use ($request) {
+                        $q->where('boxes.id', $request->box_id);
+                    })
+                        ->whereHas('mainCategories', function ($q) use ($request) {
+                            $q->where('main_categories.id', $request->main_category_id);
+                        })
+                        ->where('type', 'product')->inRandomOrder()->first();
+                    if (!$product_gift) {
+                        $gift = Gift::where('type', 'money')->where('money_remain', '>', 0)->inRandomOrder()->first();
+                        if ($gift) {
+                            $product_gift = $this->gift_money($gift);
+                        }
+                    } else {
+                        GiftHistory::create(['user_id' => Auth::guard('user')->id(), 'type' => 'product']);
+                    }
+                } else {
+                    $gift = Gift::where('type', 'money')->where('money_remain', '>', 0)->inRandomOrder()->first();
+                    if ($gift) {
+                        $product_gift = $this->gift_money($gift);
+                    } else {
+                        $product_gift = Gift::whereHas('boxes', function ($q) use ($request) {
+                            $q->where('boxes.id', $request->box_id);
+                        })
+                            ->whereHas('mainCategories', function ($q) use ($request) {
+                                $q->where('main_categories.id', $request->main_category_id);
+                            })
+                            ->where('type', 'product')->inRandomOrder()->first();
+                        if ($product_gift) {
+                            GiftHistory::create(['user_id' => Auth::guard('user')->id(), 'type' => 'product']);
+                        }
+                    }
+                }
+            }
+        } else {
+            $gift = Gift::where('type', 'money')->where('money_remain', '>', 0)->inRandomOrder()->first();
+            if ($gift) {
+                $product_gift = $this->gift_money($gift);
+            } else {
+                $product_gift = Gift::whereHas('boxes', function ($q) use ($request) {
+                    $q->where('boxes.id', $request->box_id);
+                })
+                    ->whereHas('mainCategories', function ($q) use ($request) {
+                        $q->where('main_categories.id', $request->main_category_id);
+                    })
+                    ->where('type', 'product')->inRandomOrder()->first();
+                if ($product_gift) {
+                    GiftHistory::create(['user_id' => Auth::guard('user')->id(), 'type' => 'product']);
+                }
+            }
+        }
+        return $product_gift;
+
+    }
+
+
+    public function gift_money($gift)
+    {
+        $product_gift = GiftMoneyDetail::where('gift_id', $gift->id)->where('is_selected', 0)->inRandomOrder()->first();
+        if ($product_gift) {
+            GiftHistory::create(['user_id' => Auth::guard('user')->id(), 'type' => 'money']);
+            $product_gift->is_selected = 1;
+            $product_gift->save();
+            $gift->money_remain = $gift->money_remain - $product_gift->amount;
+            $gift->save();
+            return $product_gift;
+        }
     }
 
     public function orders()
@@ -189,7 +336,7 @@ class OrderController extends Controller
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS =>  "{\"amount\":$amount,\"currency\":\"SAR\",\"customer_initiated\":true,\"threeDSecure\":true,\"save_card\":false,\"description\":\"Please Complete The Current Payment\",\"metadata\":{\"udf1\":\"Metadata 1\"},\"reference\":{\"transaction\":\"txn_01\",\"order\":\"ord_01\"},\"receipt\":{\"email\":true,\"sms\":true},\"customer\":{\"first_name\":\"$first_name\",\"middle_name\":\"-\",\"last_name\":\"$last_name\",\"email\":\"$email\",\"phone\":{\"country_code\":$code,\"number\":$phone}},\"source\":{\"id\":\"src_all\"},\"post\":{\"url\":\"$callback_url\"},\"redirect\":{\"url\":\"$callback_url\"}}",
+            CURLOPT_POSTFIELDS => "{\"amount\":$amount,\"currency\":\"SAR\",\"customer_initiated\":true,\"threeDSecure\":true,\"save_card\":false,\"description\":\"Please Complete The Current Payment\",\"metadata\":{\"udf1\":\"Metadata 1\"},\"reference\":{\"transaction\":\"txn_01\",\"order\":\"ord_01\"},\"receipt\":{\"email\":true,\"sms\":true},\"customer\":{\"first_name\":\"$first_name\",\"middle_name\":\"-\",\"last_name\":\"$last_name\",\"email\":\"$email\",\"phone\":{\"country_code\":$code,\"number\":$phone}},\"source\":{\"id\":\"src_all\"},\"post\":{\"url\":\"$callback_url\"},\"redirect\":{\"url\":\"$callback_url\"}}",
             CURLOPT_HTTPHEADER => [
                 "Authorization: Bearer sk_test_pJ8K61wBTgO3WzXRaf5omI7D",
                 "accept: application/json",
