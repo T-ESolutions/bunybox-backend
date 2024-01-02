@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'hint' => 'الارشادات',
+    'the_confirm' => 'تأكيد',
     'user_deleted' => 'المستخدم محذوف',
     'remove_image' => 'حذف الصورة',
     'cancel_image' => 'الغاء الصورة',

@@ -86,13 +86,14 @@ class BoxController extends Controller
     public function store(Request $request)
     {
         if (!$this->permission()) return "Not Authorized";
-
         $request->validate([
             'main_category_id' => 'required|exists:main_categories,id',
             'title_ar' => 'required|string',
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
             'desc_en' => 'required|string',
+            'hint_ar' => 'required|string',
+            'hint_en' => 'required|string',
             'slider_image_ar' => 'required|image',
             'slider_image_en' => 'required|image',
             'price' => 'required|numeric',
@@ -102,13 +103,14 @@ class BoxController extends Controller
             'category_id' => 'required|Array',
             'category_id.*' => 'required|exists:categories,id',
         ]);
-
         $row = new Box();
         $row->main_category_id = $request->main_category_id;
         $row->title_ar = $request->title_ar;
         $row->title_en = $request->title_en;
         $row->desc_ar = $request->desc_ar;
         $row->desc_en = $request->desc_en;
+        $row->hint_ar = $request->hint_ar;
+        $row->hint_en = $request->hint_en;
         $row->price = $request->price;
         $row->min_price = $request->min_price;
         $row->max_price = $request->max_price;
@@ -119,16 +121,12 @@ class BoxController extends Controller
         $row->slider_image_ar = $request->slider_image_ar;
         $row->slider_image_en = $request->slider_image_en;
         $row->save();
-
-
         foreach ($request->category_id as $category_id) {
             $boxCategory = new BoxCategory();
             $boxCategory->category_id = $category_id;
             $boxCategory->box_id = $row->id;
             $boxCategory->save();
         }
-
-
         return redirect()->back()->with('message', trans('lang.added_s'));
     }
 
@@ -155,6 +153,8 @@ class BoxController extends Controller
             'title_en' => 'required|string',
             'desc_ar' => 'required|string',
             'desc_en' => 'required|string',
+            'hint_ar' => 'required|string',
+            'hint_en' => 'required|string',
             'price' => 'required|numeric',
             'min_price' => 'required|numeric',
             'max_price' => 'required|numeric',
@@ -169,6 +169,8 @@ class BoxController extends Controller
         $row->title_en = $request->title_en;
         $row->desc_ar = $request->desc_ar;
         $row->desc_en = $request->desc_en;
+        $row->hint_ar = $request->hint_ar;
+        $row->hint_en = $request->hint_en;
         $row->price = $request->price;
         $row->min_price = $request->min_price;
         $row->max_price = $request->max_price;

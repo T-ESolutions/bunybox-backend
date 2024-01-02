@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'the_confirm' => 'Confirm',
+    'hint' => 'Hint',
+
     'user_deleted' => 'User deleted',
 
     'remove_image' => 'remove image',

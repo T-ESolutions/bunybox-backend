@@ -255,7 +255,39 @@
                                             <!--end::Description-->
                                             </div>
                                             <!--end::Input group-->
+                                            <div class="mb-5 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">{{__('lang.hint')}}
+                                                    ({{__('lang.ar')}}) </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <textarea required name="hint_ar"
+                                                          placeholder="{{__('lang.hint')}} ({{__('lang.ar')}})"
+                                                          class="form-control mb-2">{{$row->hint_ar}}</textarea>
 
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="mb-5 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="required form-label">{{__('lang.hint')}}
+                                                    ({{__('lang.en')}}) </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <textarea required name="hint_en"
+                                                          placeholder="{{__('lang.hint')}} ({{__('lang.en')}})"
+                                                          class="form-control mb-2">{{$row->hint_en}}</textarea>
+
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+                                            {{--                                                <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                            <!--end::Description-->
+                                            </div>
                                             <!--begin::Input group-->
                                             <div class="mb-5 fv-row">
                                                 <!--begin::Label-->

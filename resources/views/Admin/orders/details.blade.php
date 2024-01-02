@@ -17,7 +17,8 @@
                 {{trans('lang.Dashboard')}} </a>
         </li>
         <li class="breadcrumb-item">
-            {{trans('lang.'.$route)}}
+            <a href="{{route('orders.index')}}" class="text-muted">
+                {{trans('lang.'.$route)}} </a>
         </li>
         <li class="breadcrumb-item">
             {{trans('lang.'.'order_details')}}

@@ -153,7 +153,7 @@
                         </div>
                         <!--end::Card body-->
                         <div class="modal-footer">
-                            <button type="submit" data-dismiss="modal" class="btn btn-primary submit_btn">تأكيد</button>
+                            <button type="submit" data-dismiss="modal" class="btn btn-primary submit_btn">{{trans('lang.the_confirm')}}</button>
                         </div>
                     </form>
                 </div>
