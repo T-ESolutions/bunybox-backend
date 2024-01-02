@@ -119,7 +119,7 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Head-->
 <!--begin::Body-->
 <body id="kt_body" style="background-image: url()"
-      class="header-fixed header-tablet-and-mobile-fixed aside-fixed @if(Request::is('/') || request()->routeIs('zones.*') ) aside-secondary-disabled @else aside-secondary-enabled  @endif">
+      class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-enabled">
 <!--begin::Main-->
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
@@ -156,8 +156,10 @@ License: For each use you must have a valid license purchased only from above li
                                     title="{{trans('lang.Dashboard')}}">
                                     <!--begin::Nav link-->
                                     {{--                                @if(request()->segment(1) != 'ready' && request()->segment(1) != 'cars') active @endif--}}
-                                    <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light   @if(request()->segment(1) == '' ) active @endif "
-                                       href="{{url('/')}}">
+                                    <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light
+@if(request()->routeIs('dashboard.index') ) active @endif "
+
+                                    data-bs-toggle="tab" href="#kt_aside_nav_tab_menu_home">
                                         <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
                                         <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Home\Home.svg--><svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +186,8 @@ License: For each use you must have a valid license purchased only from above li
                                 data-bs-placement="right" data-bs-dismiss="click" title="{{trans('lang.users')}}">
                                 <!--begin::Nav link-->
                                 {{--                                @if(request()->segment(1) != 'ready' && request()->segment(1) != 'cars') active @endif--}}
-                                <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light  @if(request()->segment(1) == 'admins' || request()->segment(1) == 'users' || request()->segment(1) == 'hosts' || request()->segment(1) == 'employees' ) active @endif"
+                                <a class="nav-link btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light
+@if(request()->segment(1) == 'admins' || request()->segment(1) == 'users' || request()->segment(1) == 'hosts' || request()->segment(1) == 'employees' ) active @endif"
                                    data-bs-toggle="tab" href="#kt_aside_nav_tab_menu_users">
                                     <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -322,6 +325,7 @@ License: For each use you must have a valid license purchased only from above li
                             @include('layout.sidebars.basic_menus')
                             @include('layout.sidebars.events_menus')
                             @include('layout.sidebars.orders_menus')
+                            @include('layout.sidebars.dashboard_menus')
                             {{--                            @include('layout.sidebars.reports_menus')--}}
                             <!--end::Menu-->
 
@@ -404,7 +408,9 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Breadcrumb-->
             <!--end::Header-->
             <!--begin::Content-->
+            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         @yield('content')
+            </div>
         <!--end::Content-->
             <!--begin::Footer-->
             <div class="footer py-4 d-flex flex-lg-column" id="kt_footer">

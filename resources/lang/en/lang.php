@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'user_deleted' => 'User deleted',
+
     'remove_image' => 'remove image',
     'cancel_image' => 'cancel image',
     'choose_image' => 'choose image',

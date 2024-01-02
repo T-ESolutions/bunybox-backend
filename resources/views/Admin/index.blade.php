@@ -457,9 +457,7 @@
 {{--            </div>--}}
 {{--        </div>--}}
     </div>
-
-
-                @endsection
+@endsection
 @section('script')
 
     <script src="{{asset('dashboard/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>

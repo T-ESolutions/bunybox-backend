@@ -149,12 +149,17 @@ class OrderController extends Controller
                         </b>';
             })
             ->addColumn('user_name', function ($row) {
-                $user_name = $row->user->name;
+                $user_name = $row->user ? $row->user->name : '';
                 $main_category_name = $row->mainCategory ? $row->mainCategory->title : "";
-                return '<a href="' . route('users.edit', [$row->user_id]) . '" target="_blank" class="" title="العميل">
+                if($row->user){
+                    return '<a href="' . route('users.edit', [$row->user_id]) . '" target="_blank" class="" title="العميل">
                             ' . $user_name . '
                         </a>
                        ';
+                }else{
+                    return '<a class="badge badge-danger">'.trans('lang.user_deleted').'</a>';
+                }
+
             })
             ->addColumn('box', function ($row) {
                 $box = $row->box->title;

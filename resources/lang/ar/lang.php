@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'user_deleted' => 'المستخدم محذوف',
     'remove_image' => 'حذف الصورة',
     'cancel_image' => 'الغاء الصورة',
     'choose_image' => 'إختر الصورة',

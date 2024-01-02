@@ -36,6 +36,7 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     <!--begin::Table-->
+                    <div class="table-responsive">
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="admins_table">
                         <!--begin::Table head-->
                         <thead>
@@ -72,6 +73,7 @@
                         <!--end::Table body-->
                     </table>
                     <!--end::Table-->
+                    </div>
                 </div>
                 <!--end::Card body-->
             </div>

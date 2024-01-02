@@ -25,44 +25,46 @@
 @endsection
 
 @section('content')
-    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+    <div id="kt_content_container" class=" align-items-start container-xxl">
         <!--begin::Post-->
         <div class="content flex-row-fluid" id="kt_content">
             <!--begin::Card-->
             <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
+                    <div class="table-responsive">
+                        <!--begin::Table-->
+                        <table class="table align-middle table-row-dashed fs-4 gy-5" id="admins_table">
+                            <!--begin::Table head-->
+                            <thead>
+                            <!--begin::Table row-->
 
-                    <!--begin::Table-->
-                    <table class="table align-middle table-row-dashed fs-4 gy-5" id="admins_table">
-                        <!--begin::Table head-->
-                        <thead>
-                        <!--begin::Table row-->
+                            <tr class="text-start text-muted fw-bolder fs-5 text-uppercase gs-0">
+                                <th class="w-10px pe-2">
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
+                                               data-kt-check-target="#admins_table .checkbox" value="1"/>
+                                    </div>
+                                </th>
 
-                        <tr class="text-start text-muted fw-bolder fs-5 text-uppercase gs-0">
-                            <th class="w-10px pe-2">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                           data-kt-check-target="#admins_table .checkbox" value="1"/>
-                                </div>
-                            </th>
-                            <th class="min-w-125px">{{__('lang.image')}}</th>
-                            <th class="min-w-125px">{{__('lang.name')}}</th>
-                            <th class="min-w-10px">{{__('lang.status')}}</th>
-                            <th class="min-w-125px">{{__('lang.category')}}</th>
-                            <th class="min-w-125px">{{__('lang.quantity')}}</th>
-                            <th class="min-w-125px">{{__('lang.buy_price')}}</th>
-                            <th class="min-w-125px">{{__('lang.sell_price')}}</th>
-                            <th class="min-w-125px">{{__('lang.Actions')}}</th>
-                        </tr>
-                        <!--end::Table row-->
-                        </thead>
-                        <!--end::Table head-->
-                        <!--begin::Table body-->
+                                <th class="min-w-125px">{{__('lang.image')}}</th>
+                                <th class="min-w-125px">{{__('lang.name')}}</th>
+                                <th class="min-w-10px">{{__('lang.status')}}</th>
+                                <th class="min-w-125px">{{__('lang.category')}}</th>
+                                <th class="min-w-125px">{{__('lang.quantity')}}</th>
+                                <th class="min-w-125px">{{__('lang.buy_price')}}</th>
+                                <th class="min-w-125px">{{__('lang.sell_price')}}</th>
+                                <th class="min-w-125px">{{__('lang.Actions')}}</th>
+                            </tr>
+                            <!--end::Table row-->
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
 
 
-                        <!--end::Table body-->
-                    </table>
+                            <!--end::Table body-->
+                        </table>
+                    </div>
                     <!--end::Table-->
                 </div>
                 <!--end::Card body-->
