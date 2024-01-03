@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'is_selected' => 'Is selected',
+    'selected' => 'Selected',
+    'not_selected' => 'Not selected',
+
+    'money_details' => 'Money details',
+
     'the_confirm' => 'Confirm',
     'hint' => 'Hint',
 

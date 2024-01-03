@@ -174,6 +174,8 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('/store', [GiftController::class, 'store'])->name('.store');
         Route::post('search', [GiftController::class, 'search'])->name('.search');
         Route::get('/edit/{id}', [GiftController::class, 'edit'])->name('.edit');
+        Route::get('/show/{id}', [GiftController::class, 'show'])->name('.show');
+        Route::get('/show/gift_money_details/datatable/{id}', [GiftController::class, 'giftMoneyDetailsDatatable'])->name('.gift_money_details.datatable');
         Route::post('/update/{id}', [GiftController::class, 'update'])->name('.update');
         Route::get('/delete', [GiftController::class, 'delete'])->name('.delete');
         Route::get('/add-button', [GiftController::class, 'table_buttons'])->name('.add-button');

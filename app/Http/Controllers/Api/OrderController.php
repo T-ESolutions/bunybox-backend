@@ -81,6 +81,8 @@ class OrderController extends Controller
                     'category_id' => $product->category_id,
                     'type' => "basic",
                 ]);
+                $product->quantity = $product->quantity - 1;
+                $product->save();
             }
 
 

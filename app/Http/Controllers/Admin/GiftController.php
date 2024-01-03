@@ -82,6 +82,18 @@ class GiftController extends Controller
                     return '-';
                 }
             })
+            ->addColumn('details', function ($row) {
+                if ($row->type == 'money') {
+                    $buttons = '';
+                    $buttons .= '<a href="' . route('gifts.show', [$row->id]) . '" class="btn btn-warning btn-circle btn-sm m-1"
+                 title="' . trans('lang.details') . '">
+                            <i class="fa fa-eye"></i>
+                        </a>';
+                } else {
+                    $buttons = '';
+                }
+                return $buttons;
+            })
             ->addColumn('actions', function ($row) use ($auth) {
                 $buttons = '';
                 $buttons .= '<a href="' . route('gifts.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
@@ -90,7 +102,44 @@ class GiftController extends Controller
                 return $buttons;
             })
             ->
-            rawColumns(['actions', 'active', 'checkbox', 'image', 'type', 'boxes', 'main_cats'])
+            rawColumns(['actions', 'active', 'checkbox', 'image', 'type', 'boxes', 'main_cats', 'details'])
+            ->make();
+
+    }
+
+  public function giftMoneyDetailsDatatable($id)
+    {
+        if (!$this->permission()) return "Not Authorized";
+
+        $auth = Auth::guard('admin')->user();
+        $model = GiftMoneyDetail::query();
+        $model = $model->where('gift_id',$id);
+        return DataTables::eloquent($model)
+            ->addIndexColumn()
+//            ->addColumn('checkbox', function ($row) {
+//                $checkbox = '';
+//                $checkbox .= '<div class="form-check form-check-sm form-check-custom form-check-solid">
+//                                    <input class="form-check-input selector checkbox" type="checkbox" value="' . $row->id . '" />
+//                                </div>';
+//                return $checkbox;
+//            })
+
+            ->editColumn('is_selected', function ($row) {
+                if ($row->is_selected)
+                    return '<b class="badge badge-danger">' . trans('lang.selected') . '</b>';
+                else
+                    return '<b class="badge badge-success">' . trans('lang.not_selected') . '</b>';
+            })
+
+//            ->addColumn('actions', function ($row) use ($auth) {
+//                $buttons = '';
+//                $buttons .= '<a href="' . route('gifts.edit', [$row->id]) . '" class="btn btn-primary btn-circle btn-sm m-1" title="' . trans('lang.edit') . '">
+//                            <i class="fa fa-edit"></i>
+//                        </a>';
+//                return $buttons;
+//            })
+            ->
+            rawColumns(['actions', 'active', 'checkbox', 'image', 'type', 'boxes', 'main_cats', 'details','is_selected'])
             ->make();
 
     }
@@ -178,6 +227,33 @@ class GiftController extends Controller
         $row = Gift::findOrFail($id);
         return view('Admin.gifts.edit',
             compact('row', 'boxs', 'main_categories', 'gift_main_categories', 'gift_boxes'));
+    }
+
+    public function show($id)
+    {
+        if (!$this->permission()) return "Not Authorized";
+
+
+
+        $targetSum = 100; // Set the target sum
+        $numberOfRandomNumbers = 10; // Set the number of random numbers to generate
+        $minValue = 1; // Minimum value for random numbers
+        $maxValue = 10; // Maximum value for random numbers
+
+        $randomNumbers = [];
+
+// Generate n-1 random numbers
+        for ($i = 0; $i < $numberOfRandomNumbers - 1; $i++) {
+            $randomNumbers[] = mt_rand($minValue, $maxValue);
+        }
+
+// Adjust the last element to make the sum equal to the target sum
+        $randomNumbers[$numberOfRandomNumbers - 1] = $targetSum - array_sum($randomNumbers);
+
+// Print or use the generated random numbers
+//                dd($randomNumbers,array_sum($randomNumbers));
+
+        return view('Admin.gifts.money_details',compact('id'));
     }
 
     public function update(Request $request, $id)

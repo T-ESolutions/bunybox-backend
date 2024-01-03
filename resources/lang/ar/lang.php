@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'selected' => 'تم اختياره',
+    'not_selected' => 'لم يتم اختياره',
+    'is_selected' => 'هل تم اختياره',
+    'money_details' => 'تفاصيل مبلغ المال',
     'hint' => 'الارشادات',
     'the_confirm' => 'تأكيد',
     'user_deleted' => 'المستخدم محذوف',
