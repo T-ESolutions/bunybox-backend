@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'not_used' => 'Not used',
+    'used' => 'Used',
     'is_selected' => 'Is selected',
     'selected' => 'Selected',
     'not_selected' => 'Not selected',
