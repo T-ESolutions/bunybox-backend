@@ -68,7 +68,7 @@ class AppServiceProvider extends ServiceProvider
             });
 
             //cron job for delete unpaid orders after 6 hours ...
-            $after_six_hours = Carbon::now()->subHour(6);
+            $after_six_hours = Carbon::now()->subHours(6);
             $expired_orders = Order::where('payment_status', 'unpaid')->where('created_at', '<', $after_six_hours)->get();
             if (count($expired_orders) > 0) {
                 foreach ($expired_orders as $order) {

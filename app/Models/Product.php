@@ -12,7 +12,7 @@ class Product extends Model
 
     protected static function booted()
     {
-        if (request()->segment(2) == "save-sizes-data") {
+        if (request()->segment(3) == "save-sizes-data") {
             static::addGlobalScope('active', function (Builder $builder) {
                 $builder->where('active', 1);
             });

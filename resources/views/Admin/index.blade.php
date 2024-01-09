@@ -150,7 +150,7 @@
 
                 <div class="col-xl-3">
                     <!--begin::Statistics Widget 5-->
-                    <a href="#" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
+                    <a href="{{url('orders')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
 
@@ -165,7 +165,7 @@
                 </div>
                 <div class="col-xl-3">
                     <!--begin::Statistics Widget 5-->
-                    <a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8 ">
+                    <a href="{{url('orders')}}" class="card bg-body hoverable card-xl-stretch mb-xl-8 ">
                         <!--begin::Body-->
                         <div class="card-body">
                             <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm008.svg-->
@@ -179,7 +179,7 @@
                 </div>
                 <div class="col-xl-3">
                     <!--begin::Statistics Widget 5-->
-                    <a href="#" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
+                    <a href="{{url('orders')}}" class="card app-bg-color hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
@@ -194,7 +194,7 @@
                 </div>
                 <div class="col-xl-3">
                     <!--begin::Statistics Widget 5-->
-                    <a href="#" class="card bg-body hoverable card-xl-stretch mb-5 mb-xl-8">
+                    <a href="{{url('orders')}}" class="card bg-body hoverable card-xl-stretch mb-5 mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->

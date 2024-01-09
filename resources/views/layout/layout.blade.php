@@ -409,7 +409,7 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Header-->
             <!--begin::Content-->
             <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        @yield('content')
+            @yield('content')
             </div>
         <!--end::Content-->
             <!--begin::Footer-->
@@ -417,11 +417,11 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Container-->
                 <div class="container-xxl d-flex flex-column flex-md-row flex-stack">
                     <!--begin::Copyright-->
-                    <div class="text-dark order-2 order-md-1">
-                        <span class="text-gray-400 fw-bold me-1">{{trans('lang.created_by')}}</span>
-                        <a href="https://tesolutionspro.com/"
-                           class="text-muted text-hover-primary fw-bold me-2 fs-6">TESolutions</a>
-                    </div>
+{{--                    <div class="text-dark order-2 order-md-1">--}}
+{{--                        <span class="text-gray-400 fw-bold me-1">{{trans('lang.created_by')}}</span>--}}
+{{--                        <a href="https://tesolutionspro.com/"--}}
+{{--                           class="text-muted text-hover-primary fw-bold me-2 fs-6">TESolutions</a>--}}
+{{--                    </div>--}}
                     <!--end::Copyright-->
                     <!--begin::Menu-->
                     <!--end::Menu-->

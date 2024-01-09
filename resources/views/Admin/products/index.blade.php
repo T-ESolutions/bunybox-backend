@@ -47,6 +47,7 @@
                                     </div>
                                 </th>
 
+                                <th class="min-w-125px">ID</th>
                                 <th class="min-w-125px">{{__('lang.image')}}</th>
                                 <th class="min-w-125px">{{__('lang.name')}}</th>
                                 <th class="min-w-10px">{{__('lang.status')}}</th>
@@ -158,6 +159,7 @@
                 },
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
+                    {data: 'id', name: 'id', "searchable": true, "orderable": true},
                     {data: 'image', name: 'image', "searchable": true, "orderable": true},
                     {data: 'title', name: 'title_ar', "searchable": true, "orderable": true},
                     {data: 'active', name: 'active', "searchable": true, "orderable": true},

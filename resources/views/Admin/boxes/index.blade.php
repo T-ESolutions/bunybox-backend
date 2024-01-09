@@ -47,6 +47,7 @@
                                            data-kt-check-target="#admins_table .checkbox" value="1"/>
                                 </div>
                             </th>
+                            <th class="min-w-10px">ID</th>
                             <th class="min-w-10px">{{__('lang.image')}}</th>
                             <th class="min-w-10px">{{__('lang.name')}}</th>
                             <th class="min-w-10px">{{__('lang.status')}}</th>
@@ -157,6 +158,7 @@
                 },
                 columns: [
                     {data: 'checkbox', name: 'checkbox', "searchable": false, "orderable": false},
+                    {data: 'id', name: 'id', "searchable": true, "orderable": true},
                     {data: 'image', name: 'image', "searchable": true, "orderable": true},
                     {data: 'title', name: 'title_ar', "searchable": true, "orderable": true},
                     {data: 'active', name: 'active', "searchable": true, "orderable": true},

@@ -57,6 +57,7 @@
                                 <div class="text-sm-end fw-bold fs-4 text-muted mt-7">
                                     <div>{{trans('lang.'.$order->address_data->location)}}  {{$order->address_data->address}}</div>
                                     <div>{{$order->address_data->phone}}</div>
+                                    <div><a target="_blank" href="{{"https://www.google.com/maps/search/?api=1&query=".$order->address_data->lat.",".$order->address_data->lng}}">الموقع على الخريطه</a></div>
 
                                 </div>
                                 <!--end::Text-->
@@ -90,10 +91,12 @@
 
                                                     </td>
                                                     <td class="pt-11 bold">
-                                                        {{$item->product->title}}
+                                                        <a target="_blank"
+                                                           href="{{url("products/edit/".$item->product->id)}}">{{$item->product->title}}</a>
                                                     </td>
                                                     <td class="pt-11 bold">
-                                                        {{$item->category->title}}
+                                                        <a target="_blank"
+                                                           href="{{url("categories/edit/".$item->category->id)}}"> {{$item->category->title}}</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
